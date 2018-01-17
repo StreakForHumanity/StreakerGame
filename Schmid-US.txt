@@ -1,0 +1,5 @@
+1) As a player, I want the option of pausing the game so that I can set it down and return to it later on. 
+
+2) As a player, I want a local leaderboard so that I can see how I compare to myself. 
+
+3) As a player, I want the option of uploading my face to my avatar for a more immersive experience. 

@@ -1,0 +1,5 @@
+1) The score of a level will be displayed in the upper right corner of the screen when a game is active. 
+
+2) The player will be able to alter the avatars appearance. 
+
+3) The game should have several difficulty presets ranging from 'beginner/novice' to 'expert'.
