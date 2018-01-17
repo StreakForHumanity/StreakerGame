@@ -1,0 +1,5 @@
+As a player, I want to be able to use my coins I earned while playing to pay off enemies if I am caught to help my character win the game.
+
+As a player, I would like to be able to collect coins while playing to increase my score.
+
+As a player, I would like to be able to pause the game to take a break when I am playing.

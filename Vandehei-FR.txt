@@ -1,0 +1,5 @@
+The game shall allow the player to use earned coins to pay off enemies from catching them.
+
+The game should have coins the player can collect while playing.
+
+The game will allow the player to pause the game and keep the progress of the paused game.
