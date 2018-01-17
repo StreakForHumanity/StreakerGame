@@ -1,0 +1,3 @@
+1. The game shall have obstacles.
+2. The game shall have avatars.
+3. The game shall have customizable control schemes.
