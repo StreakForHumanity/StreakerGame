@@ -1,0 +1,5 @@
+1) As a player, I want to be able to create multiple characters on a single account, each with their own levels of progression and customization.
+
+2) As a player, I want to be able to interact with the environment in a meaningful way.
+
+3) As a player, I want the game to take its subject matter properly into account, implementing versions that are approachable for all ages.
