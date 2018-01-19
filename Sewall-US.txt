@@ -1,0 +1,3 @@
+As a player, I want music in the game so my streaking sounds cool
+As a player, I want an arrow present on the screen that points to where the finish line is so that I know where to lead my character
+As a player, I want a timed mode of the game which increases in difficulty the longer I survive so that the game has more variety

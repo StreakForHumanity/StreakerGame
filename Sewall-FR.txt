@@ -1,0 +1,3 @@
+The game will have guards that try and catch the streaker to end the level
+The game shall modify the streaker's running speed over different types of terrain to make the game more realistic
+The player will be able to select past levels to be able to replay them when they want to
