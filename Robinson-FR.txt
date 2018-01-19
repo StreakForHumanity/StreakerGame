@@ -1,0 +1,5 @@
+1) The game shall have customizable control schemes.
+
+2) The game will allow a user to create multiple characters on the same account.
+
+3) The game shall have a tutorial/introduction level to familiarize the user with the controls.
