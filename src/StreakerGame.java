@@ -19,48 +19,20 @@ public class StreakerGame extends Application {
     private static final int SCREEN_HEIGHT = 600;
     private static final int MOVING_SPEED = 8;
 
+    private Group root;
+    private Scene scene;
+    private BackgroundItem background;
+    private Canvas canvas;
+    ArrayList<String> input;
+
     public static void main(String[] args) {
         launch(args);
     }
     @Override
-    public void start(Stage theStage) {
-        // setup init
-        theStage.setTitle( "Streaker" );
-        Group root = new Group();
-        Scene theScene = new Scene(root);
-        theStage.setScene(theScene);
-        Sprite background = new Sprite();
-        Sprite background2 = new Sprite();
-        background.setImage("../assets/images/background.png");
-        background.setPosition(0, SCREEN_HEIGHT - background.getHeight());
-        background2.setImage("../assets/images/background.png");
-        background2.setPosition(0, SCREEN_HEIGHT -(2 * background.getHeight()));
-        Canvas canvas = new Canvas(background.getWidth(), SCREEN_HEIGHT);
-        root.getChildren().add(canvas);
-        //
-        // on key press
-        ArrayList<String> input = new ArrayList<String>();
-        theScene.setOnKeyPressed(
-            new EventHandler<KeyEvent>() {
-                public void handle(KeyEvent e) {
-                    String code = e.getCode().toString();
-                    if (!input.contains(code)) {
-                        input.add(code);
-                    }
-                }
-            }
-        );
-        //
-        // on key release
-        theScene.setOnKeyReleased(
-            new EventHandler<KeyEvent>() {
-                public void handle(KeyEvent e) {
-                    String code = e.getCode().toString();
-                    input.remove(code);
-                }
-            }
-        );
-        //
+    public void start(Stage stage) {
+        setupGameState(stage);
+        setOnKeyPress();
+        setOnKeyRelease();
         // create character
         GraphicsContext gc = canvas.getGraphicsContext2D();
         AnimatedImage character = new AnimatedImage();
@@ -96,18 +68,8 @@ public class StreakerGame extends Application {
                 lastNanoTime.value = currentNanoTime;
                 double nanot = currentNanoTime - startNanoTime;
                 double t = nanot / 1000000000.0;
-                if (background.getY() > SCREEN_HEIGHT) {
-                    background.setPosition(0, background2.getY() - background.getHeight());
-                }
-                if (background2.getY() > SCREEN_HEIGHT) {
-                    background2.setPosition(0, background.getY() - background2.getHeight());
-                }
-                background.setSpeed(0, MOVING_SPEED);
-                background.updateS();
-                background.render(gc);
-                background2.setSpeed(0, MOVING_SPEED);
-                background2.updateS();
-                background2.render(gc);
+                background.loop();
+                background.setBackgroundSpeed(gc);
                 character.setVelocity(0,0);
                 if (input.contains("LEFT")) {
                     character.addVelocity(-550,0);
@@ -166,6 +128,38 @@ public class StreakerGame extends Application {
                gc.strokeText( coinStr , background.getWidth() - 100, 40 );
             }
         }.start();
-        theStage.show();
+        stage.show();
+    }
+    public void setOnKeyPress() {
+        scene.setOnKeyPressed(
+            new EventHandler<KeyEvent>() {
+                public void handle(KeyEvent e) {
+                    String code = e.getCode().toString();
+                    if (!input.contains(code)) {
+                        input.add(code);
+                    }
+                }
+            }
+        );
+    }
+    public void setOnKeyRelease() {
+        scene.setOnKeyReleased(
+            new EventHandler<KeyEvent>() {
+                public void handle(KeyEvent e) {
+                    String code = e.getCode().toString();
+                    input.remove(code);
+                }
+            }
+        );
+    }
+    public void setupGameState(Stage stage) {
+        stage.setTitle("Streaker");
+        root = new Group();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        background = new BackgroundItem(SCREEN_HEIGHT, MOVING_SPEED);
+        canvas = new Canvas(background.getWidth(), SCREEN_HEIGHT);
+        root.getChildren().add(canvas);
+        input = new ArrayList<String>();
     }
 }
