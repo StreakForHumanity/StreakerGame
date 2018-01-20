@@ -31,10 +31,10 @@ public class StreakerGame extends Application {
         Sprite background = new Sprite();
         Sprite background2 = new Sprite();
         background.setImage("../assets/images/background.png");
-        background.setPosition(0, ScreenHeight - background.getH());
+        background.setPosition(0, ScreenHeight - background.getHeight());
         background2.setImage("../assets/images/background.png");
-        background2.setPosition(0, ScreenHeight -(2 * background.getH()));
-        Canvas canvas = new Canvas(background.getW(), ScreenHeight);
+        background2.setPosition(0, ScreenHeight -(2 * background.getHeight()));
+        Canvas canvas = new Canvas(background.getWidth(), ScreenHeight);
         root.getChildren().add(canvas);
         ArrayList<String> input = new ArrayList<String>();
         theScene.setOnKeyPressed(
@@ -64,13 +64,13 @@ public class StreakerGame extends Application {
         imageArray[3] = new Image("../assets/images/guyRight.png");
         character.setFrame(imageArray);
         character.duration = 0.150;
-        character.setPosition((background.getW() / 2) - 40, ScreenHeight / 2);
+        character.setPosition((background.getWidth() / 2) - 40, ScreenHeight / 2);
         ArrayList<Sprite> coins = new ArrayList<Sprite>();
         for(int i = 0; i < 4; i++) {
             Sprite coin = new Sprite();
             coin.setImage("../assets/images/coin.png");
-            double x = background.getW() * Math.random();
-            double y = - background.getH() * Math.random();
+            double x = background.getWidth() * Math.random();
+            double y = - background.getHeight() * Math.random();
             coin.setPosition(x, y);
             coins.add(coin);
          }
@@ -84,10 +84,10 @@ public class StreakerGame extends Application {
                 double nanot = currentNanoTime - startNanoTime;
                 double t = nanot / 1000000000.0;
                 if (background.getY() > ScreenHeight) {
-                    background.setPosition(0, background2.getY() - background.getH());
+                    background.setPosition(0, background2.getY() - background.getHeight());
                 }
                 if (background2.getY() > ScreenHeight) {
-                    background2.setPosition(0, background.getY() - background2.getH());
+                    background2.setPosition(0, background.getY() - background2.getHeight());
                 }
                 background.setSpeed(0, movingSpeed);
                 background.updateS();
@@ -111,14 +111,14 @@ public class StreakerGame extends Application {
                 if (character.getX() < 0) {
                     character.setPosition(0, character.getY());
                 }
-                if (character.getX() > (background.getW() - character.getW())) {
-                    character.setPosition((background.getW() - character.getW()), character.getY());
+                if (character.getX() > (background.getWidth() - character.getWidth())) {
+                    character.setPosition((background.getWidth() - character.getWidth()), character.getY());
                 }
                 if (character.getY() < 0) {
                     character.setPosition(character.getX(), 0);
                 }
-                if (character.getY() > (ScreenHeight - character.getH())) {
-                    character.setPosition(character.getX(), ScreenHeight - character.getH());
+                if (character.getY() > (ScreenHeight - character.getHeight())) {
+                    character.setPosition(character.getX(), ScreenHeight - character.getHeight());
                 }
                character.updateV(elapsedTime);
                character.render(gc, t);
@@ -126,13 +126,13 @@ public class StreakerGame extends Application {
                while (coinsIter.hasNext()) {
                    Sprite coin = coinsIter.next();
                    if (coin.getY() > ScreenHeight) {
-                       double x = background.getW() * Math.random();
-                       double y = - background.getH() * Math.random();
+                       double x = background.getWidth() * Math.random();
+                       double y = - background.getHeight() * Math.random();
                        coin.setPosition(x, y);
                    }
                    if (character.intersects(coin.getBoundary())) {
-                       double x = background.getW() * Math.random();
-                       double y = - background.getH() * Math.random();
+                       double x = background.getWidth() * Math.random();
+                       double y = - background.getHeight() * Math.random();
                        coin.setPosition(x, y);
                        collected.value += 10;
                    }
@@ -145,12 +145,12 @@ public class StreakerGame extends Application {
                String hms = String.format("%02d:%02d:%02d", TimeUnit.NANOSECONDS.toHours((long)nanot),
                TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
                TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));
-               gc.fillText( hms, background.getW() - 100, 20 );
-               gc.strokeText( hms , background.getW() - 100, 20 );
+               gc.fillText( hms, background.getWidth() - 100, 20 );
+               gc.strokeText( hms , background.getWidth() - 100, 20 );
 
                String coinStr = "Coins: " + collected.value;
-               gc.fillText( coinStr, background.getW() - 100, 40 );
-               gc.strokeText( coinStr , background.getW() - 100, 40 );
+               gc.fillText( coinStr, background.getWidth() - 100, 40 );
+               gc.strokeText( coinStr , background.getWidth() - 100, 40 );
             }
         }.start();
         theStage.show();

@@ -1,9 +1,6 @@
-import javafx.scene.image.Image;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.geometry.Rectangle2D;
 
-public class Character {
-    private Image image;
+
+public class Character extends WorldItem {
     private double positionX;
     private double positionY;
     private double velocityX;
@@ -18,31 +15,6 @@ public class Character {
         positionY = 0;
         velocityX = 0;
         velocityY = 0;
-    }
-    public double getX() {
-        return positionX;
-    }
-    public double getY() {
-        return positionY;
-    }
-    public double getW() {
-        return width;
-    }
-    public double getH() {
-        return height;
-    }
-    public void setImage(Image i) {
-        image = i;
-        width = i.getWidth();
-        height = i.getHeight();
-    }
-    public void setImage(String filename) {
-        Image i = new Image(filename);
-        setImage(i);
-    }
-    public void setPosition(double x, double y) {
-        positionX = x;
-        positionY = y;
     }
     public void setVelocity(double x, double y) {
         velocityX = x;
@@ -60,21 +32,8 @@ public class Character {
         speedX = x;
         speedY = y;
     }
-    public void updateS() {
+    public void updateSpeed() {
         positionX += speedX;
         positionY += speedY;
-    }
-    public void render(GraphicsContext gc) {
-        gc.drawImage(image, positionX, positionY);
-    }
-    public Rectangle2D getBoundary() {
-        return new Rectangle2D(positionX, positionY, width, height);
-    }
-    public boolean intersects(Rectangle2D s) {
-        return s.intersects(this.getBoundary());
-    }
-    public String toString() {
-        return "Position: [" + positionX + "," + positionY + "]"
-        + " Velocity: [" + velocityX + "," + velocityY + "]";
     }
 }
