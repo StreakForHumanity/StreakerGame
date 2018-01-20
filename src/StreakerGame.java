@@ -18,12 +18,19 @@ import java.util.concurrent.TimeUnit;
 public class StreakerGame extends Application {
     private static final int SCREEN_HEIGHT = 600;
     private static final int MOVING_SPEED = 8;
+    private static final double FRAME_DURATION = 0.150;
+    private static final int NUM_COINS = 4;
+
+    private long startNanoTime;
+    private LongValue lastNanoTime;
+    private IntValue collected;
 
     private Group root;
     private Scene scene;
     private BackgroundItem background;
     private Canvas canvas;
-    ArrayList<String> input;
+    private ArrayList<String> input;
+    private GraphicsContext gc;
 
     public static void main(String[] args) {
         launch(args);
@@ -33,34 +40,9 @@ public class StreakerGame extends Application {
         setupGameState(stage);
         setOnKeyPress();
         setOnKeyRelease();
-        // create character
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        AnimatedImage character = new AnimatedImage();
-        Image[] imageArray = new Image[4];
-        imageArray[0] = new Image("../assets/images/guyForward.png");
-        imageArray[1] = new Image("../assets/images/guyLeft.png");
-        imageArray[2] = new Image("../assets/images/guyForward.png");
-        imageArray[3] = new Image("../assets/images/guyRight.png");
-        character.setFrame(imageArray);
-        character.duration = 0.150; // change to global variable
-        character.setPosition((background.getWidth() / 2) - 40, SCREEN_HEIGHT / 2);
-        //
-        // create coins
-        ArrayList<Sprite> coins = new ArrayList<Sprite>();
-        for(int i = 0; i < 4; i++) {
-            Sprite coin = new Sprite();
-            coin.setImage("../assets/images/coin.png");
-            double x = background.getWidth() * Math.random();
-            double y = - background.getHeight() * Math.random();
-            coin.setPosition(x, y);
-            coins.add(coin);
-        }
-        //
-        // initialize time and score
-        IntValue collected = new IntValue(0);
-        LongValue lastNanoTime = new LongValue( System.nanoTime() );
-        final long startNanoTime = System.nanoTime();
-        //
+        createCharacter();
+        createCoins();
+        setInitialScore();
         // run game
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
@@ -161,5 +143,35 @@ public class StreakerGame extends Application {
         canvas = new Canvas(background.getWidth(), SCREEN_HEIGHT);
         root.getChildren().add(canvas);
         input = new ArrayList<String>();
+        gc = canvas.getGraphicsContext2D();
+    }
+    public void createCharacter() {
+        // create a character class in the future
+        AnimatedImage character = new AnimatedImage();
+        Image[] imageArray = new Image[4];
+        imageArray[0] = new Image("../assets/images/guyForward.png");
+        imageArray[1] = new Image("../assets/images/guyLeft.png");
+        imageArray[2] = new Image("../assets/images/guyForward.png");
+        imageArray[3] = new Image("../assets/images/guyRight.png");
+        character.setFrame(imageArray);
+        character.duration = FRAME_DURATION;
+        character.setPosition((background.getWidth() / 2) - 40, SCREEN_HEIGHT / 2);
+    }
+    public void createCoins() {
+        // create a coin class in the future
+        ArrayList<WorldItem> coins = new ArrayList<WorldItem>();
+        for(int i = 0; i < NUM_COINS; i++) {
+            WorldItem coin = new WorldItem();
+            coin.setImage("../assets/images/coin.png");
+            double x = background.getWidth() * Math.random();
+            double y = - background.getHeight() * Math.random();
+            coin.setPosition(x, y);
+            coins.add(coin);
+        }
+    }
+    public void setInitialScore() {
+        collected = new IntValue(0);
+        lastNanoTime = new LongValue(System.nanoTime());
+        startNanoTime = System.nanoTime();
     }
 }
