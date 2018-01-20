@@ -32,7 +32,7 @@ public class StreakerGame extends Application {
     private Canvas canvas;
     private ArrayList<String> input;
     private GraphicsContext gc;
-    private ArrayList<WorldItem> coins;
+    private ArrayList<Coin> coins;
     private AnimatedImage character;
 
     public static void main(String[] args) {
@@ -61,25 +61,15 @@ public class StreakerGame extends Application {
                 handleCharacterPosition();
                 character.updateVelocity(elapsedTime);
                 character.render(gc, t);
-                Iterator<WorldItem> coinsIter = coins.iterator();
-                while (coinsIter.hasNext()) {
-                    WorldItem coin = coinsIter.next();
+                for (Coin coin : coins) {
                     if (coin.getY() > SCREEN_HEIGHT) {
-                        double x = background.getWidth() * Math.random();
-                        double y = - background.getHeight() * Math.random();
-                        coin.setPosition(x, y);
+                        coin.resetPosition();
                     }
                     if (character.intersects(coin.getBoundary())) {
-                        double x = background.getWidth() * Math.random();
-                        double y = - background.getHeight() * Math.random();
-                        coin.setPosition(x, y);
+                        coin.resetPosition();
                         collected.value += 10;
                     }
-                }
-                for (WorldItem coin : coins) {
-                    coin.setSpeed(0, MOVING_SPEED);
-                    coin.updateS();
-                    coin.render(gc);
+                    coin.handleSpeed(gc);
                 }
                 String hms = String.format("%02d:%02d:%02d", TimeUnit.NANOSECONDS.toHours((long)nanot),
                 TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
@@ -140,14 +130,9 @@ public class StreakerGame extends Application {
         character.setPosition((background.getWidth() / 2) - 40, SCREEN_HEIGHT / 2);
     }
     public void createCoins() {
-        // create a coin class in the future
-        coins = new ArrayList<WorldItem>();
+        coins = new ArrayList<Coin>();
         for(int i = 0; i < NUM_COINS; i++) {
-            WorldItem coin = new WorldItem();
-            coin.setImage("../assets/images/coin.png");
-            double x = background.getWidth() * Math.random();
-            double y = - background.getHeight() * Math.random();
-            coin.setPosition(x, y);
+            Coin coin = new Coin(background, MOVING_SPEED);
             coins.add(coin);
         }
     }
