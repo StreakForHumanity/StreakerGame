@@ -21,6 +21,7 @@ public class StreakerGame extends Application {
     private static final double FRAME_DURATION = 0.150;
     private static final int NUM_COINS = 4;
     private static final int CHARACTER_VELOCITY = 550;
+    private static final double _PRECISION = 1000000000.0;
 
     private long startNanoTime;
     private LongValue lastNanoTime;
@@ -46,15 +47,12 @@ public class StreakerGame extends Application {
         createCharacter();
         createCoins();
         setInitialScore();
-        // run game
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                // deal with time
                 double elapsedTime = (currentNanoTime - lastNanoTime.value) / 1000000000.0;
                 lastNanoTime.value = currentNanoTime;
                 double nanot = currentNanoTime - startNanoTime;
-                double t = nanot / 1000000000.0;
-                //
+                double t = nanot / _PRECISION;
                 background.loop();
                 background.setBackgroundSpeed(gc);
                 handleVelocity();
@@ -71,15 +69,8 @@ public class StreakerGame extends Application {
                     }
                     coin.handleSpeed(gc);
                 }
-                String hms = String.format("%02d:%02d:%02d", TimeUnit.NANOSECONDS.toHours((long)nanot),
-                TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
-                TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));
-                gc.fillText(hms, background.getWidth() - 100, 20);
-                gc.strokeText(hms , background.getWidth() - 100, 20);
-
-                String coinStr = "Coins: " + collected.value;
-                gc.fillText(coinStr, background.getWidth() - 100, 40);
-                gc.strokeText(coinStr , background.getWidth() - 100, 40);
+                showTime(nanot);
+                showCoins();
             }
         }.start();
         stage.show();
@@ -169,5 +160,17 @@ public class StreakerGame extends Application {
         if (character.getY() > (SCREEN_HEIGHT - character.getHeight())) {
             character.setPosition(character.getX(), SCREEN_HEIGHT - character.getHeight());
         }
+    }
+    public void showTime(double nanot) {
+        String hms = String.format("%02d:%02d:%02d", TimeUnit.NANOSECONDS.toHours((long)nanot),
+        TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
+        TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));
+        gc.fillText(hms, background.getWidth() - 100, 20);
+        gc.strokeText(hms , background.getWidth() - 100, 20);
+    }
+    public void showCoins() {
+        String coinStr = "Coins: " + collected.value;
+        gc.fillText(coinStr, background.getWidth() - 100, 40);
+        gc.strokeText(coinStr , background.getWidth() - 100, 40);
     }
 }
