@@ -20,6 +20,7 @@ public class StreakerGame extends Application {
     private static final int MOVING_SPEED = 8;
     private static final double FRAME_DURATION = 0.150;
     private static final int NUM_COINS = 4;
+    private static final int CHARACTER_VELOCITY = 550;
 
     private long startNanoTime;
     private LongValue lastNanoTime;
@@ -31,6 +32,8 @@ public class StreakerGame extends Application {
     private Canvas canvas;
     private ArrayList<String> input;
     private GraphicsContext gc;
+    private ArrayList<WorldItem> coins;
+    private AnimatedImage character;
 
     public static void main(String[] args) {
         launch(args);
@@ -46,68 +49,47 @@ public class StreakerGame extends Application {
         // run game
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
+                // deal with time
                 double elapsedTime = (currentNanoTime - lastNanoTime.value) / 1000000000.0;
                 lastNanoTime.value = currentNanoTime;
                 double nanot = currentNanoTime - startNanoTime;
                 double t = nanot / 1000000000.0;
+                //
                 background.loop();
                 background.setBackgroundSpeed(gc);
-                character.setVelocity(0,0);
-                if (input.contains("LEFT")) {
-                    character.addVelocity(-550,0);
+                handleVelocity();
+                handleCharacterPosition();
+                character.updateVelocity(elapsedTime);
+                character.render(gc, t);
+                Iterator<WorldItem> coinsIter = coins.iterator();
+                while (coinsIter.hasNext()) {
+                    WorldItem coin = coinsIter.next();
+                    if (coin.getY() > SCREEN_HEIGHT) {
+                        double x = background.getWidth() * Math.random();
+                        double y = - background.getHeight() * Math.random();
+                        coin.setPosition(x, y);
+                    }
+                    if (character.intersects(coin.getBoundary())) {
+                        double x = background.getWidth() * Math.random();
+                        double y = - background.getHeight() * Math.random();
+                        coin.setPosition(x, y);
+                        collected.value += 10;
+                    }
                 }
-                if (input.contains("RIGHT")) {
-                    character.addVelocity(550,0);
+                for (WorldItem coin : coins) {
+                    coin.setSpeed(0, MOVING_SPEED);
+                    coin.updateS();
+                    coin.render(gc);
                 }
-                if (input.contains("UP")) {
-                    character.addVelocity(0,-550);
-                }
-                if (input.contains("DOWN")) {
-                    character.addVelocity(0,550);
-                }
-                if (character.getX() < 0) {
-                    character.setPosition(0, character.getY());
-                }
-                if (character.getX() > (background.getWidth() - character.getWidth())) {
-                    character.setPosition((background.getWidth() - character.getWidth()), character.getY());
-                }
-                if (character.getY() < 0) {
-                    character.setPosition(character.getX(), 0);
-                }
-                if (character.getY() > (SCREEN_HEIGHT - character.getHeight())) {
-                    character.setPosition(character.getX(), SCREEN_HEIGHT - character.getHeight());
-                }
-               character.updateV(elapsedTime);
-               character.render(gc, t);
-               Iterator<Sprite> coinsIter = coins.iterator();
-               while (coinsIter.hasNext()) {
-                   Sprite coin = coinsIter.next();
-                   if (coin.getY() > SCREEN_HEIGHT) {
-                       double x = background.getWidth() * Math.random();
-                       double y = - background.getHeight() * Math.random();
-                       coin.setPosition(x, y);
-                   }
-                   if (character.intersects(coin.getBoundary())) {
-                       double x = background.getWidth() * Math.random();
-                       double y = - background.getHeight() * Math.random();
-                       coin.setPosition(x, y);
-                       collected.value += 10;
-                   }
-               }
-               for (Sprite coin : coins) {
-                   coin.setSpeed(0, MOVING_SPEED);
-                   coin.updateS();
-                   coin.render(gc);
-               }
-               String hms = String.format("%02d:%02d:%02d", TimeUnit.NANOSECONDS.toHours((long)nanot),
-               TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
-               TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));
-               gc.fillText( hms, background.getWidth() - 100, 20 );
-               gc.strokeText( hms , background.getWidth() - 100, 20 );
+                String hms = String.format("%02d:%02d:%02d", TimeUnit.NANOSECONDS.toHours((long)nanot),
+                TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
+                TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));
+                gc.fillText(hms, background.getWidth() - 100, 20);
+                gc.strokeText(hms , background.getWidth() - 100, 20);
 
-               String coinStr = "Coins: " + collected.value;
-               gc.fillText( coinStr, background.getWidth() - 100, 40 );
-               gc.strokeText( coinStr , background.getWidth() - 100, 40 );
+                String coinStr = "Coins: " + collected.value;
+                gc.fillText(coinStr, background.getWidth() - 100, 40);
+                gc.strokeText(coinStr , background.getWidth() - 100, 40);
             }
         }.start();
         stage.show();
@@ -147,7 +129,7 @@ public class StreakerGame extends Application {
     }
     public void createCharacter() {
         // create a character class in the future
-        AnimatedImage character = new AnimatedImage();
+        character = new AnimatedImage();
         Image[] imageArray = new Image[4];
         imageArray[0] = new Image("../assets/images/guyForward.png");
         imageArray[1] = new Image("../assets/images/guyLeft.png");
@@ -159,7 +141,7 @@ public class StreakerGame extends Application {
     }
     public void createCoins() {
         // create a coin class in the future
-        ArrayList<WorldItem> coins = new ArrayList<WorldItem>();
+        coins = new ArrayList<WorldItem>();
         for(int i = 0; i < NUM_COINS; i++) {
             WorldItem coin = new WorldItem();
             coin.setImage("../assets/images/coin.png");
@@ -173,5 +155,34 @@ public class StreakerGame extends Application {
         collected = new IntValue(0);
         lastNanoTime = new LongValue(System.nanoTime());
         startNanoTime = System.nanoTime();
+    }
+    public void handleVelocity() {
+        character.setVelocity(0,0);
+        if (input.contains("LEFT")) {
+            character.addVelocity(-CHARACTER_VELOCITY,0);
+        }
+        if (input.contains("RIGHT")) {
+            character.addVelocity(CHARACTER_VELOCITY,0);
+        }
+        if (input.contains("UP")) {
+            character.addVelocity(0,-CHARACTER_VELOCITY);
+        }
+        if (input.contains("DOWN")) {
+            character.addVelocity(0,CHARACTER_VELOCITY);
+        }
+    }
+    public void handleCharacterPosition() {
+        if (character.getX() < 0) {
+            character.setPosition(0, character.getY());
+        }
+        if (character.getX() > (background.getWidth() - character.getWidth())) {
+            character.setPosition((background.getWidth() - character.getWidth()), character.getY());
+        }
+        if (character.getY() < 0) {
+            character.setPosition(character.getX(), 0);
+        }
+        if (character.getY() > (SCREEN_HEIGHT - character.getHeight())) {
+            character.setPosition(character.getX(), SCREEN_HEIGHT - character.getHeight());
+        }
     }
 }
