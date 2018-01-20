@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 
 public class BackgroundItem {
+    private static final String _PATH = "../assets/images/background.png";
+
     private ArrayList<Character> backgrounds;
     private int SCREEN_HEIGHT;
     private int MOVING_SPEED;
@@ -17,7 +19,7 @@ public class BackgroundItem {
         this.setBackground(backgroundTwo, false);
     }
     public void setBackground(Character background, boolean first) {
-        background.setImage("../assets/images/background.png");
+        background.setImage(_PATH);
         if (first) {
             background.setPosition(0, SCREEN_HEIGHT - background.getHeight());
         } else {

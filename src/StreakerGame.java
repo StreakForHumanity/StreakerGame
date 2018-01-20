@@ -110,6 +110,7 @@ public class StreakerGame extends Application {
     }
     public void createCharacter() {
         // create a character class in the future
+        // really needs a rewrite in general
         character = new AnimatedImage();
         Image[] imageArray = new Image[4];
         imageArray[0] = new Image("../assets/images/guyForward.png");
