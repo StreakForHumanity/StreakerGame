@@ -49,7 +49,7 @@ public class StreakerGame extends Application {
         setInitialScore();
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                double elapsedTime = (currentNanoTime - lastNanoTime.value) / 1000000000.0;
+                double elapsedTime = (currentNanoTime - lastNanoTime.value) / _PRECISION;
                 lastNanoTime.value = currentNanoTime;
                 double nanot = currentNanoTime - startNanoTime;
                 double t = nanot / _PRECISION;
