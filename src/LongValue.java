@@ -1,9 +1,7 @@
-public class LongValue
-{
+public class LongValue {
     public long value;
-    
-    public LongValue(long i)
-    {
+
+    public LongValue(long i) {
         value = i;
     }
 }

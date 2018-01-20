@@ -15,200 +15,150 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
-// Animation of Earth rotating around the sun. (Hello, world!)
-public class StreakerGame extends Application 
-{
+public class StreakerGame extends Application {
+    private static final int SCREEN_HEIGHT = 600;
+    private static final int MOVING_SPEED = 8;
+    private static final double FRAME_DURATION = 0.150;
+    private static final int NUM_COINS = 4;
+    private static final int CHARACTER_VELOCITY = 550;
+    private static final double _PRECISION = 1000000000.0;
 
-    private static final int ScreenHeight = 600;
-    private static final int movingSpeed = 8;
+    private long startNanoTime;
+    private LongValue lastNanoTime;
+    private IntValue collected;
 
-    public static void main(String[] args) 
-    {
+    private Group root;
+    private Scene scene;
+    private BackgroundItem background;
+    private Canvas canvas;
+    private ArrayList<String> input;
+    private GraphicsContext gc;
+    private ArrayList<Coin> coins;
+    private AnimatedImage character;
+
+    public static void main(String[] args) {
         launch(args);
     }
-
     @Override
-    public void start(Stage theStage) 
-    {
-        theStage.setTitle( "Streaker" );
-
-        Group root = new Group();
-        Scene theScene = new Scene( root );
-        theStage.setScene( theScene );
-
-        //create background images to loop
-        Sprite background = new Sprite();
-        Sprite background2 = new Sprite();
-
-        //Load images and set position        
-        background.setImage("background.png");
-        background.setPosition(0, ScreenHeight - background.getH());
-        background2.setImage("background.png");
-        background2.setPosition(0, ScreenHeight -(2 * background.getH()));
- 
-        //create a canvas --- canvas width must equal background width and screen height
-        Canvas canvas = new Canvas( background.getW(), ScreenHeight );
-        root.getChildren().add( canvas );
- 
-        //list of inputted keys (left right up down)
-        ArrayList<String> input = new ArrayList<String>();
-
-        //add to input string when key is held down
-        theScene.setOnKeyPressed(
-            new EventHandler<KeyEvent>()
-            {
-                public void handle(KeyEvent e)
-                {
-                    String code = e.getCode().toString();
-                    if ( !input.contains(code) )
-                        input.add( code );
-                }
-            });
-
-        //remove inputted key when key is released
-        theScene.setOnKeyReleased(
-            new EventHandler<KeyEvent>()
-            {
-                public void handle(KeyEvent e)
-                {
-                    String code = e.getCode().toString();
-                    input.remove( code );
-                }
-            });
-
-        //create graphics context in canvas
-        GraphicsContext gc = canvas.getGraphicsContext2D(); 
-       
-        //create player's animated character
-        AnimatedImage character = new AnimatedImage();
-        Image[] imageArray = new Image[4];
-        imageArray[0] = new Image( "guyForward.png" );
-        imageArray[1] = new Image( "guyLeft.png" );
-        imageArray[2] = new Image( "guyForward.png" );
-        imageArray[3] = new Image( "guyRight.png" );
-        character.setFrame(imageArray);
-        character.duration = 0.150;
-        character.setPosition((background.getW() / 2) - 40, ScreenHeight/2 );
-
-        // create coins
-        ArrayList<Sprite> coins = new ArrayList<Sprite>();
-
-        for( int i = 0; i < 4; i++)
-        {
-            Sprite coin = new Sprite();
-            coin.setImage("tempCoin.png");
-            double x = background.getW() * Math.random();
-            double y = - background.getH() * Math.random();
-            coin.setPosition(x, y);
-            coins.add(coin);
-         }
-
-        IntValue collected = new IntValue(0);
-
-        //get initial time values
-        LongValue lastNanoTime = new LongValue( System.nanoTime() );
-        final long startNanoTime = System.nanoTime();
-
-
-        new AnimationTimer()
-        {
-            public void handle(long currentNanoTime)
-            {
-                // calculate time since last update.
-                double elapsedTime = (currentNanoTime - lastNanoTime.value) / 1000000000.0;
+    public void start(Stage stage) {
+        setupGameState(stage);
+        setOnKeyPress();
+        setOnKeyRelease();
+        character = new Streaker(FRAME_DURATION, SCREEN_HEIGHT, background);
+        createCoins();
+        setInitialScore();
+        new AnimationTimer() {
+            public void handle(long currentNanoTime) {
+                double elapsedTime = (currentNanoTime - lastNanoTime.value) / _PRECISION;
                 lastNanoTime.value = currentNanoTime;
-
-                //calculate time since started
-                double nanot = currentNanoTime - startNanoTime; 
-                double t = nanot / 1000000000.0;
-
-                //loop backgrounds
-                if (background.getY() > ScreenHeight)
-                   background.setPosition(0, background2.getY() - background.getH());
-                if (background2.getY() > ScreenHeight)
-                   background2.setPosition(0, background.getY() - background2.getH());
-
-                //set up speed bacground moves and display to graphics context
-                background.setSpeed(0,movingSpeed);
-                background.updateS();
-                background.render( gc );
-                background2.setSpeed(0,movingSpeed);
-                background2.updateS();
-                background2.render( gc ); 
-              
-                //set velocity for which character will move, 0 when no keys are pressed else velocity > 0
-                character.setVelocity(0,0);
-                if (input.contains("LEFT"))
-                    character.addVelocity(-550,0);
-                if (input.contains("RIGHT"))
-                    character.addVelocity(550,0);
-                if (input.contains("UP"))
-                    character.addVelocity(0,-550);
-                if (input.contains("DOWN"))
-                    character.addVelocity(0,550);
-             
-                //reset character's position if character moves off screen        
-                if ( character.getX() < 0 )
-                    character.setPosition(0, character.getY());
-                if ( character.getX() > (background.getW() - character.getW()) )
-                    character.setPosition((background.getW() - character.getW()), character.getY());  
-                if ( character.getY() < 0 )
-                    character.setPosition(character.getX(), 0);
-                if ( character.getY() > (ScreenHeight - character.getH()) )
-                    character.setPosition(character.getX(), ScreenHeight - character.getH());
-                
-               //update characters position based on time elapsed
-               character.updateV(elapsedTime);
-               //add character to screen --- frame is based on time t
-               character.render(gc, t);
-
-               //if coins go out of view, replace
-               Iterator<Sprite> coinsIter = coins.iterator();
-                while ( coinsIter.hasNext() )
-                {
-                    Sprite coin = coinsIter.next();
-                    // reset coins if they go off screen
-                    if ( coin.getY() > ScreenHeight )
-                    {
-                        double x = background.getW() * Math.random();
-                        double y = - background.getH() * Math.random();
-                        coin.setPosition(x, y);
+                double nanot = currentNanoTime - startNanoTime;
+                double t = nanot / _PRECISION;
+                background.loop();
+                background.setBackgroundSpeed(gc);
+                handleVelocity();
+                handleCharacterPosition();
+                character.updateVelocity(elapsedTime);
+                character.render(gc, t);
+                for (Coin coin : coins) {
+                    if (coin.getY() > SCREEN_HEIGHT) {
+                        coin.resetPosition();
                     }
-                    //reset coins if they are collected
-                    if ( character.intersects(coin.getBoundary()) )
-                    {
-                        double x = background.getW() * Math.random();
-                        double y = - background.getH() * Math.random();
-                        coin.setPosition(x, y);
+                    if (character.intersects(coin.getBoundary())) {
+                        coin.resetPosition();
                         collected.value += 10;
                     }
+                    coin.handleSpeed(gc);
                 }
-
-
-                for (Sprite coin : coins )
-                {
-                    coin.setSpeed(0,movingSpeed);
-                    coin.updateS();
-                    coin.render( gc);
-                }
-
-
-               String hms = String.format("%02d:%02d:%02d", TimeUnit.NANOSECONDS.toHours((long)nanot),
-                TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
-                TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));
-                
-               gc.fillText( hms, background.getW() - 100, 20 );
-               gc.strokeText( hms , background.getW() - 100, 20 );    
-
-               String coinStr = "Coins: " + collected.value;
-               gc.fillText( coinStr, background.getW() - 100, 40 );
-               gc.strokeText( coinStr , background.getW() - 100, 40 );
-
-
+                showTime(nanot);
+                showCoins();
             }
         }.start();
-        
-        //display stage
-        theStage.show();
+        stage.show();
+    }
+    public void setOnKeyPress() {
+        scene.setOnKeyPressed(
+            new EventHandler<KeyEvent>() {
+                public void handle(KeyEvent e) {
+                    String code = e.getCode().toString();
+                    if (!input.contains(code)) {
+                        input.add(code);
+                    }
+                }
+            }
+        );
+    }
+    public void setOnKeyRelease() {
+        scene.setOnKeyReleased(
+            new EventHandler<KeyEvent>() {
+                public void handle(KeyEvent e) {
+                    String code = e.getCode().toString();
+                    input.remove(code);
+                }
+            }
+        );
+    }
+    public void setupGameState(Stage stage) {
+        stage.setTitle("Streaker");
+        root = new Group();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        background = new BackgroundItem(SCREEN_HEIGHT, MOVING_SPEED);
+        canvas = new Canvas(background.getWidth(), SCREEN_HEIGHT);
+        root.getChildren().add(canvas);
+        input = new ArrayList<String>();
+        gc = canvas.getGraphicsContext2D();
+    }
+    public void createCoins() {
+        coins = new ArrayList<Coin>();
+        for(int i = 0; i < NUM_COINS; i++) {
+            Coin coin = new Coin(background, MOVING_SPEED);
+            coins.add(coin);
+        }
+    }
+    public void setInitialScore() {
+        collected = new IntValue(0);
+        lastNanoTime = new LongValue(System.nanoTime());
+        startNanoTime = System.nanoTime();
+    }
+    public void handleVelocity() {
+        character.setVelocity(0,0);
+        if (input.contains("LEFT")) {
+            character.addVelocity(-CHARACTER_VELOCITY,0);
+        }
+        if (input.contains("RIGHT")) {
+            character.addVelocity(CHARACTER_VELOCITY,0);
+        }
+        if (input.contains("UP")) {
+            character.addVelocity(0,-CHARACTER_VELOCITY);
+        }
+        if (input.contains("DOWN")) {
+            character.addVelocity(0,CHARACTER_VELOCITY);
+        }
+    }
+    public void handleCharacterPosition() {
+        if (character.getX() < 0) {
+            character.setPosition(0, character.getY());
+        }
+        if (character.getX() > (background.getWidth() - character.getWidth())) {
+            character.setPosition((background.getWidth() - character.getWidth()), character.getY());
+        }
+        if (character.getY() < 0) {
+            character.setPosition(character.getX(), 0);
+        }
+        if (character.getY() > (SCREEN_HEIGHT - character.getHeight())) {
+            character.setPosition(character.getX(), SCREEN_HEIGHT - character.getHeight());
+        }
+    }
+    public void showTime(double nanot) {
+        String hms = String.format("%02d:%02d:%02d", TimeUnit.NANOSECONDS.toHours((long)nanot),
+        TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
+        TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));
+        gc.fillText(hms, background.getWidth() - 100, 20);
+        gc.strokeText(hms , background.getWidth() - 100, 20);
+    }
+    public void showCoins() {
+        String coinStr = "Coins: " + collected.value;
+        gc.fillText(coinStr, background.getWidth() - 100, 40);
+        gc.strokeText(coinStr , background.getWidth() - 100, 40);
     }
 }
