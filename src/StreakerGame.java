@@ -44,7 +44,7 @@ public class StreakerGame extends Application {
         setupGameState(stage);
         setOnKeyPress();
         setOnKeyRelease();
-        createCharacter();
+        character = new Streaker(FRAME_DURATION, SCREEN_HEIGHT, background);
         createCoins();
         setInitialScore();
         new AnimationTimer() {
@@ -107,19 +107,6 @@ public class StreakerGame extends Application {
         root.getChildren().add(canvas);
         input = new ArrayList<String>();
         gc = canvas.getGraphicsContext2D();
-    }
-    public void createCharacter() {
-        // create a character class in the future
-        // really needs a rewrite in general
-        character = new AnimatedImage();
-        Image[] imageArray = new Image[4];
-        imageArray[0] = new Image("../assets/images/guyForward.png");
-        imageArray[1] = new Image("../assets/images/guyLeft.png");
-        imageArray[2] = new Image("../assets/images/guyForward.png");
-        imageArray[3] = new Image("../assets/images/guyRight.png");
-        character.setFrame(imageArray);
-        character.duration = FRAME_DURATION;
-        character.setPosition((background.getWidth() / 2) - 40, SCREEN_HEIGHT / 2);
     }
     public void createCoins() {
         coins = new ArrayList<Coin>();
