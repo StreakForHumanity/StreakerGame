@@ -24,7 +24,7 @@ public class Character extends WorldItem {
         velocityX += x;
         velocityY += y;
     }
-    public void updateV(double time) {
+    public void updateVelocity(double time) {
         positionX += velocityX * time;
         positionY += velocityY * time;
     }
