@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 
 public class BackgroundItem {
-    private static final String _PATH = "../assets/images/background.png";
+    private static final String _PATH = "src/assets/background.png";
 
     private ArrayList<Character> backgrounds;
     private int SCREEN_HEIGHT;
