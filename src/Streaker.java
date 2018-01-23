@@ -2,10 +2,10 @@ import javafx.scene.image.Image;
 
 public class Streaker extends AnimatedImage {
     private static final String[] _PATHS = {
-        "../assets/images/guyForward.png",
-        "../assets/images/guyLeft.png",
-        "../assets/images/guyForward.png",
-        "../assets/images/guyRight.png"
+            "src/assets/guyForward.png",
+            "src/assets/guyLeft.png",
+            "src/assets/guyForward.png",
+            "src/assets/guyRight.png"
     };
 
     private double FRAME_DURATION;
