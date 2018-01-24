@@ -1,7 +1,7 @@
 import javafx.scene.canvas.GraphicsContext;
 
 public class Coin extends Character {
-    private static final String _PATH = "src/assets/coin.png";
+    private static final String _PATH = "./assets/coin.png";
 
     private BackgroundItem background;
     private int MOVING_SPEED;
