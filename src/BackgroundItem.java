@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 
 public class BackgroundItem {
-    private static final String _PATH = "./assets/background.png";
+    private static final String _PATH = "./assets/stadium.png";
 
     private ArrayList<Character> backgrounds;
     private int SCREEN_HEIGHT;
@@ -31,6 +31,9 @@ public class BackgroundItem {
     }
     public double getHeight() {
         return backgrounds.get(0).getHeight();
+    }
+    public void resetSpeed(int s) {
+        MOVING_SPEED = s;
     }
     public void loop() {
         if (backgrounds.get(0).getY() > SCREEN_HEIGHT) {

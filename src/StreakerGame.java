@@ -17,15 +17,16 @@ import java.util.concurrent.TimeUnit;
 
 public class StreakerGame extends Application {
     private static final int SCREEN_HEIGHT = 600;
-    private static final int MOVING_SPEED = 8;
     private static final double FRAME_DURATION = 0.150;
     private static final int NUM_COINS = 4;
     private static final int CHARACTER_VELOCITY = 550;
     private static final double _PRECISION = 1000000000.0;
-
+    private static final int STADIUM_BORDER = 45;
+    private static final int STARTING_SPEED = 7;
     private long startNanoTime;
     private LongValue lastNanoTime;
     private IntValue collected;
+    private IntValue movingSpeed = new IntValue(STARTING_SPEED);
 
     private Group root;
     private Scene scene;
@@ -102,7 +103,7 @@ public class StreakerGame extends Application {
         root = new Group();
         scene = new Scene(root);
         stage.setScene(scene);
-        background = new BackgroundItem(SCREEN_HEIGHT, MOVING_SPEED);
+        background = new BackgroundItem(SCREEN_HEIGHT, movingSpeed.value);
         canvas = new Canvas(background.getWidth(), SCREEN_HEIGHT);
         root.getChildren().add(canvas);
         input = new ArrayList<String>();
@@ -111,7 +112,7 @@ public class StreakerGame extends Application {
     public void createCoins() {
         coins = new ArrayList<Coin>();
         for(int i = 0; i < NUM_COINS; i++) {
-            Coin coin = new Coin(background, MOVING_SPEED);
+            Coin coin = new Coin(background, movingSpeed.value);
             coins.add(coin);
         }
     }
@@ -136,23 +137,23 @@ public class StreakerGame extends Application {
         }
     }
     public void handleCharacterPosition() {
-        if (character.getX() < 0) {
-            character.setPosition(0, character.getY());
+        if (character.getX() < STADIUM_BORDER) {
+            character.setPosition(STADIUM_BORDER, character.getY());
         }
-        if (character.getX() > (background.getWidth() - character.getWidth())) {
-            character.setPosition((background.getWidth() - character.getWidth()), character.getY());
+        if (character.getX() > background.getWidth() - STADIUM_BORDER - character.getWidth()) {
+            character.setPosition(background.getWidth() - STADIUM_BORDER - character.getWidth(), character.getY());
         }
         if (character.getY() < 0) {
             character.setPosition(character.getX(), 0);
         }
-        if (character.getY() > (SCREEN_HEIGHT - character.getHeight())) {
+        if (character.getY() > SCREEN_HEIGHT - character.getHeight()) {
             character.setPosition(character.getX(), SCREEN_HEIGHT - character.getHeight());
         }
     }
     public void showTime(double nanot) {
         String hms = String.format("%02d:%02d:%02d", TimeUnit.NANOSECONDS.toHours((long)nanot),
         TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
-        TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));
+        TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot))); 
         gc.fillText(hms, background.getWidth() - 100, 20);
         gc.strokeText(hms , background.getWidth() - 100, 20);
     }
