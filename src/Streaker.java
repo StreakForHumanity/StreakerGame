@@ -22,5 +22,7 @@ public class Streaker extends AnimatedImage {
         this.setFrame(imageArray);
         this.duration = FRAME_DURATION;
         this.setPosition((background.getWidth() / 2) - 40, SCREEN_HEIGHT / 2);
+        width = imageArray[0].getWidth();
+        height = imageArray[0].getHeight();        
     }
 }

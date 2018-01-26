@@ -4,10 +4,10 @@ import javafx.geometry.Rectangle2D;
 
 public class WorldItem {
     private Image image;
-    private double positionX;
-    private double positionY;
-    private double width;
-    private double height;
+    protected double positionX;
+    protected double positionY;
+    protected double width;
+    protected double height;
 
     public WorldItem() {}
     public void setImage(Image i) {
@@ -22,6 +22,10 @@ public class WorldItem {
     public void setPosition(double x, double y) {
         positionX = x;
         positionY = y;
+    }
+    public void updatePosition(double x, double y) {
+        positionX += x;
+        positionY += y;
     }
     public double getX() {
         return positionX;

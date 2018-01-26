@@ -18,7 +18,7 @@ public class Coin extends Character {
         this.render(gc);
     }
     public void resetPosition() {
-        double x = background.getWidth() * Math.random();
+        double x = ((background.getWidth() - 100) * Math.random()) + 50;
         double y = - background.getHeight() * Math.random();
         this.setPosition(x, y);
     }

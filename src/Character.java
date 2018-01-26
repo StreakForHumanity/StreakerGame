@@ -1,18 +1,12 @@
 
 
 public class Character extends WorldItem {
-    private double positionX;
-    private double positionY;
     private double velocityX;
     private double velocityY;
-    private double width;
-    private double height;
     private double speedX;
     private double speedY;
 
     public Character() {
-        positionX = 0;
-        positionY = 0;
         velocityX = 0;
         velocityY = 0;
     }
@@ -33,7 +27,6 @@ public class Character extends WorldItem {
         speedY = y;
     }
     public void updateSpeed() {
-        positionX += speedX;
-        positionY += speedY;
+        updatePosition(speedX, speedY);
     }
 }
