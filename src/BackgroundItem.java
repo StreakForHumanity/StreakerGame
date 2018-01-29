@@ -32,9 +32,6 @@ public class BackgroundItem {
     public double getHeight() {
         return backgrounds.get(0).getHeight();
     }
-    public void resetSpeed(int s) {
-        MOVING_SPEED = s;
-    }
     public void loop() {
         if (backgrounds.get(0).getY() > SCREEN_HEIGHT) {
             backgrounds.get(0).setPosition(0, backgrounds.get(1).getY() - backgrounds.get(0).getHeight());
