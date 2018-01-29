@@ -19,6 +19,7 @@ public class StreakerGame extends Application {
     private static final int SCREEN_HEIGHT = 600;
     private static final double FRAME_DURATION = 0.150;
     private static final int NUM_COINS = 4;
+    private static final int NUM_TUNNELS = 3;
     private static final int CHARACTER_VELOCITY = 550;
     private static final double _PRECISION = 1000000000.0;
     private static final int STADIUM_BORDER = 45;
@@ -35,6 +36,7 @@ public class StreakerGame extends Application {
     private ArrayList<String> input;
     private GraphicsContext gc;
     private ArrayList<Coin> coins;
+    private ArrayList<Tunnel> tunnels;
     private AnimatedImage character;
 
     public static void main(String[] args) {
@@ -47,6 +49,7 @@ public class StreakerGame extends Application {
         setOnKeyRelease();
         character = new Streaker(FRAME_DURATION, SCREEN_HEIGHT, background);
         createCoins();
+        createTunnels();
         setInitialScore();
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
@@ -69,6 +72,12 @@ public class StreakerGame extends Application {
                         collected.value += 10;
                     }
                     coin.handleSpeed(gc);
+                }
+                for (Tunnel tunnel : tunnels) {
+                    if (tunnel.getY() > SCREEN_HEIGHT) {
+                        tunnel.resetPosition();
+                    }
+                    tunnel.handleSpeed(gc);
                 }
                 showTime(nanot);
                 showCoins();
@@ -116,6 +125,13 @@ public class StreakerGame extends Application {
             coins.add(coin);
         }
     }
+    public void createTunnels() {
+        tunnels = new ArrayList<Tunnel>();
+        for(int i = 0; i < NUM_TUNNELS; i++) {
+            Tunnel tunnel = new Tunnel(background, movingSpeed.value);
+            tunnels.add(tunnel);
+        }
+    }
     public void setInitialScore() {
         collected = new IntValue(0);
         lastNanoTime = new LongValue(System.nanoTime());
@@ -153,7 +169,7 @@ public class StreakerGame extends Application {
     public void showTime(double nanot) {
         String hms = String.format("%02d:%02d:%02d", TimeUnit.NANOSECONDS.toHours((long)nanot),
         TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
-        TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot))); 
+        TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));
         gc.fillText(hms, background.getWidth() - 100, 20);
         gc.strokeText(hms , background.getWidth() - 100, 20);
     }
