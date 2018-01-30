@@ -1,6 +1,8 @@
 import javafx.scene.canvas.GraphicsContext;
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 public class Coin extends WorldItem {
 
     public Coin() {
