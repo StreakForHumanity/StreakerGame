@@ -7,7 +7,7 @@ public class Tunnel extends WorldItem {
         "./assets/tunnelRight.png"
     };
 
-    public Tunnel(BackgroundItem background, int MOVING_SPEED) {
+    public Tunnel() {
         this.resetPosition();
     }
     public void handleSpeed(GraphicsContext gc) {

@@ -3,6 +3,7 @@ public class Constants {
     private static final int SCREEN_HEIGHT = 600;
     private static final double FRAME_DURATION = 0.150;
     private static final int NUM_COINS = 4;
+    private static final int NUM_TUNNELS = 3;
     private static final int CHARACTER_VELOCITY = 550;
     private static final double _PRECISION = 1000000000.0;
     private static final int STADIUM_BORDER = 80;
@@ -33,6 +34,10 @@ public class Constants {
 
     public static int getNumCoins() {
         return NUM_COINS;
+    }
+
+    public static int getNumTunnels() {
+        return NUM_TUNNELS;
     }
 
     public static int getCharacterVelocity() {

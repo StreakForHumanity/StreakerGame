@@ -121,6 +121,7 @@ public class StreakerGame extends Application {
         setOnKeyPress();
         setOnKeyRelease();
         createCoins();
+        createTunnels();
         setInitialScore();
     }
 
@@ -129,6 +130,14 @@ public class StreakerGame extends Application {
         for(int i = 0; i < Constants.getNumCoins(); i++) {
             Coin coin = new Coin();
             coins.add(coin);
+        }
+    }
+
+    private void createTunnels() {
+        tunnels = new ArrayList<Tunnel>();
+        for(int i = 0; i < Constants.getNumTunnels(); i++) {
+            Tunnel tunnel = new Tunnel();
+            tunnels.add(tunnel);
         }
     }
 
