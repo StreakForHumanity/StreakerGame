@@ -1,7 +1,8 @@
 import javafx.scene.canvas.GraphicsContext;
+import java.util.ArrayList;
 
 public class Coin extends WorldItem {
-    
+
     public Coin() {
         this.setImage(Paths.COIN_PATH);
         this.resetPosition();
@@ -17,5 +18,14 @@ public class Coin extends WorldItem {
         double x = (Constants.SCREEN_WIDTH - 2 * Constants.STADIUM_BORDER) * Math.random() + Constants.STADIUM_BORDER;
         double y = - Constants.SCREEN_HEIGHT * Math.random();
         this.setPosition(x, y);
+    }
+
+    public static ArrayList<Coin> createCoins() {
+        ArrayList<Coin> coins = new ArrayList<Coin>();
+        for(int i = 0; i < Constants.NUM_COINS; i++) {
+            Coin coin = new Coin();
+            coins.add(coin);
+        }
+        return coins;
     }
 }

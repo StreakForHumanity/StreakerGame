@@ -57,22 +57,8 @@ public class StreakerGame extends Application {
                 character.handleCharacterPosition();
                 character.updateVelocity(elapsedTime);
                 character.render(gc, t);
-                for (Coin coin : coins) {
-                    if (coin.getY() > Constants.SCREEN_HEIGHT) {
-                        coin.resetPosition();
-                    }
-                    if (character.intersects(coin.getBoundary())) {
-                        coin.resetPosition();
-                        collected.value += 10;
-                    }
-                    coin.handleSpeed(gc);
-                }
-                for (Tunnel tunnel : tunnels) {
-                    if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
-                        tunnel.resetPosition();
-                    }
-                    tunnel.handleSpeed(gc);
-                }
+                handleCoinIntersects();
+                handleTunnelLoop();
                 graphicsController.showTime(nanot);
                 showCoins();
             }
@@ -118,25 +104,9 @@ public class StreakerGame extends Application {
         character = new Streaker();
         setOnKeyPress();
         setOnKeyRelease();
-        createCoins();
-        createTunnels();
+        coins = Coin.createCoins();
+        tunnels = Tunnel.createTunnels();
         setInitialScore();
-    }
-
-    private void createCoins() {
-        coins = new ArrayList<Coin>();
-        for(int i = 0; i < Constants.NUM_COINS; i++) {
-            Coin coin = new Coin();
-            coins.add(coin);
-        }
-    }
-
-    private void createTunnels() {
-        tunnels = new ArrayList<Tunnel>();
-        for(int i = 0; i < Constants.NUM_TUNNELS; i++) {
-            Tunnel tunnel = new Tunnel();
-            tunnels.add(tunnel);
-        }
     }
 
     private void setInitialScore() {
@@ -145,12 +115,32 @@ public class StreakerGame extends Application {
         startNanoTime = System.nanoTime();
     }
 
-    //cannot refactor method without breaking code
     private void showCoins() {
         String coinStr = "ButtCoin: $" + collected.value;
         gc.fillText(coinStr, background.getWidth() - 150, 70);
         gc.setStroke(Color.WHITE);
         gc.setFont(new Font("Serif", 20));
         gc.strokeText(coinStr , background.getWidth() - 150, 70);
+    }
+
+    private void handleCoinIntersects() {
+        for (Coin coin : coins) {
+            if (coin.getY() > Constants.SCREEN_HEIGHT) {
+                coin.resetPosition();
+            }
+            if (character.intersects(coin.getBoundary())) {
+                coin.resetPosition();
+                collected.value += 10;
+            }
+            coin.handleSpeed(gc);
+        }
+    }
+    private void handleTunnelLoop() {
+        for (Tunnel tunnel : tunnels) {
+            if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
+                tunnel.resetPosition();
+            }
+            tunnel.handleSpeed(gc);
+        }
     }
 }

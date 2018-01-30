@@ -1,5 +1,6 @@
 import javafx.scene.canvas.GraphicsContext;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Tunnel extends WorldItem {
 
@@ -30,4 +31,13 @@ public class Tunnel extends WorldItem {
     /* implement
     */
     public void spawnGuard() {}
+
+    public static ArrayList<Tunnel> createTunnels() {
+        ArrayList<Tunnel> tunnels = new ArrayList<Tunnel>();
+        for(int i = 0; i < Constants.NUM_TUNNELS; i++) {
+            Tunnel tunnel = new Tunnel();
+            tunnels.add(tunnel);
+        }
+        return tunnels;
+    }
 }
