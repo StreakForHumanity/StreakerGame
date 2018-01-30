@@ -2,10 +2,6 @@ import javafx.scene.canvas.GraphicsContext;
 import java.util.Random;
 
 public class Tunnel extends WorldItem {
-    private static final String _PATHS [] = {
-        "./assets/tunnelLeft.png",
-        "./assets/tunnelRight.png"
-    };
 
     public Tunnel() {
         this.resetPosition();
@@ -23,10 +19,10 @@ public class Tunnel extends WorldItem {
         double y = - Constants.SCREEN_HEIGHT * Math.random();
         double x;
         if (left) {
-            this.setImage(_PATHS[0]);
+            this.setImage(Paths.TUNNEL_PATHS[0]);
             x = Constants.STADIUM_MARGIN_LEFT;
         } else {
-            this.setImage(_PATHS[1]);
+            this.setImage(Paths.TUNNEL_PATHS[1]);
             x = Constants.STADIUM_MARGIN_RIGHT;
         }
         this.setPosition(x, y);

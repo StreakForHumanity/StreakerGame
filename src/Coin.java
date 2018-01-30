@@ -1,10 +1,9 @@
 import javafx.scene.canvas.GraphicsContext;
 
 public class Coin extends WorldItem {
-    private static final String _PATH = "./assets/coin.png";
-
+    
     public Coin() {
-        this.setImage(_PATH);
+        this.setImage(Paths.COIN_PATH);
         this.resetPosition();
     }
 

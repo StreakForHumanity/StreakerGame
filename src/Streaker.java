@@ -3,19 +3,13 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 public class Streaker extends AnimatedImage {
-    private static final String[] _PATHS = {
-            "./assets/guyForward.png",
-            "./assets/guyLeft.png",
-            "./assets/guyForward.png",
-            "./assets/guyRight.png"
-    };
 
     public Streaker() {
         Image[] imageArray = new Image[4];
-        imageArray[0] = new Image(_PATHS[0]);
-        imageArray[1] = new Image(_PATHS[1]);
-        imageArray[2] = new Image(_PATHS[2]);
-        imageArray[3] = new Image(_PATHS[3]);
+        imageArray[0] = new Image(Paths.STREAKER_PATHS[0]);
+        imageArray[1] = new Image(Paths.STREAKER_PATHS[1]);
+        imageArray[2] = new Image(Paths.STREAKER_PATHS[2]);
+        imageArray[3] = new Image(Paths.STREAKER_PATHS[3]);
         this.setFrame(imageArray);
         this.duration = Constants.FRAME_DURATION;
         this.setPosition((Constants.SCREEN_WIDTH / 2) - 40, Constants.SCREEN_HEIGHT / 2);

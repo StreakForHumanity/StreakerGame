@@ -3,7 +3,6 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class BackgroundItem {
 
-    private static final String _PATH = "./assets/stadium.png";
     private ArrayList<WorldItem> backgrounds;
 
     public BackgroundItem() {
@@ -15,7 +14,7 @@ public class BackgroundItem {
     }
 
     public void setBackground(WorldItem background, boolean first) {
-        background.setImage(_PATH);
+        background.setImage(Paths.BACKGROUND_PATH);
         if (first) {
             background.setPosition(0, Constants.SCREEN_HEIGHT - background.getHeight());
         } else {
