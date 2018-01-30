@@ -1,5 +1,7 @@
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
+
 public class Streaker extends AnimatedImage {
     private static final String[] _PATHS = {
             "./assets/guyForward.png",
@@ -10,6 +12,7 @@ public class Streaker extends AnimatedImage {
 
     private double FRAME_DURATION;
     private int SCREEN_HEIGHT;
+    private Constants constants;
 
     public Streaker(double FRAME_DURATION, int SCREEN_HEIGHT, BackgroundItem background) {
         this.FRAME_DURATION = FRAME_DURATION;
@@ -23,6 +26,38 @@ public class Streaker extends AnimatedImage {
         this.duration = FRAME_DURATION;
         this.setPosition((background.getWidth() / 2) - 40, SCREEN_HEIGHT / 2);
         width = imageArray[0].getWidth();
-        height = imageArray[0].getHeight();        
+        height = imageArray[0].getHeight();
+        constants = new Constants(background);
+    }
+
+    public void handleCharacterPosition() {
+        if (this.getX() < constants.getStadiumBorder()) {
+            this.setPosition(constants.getStadiumBorder(), this.getY());
+        }
+        if (this.getX() > constants.getBackground().getWidth() - constants.getStadiumBorder() - this.getWidth()) {
+            this.setPosition(constants.getBackground().getWidth() - constants.getStadiumBorder() - this.getWidth(), this.getY());
+        }
+        if (this.getY() < 0) {
+            this.setPosition(this.getX(), 0);
+        }
+        if (this.getY() > SCREEN_HEIGHT - this.getHeight()) {
+            this.setPosition(this.getX(), SCREEN_HEIGHT - this.getHeight());
+        }
+    }
+
+    public void handleVelocity(ArrayList<String> input) {
+        this.setVelocity(0,0);
+        if (input.contains("LEFT")) {
+            this.addVelocity(-constants.getCharacterVelocity(),0);
+        }
+        if (input.contains("RIGHT")) {
+            this.addVelocity(constants.getCharacterVelocity(),0);
+        }
+        if (input.contains("UP")) {
+            this.addVelocity(0,-constants.getCharacterVelocity());
+        }
+        if (input.contains("DOWN")) {
+            this.addVelocity(0,constants.getCharacterVelocity());
+        }
     }
 }
