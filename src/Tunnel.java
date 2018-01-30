@@ -22,6 +22,9 @@ public class Tunnel extends Character {
         this.updateSpeed();
         this.render(gc);
     }
+    /*  currently spawns tunnels on top fo each other
+        to do: fix spawning so no overlap
+    */
     public void resetPosition() {
         boolean left = new Random().nextBoolean();
         double y = - background.getHeight() * Math.random();
@@ -35,4 +38,7 @@ public class Tunnel extends Character {
         }
         this.setPosition(x, y);
     }
+    /* implement
+    */
+    public void spawnGuard() {}
 }

@@ -6,14 +6,21 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
+import javafx.event.EventHandler;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.control.Button;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.text.*;
 
 public class StreakerGame extends Application {
     private static final int SCREEN_HEIGHT = 600;
@@ -22,7 +29,7 @@ public class StreakerGame extends Application {
     private static final int NUM_TUNNELS = 3;
     private static final int CHARACTER_VELOCITY = 550;
     private static final double _PRECISION = 1000000000.0;
-    private static final int STADIUM_BORDER = 45;
+    private static final int STADIUM_BORDER = 80;
     private static final int STARTING_SPEED = 7;
     private long startNanoTime;
     private LongValue lastNanoTime;
@@ -44,6 +51,7 @@ public class StreakerGame extends Application {
     }
     @Override
     public void start(Stage stage) {
+
         setupGameState(stage);
         setOnKeyPress();
         setOnKeyRelease();
@@ -85,6 +93,7 @@ public class StreakerGame extends Application {
         }.start();
         stage.show();
     }
+
     public void setOnKeyPress() {
         scene.setOnKeyPressed(
             new EventHandler<KeyEvent>() {
@@ -167,15 +176,17 @@ public class StreakerGame extends Application {
         }
     }
     public void showTime(double nanot) {
-        String hms = String.format("%02d:%02d:%02d", TimeUnit.NANOSECONDS.toHours((long)nanot),
+        String hms = String.format("%02d:%02d:%02d ", TimeUnit.NANOSECONDS.toHours((long)nanot),
         TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
         TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));
-        gc.fillText(hms, background.getWidth() - 100, 20);
-        gc.strokeText(hms , background.getWidth() - 100, 20);
+        gc.fillText(hms, background.getWidth() - 150, 40);
+        gc.strokeText(hms , background.getWidth() - 150, 40);
     }
     public void showCoins() {
-        String coinStr = "Coins: " + collected.value;
-        gc.fillText(coinStr, background.getWidth() - 100, 40);
-        gc.strokeText(coinStr , background.getWidth() - 100, 40);
+        String coinStr = "ButtCoin: $" + collected.value;
+        gc.fillText(coinStr, background.getWidth() - 150, 70);
+        gc.setStroke(Color.WHITE);
+        gc.setFont(new Font("Serif", 20));
+        gc.strokeText(coinStr , background.getWidth() - 150, 70);
     }
 }
