@@ -5,12 +5,8 @@ public class BackgroundItem {
 
     private static final String _PATH = "./assets/stadium.png";
     private ArrayList<WorldItem> backgrounds;
-    private int SCREEN_HEIGHT;
-    private int MOVING_SPEED;
 
-    public BackgroundItem(int SCREEN_HEIGHT, int MOVING_SPEED) {
-        this.SCREEN_HEIGHT = SCREEN_HEIGHT;
-        this.MOVING_SPEED = MOVING_SPEED;
+    public BackgroundItem() {
         backgrounds = new ArrayList<WorldItem>();
         WorldItem backgroundOne = new WorldItem();
         WorldItem backgroundTwo = new WorldItem();
@@ -21,9 +17,9 @@ public class BackgroundItem {
     public void setBackground(WorldItem background, boolean first) {
         background.setImage(_PATH);
         if (first) {
-            background.setPosition(0, SCREEN_HEIGHT - background.getHeight());
+            background.setPosition(0, Constants.getScreenHeight() - background.getHeight());
         } else {
-            background.setPosition(0, SCREEN_HEIGHT -(2 * background.getHeight()));
+            background.setPosition(0, Constants.getScreenHeight() -(2 * background.getHeight()));
         }
         backgrounds.add(background);
     }
@@ -35,21 +31,21 @@ public class BackgroundItem {
     public double getHeight() {
         return backgrounds.get(0).getHeight();
     }
-    
+
     public void loop() {
-        if (backgrounds.get(0).getY() > SCREEN_HEIGHT) {
+        if (backgrounds.get(0).getY() > Constants.getScreenHeight()) {
             backgrounds.get(0).setPosition(0, backgrounds.get(1).getY() - backgrounds.get(0).getHeight());
         }
-        if (backgrounds.get(1).getY() > SCREEN_HEIGHT) {
+        if (backgrounds.get(1).getY() > Constants.getScreenHeight()) {
             backgrounds.get(1).setPosition(0, backgrounds.get(0).getY() - backgrounds.get(1).getHeight());
         }
     }
 
     public void setBackgroundSpeed(GraphicsContext gc) {
-        backgrounds.get(0).setSpeed(0, MOVING_SPEED);
+        backgrounds.get(0).setSpeed(0, Constants.getStartingSpeed());
         backgrounds.get(0).updateSpeed();
         backgrounds.get(0).render(gc);
-        backgrounds.get(1).setSpeed(0, MOVING_SPEED);
+        backgrounds.get(1).setSpeed(0, Constants.getStartingSpeed());
         backgrounds.get(1).updateSpeed();
         backgrounds.get(1).render(gc);
     }

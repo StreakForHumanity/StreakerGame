@@ -8,6 +8,16 @@ public class Constants {
     private static final int STADIUM_BORDER = 80;
     private static final int STARTING_SPEED = 7;
     private static final int SCREEN_WIDTH = 800;
+    private static final int STADIUM_MARGIN_LEFT = 50;
+    private static final int STADIUM_MARGIN_RIGHT = 695;
+
+    public static int getStadMargLeft() {
+        return STADIUM_MARGIN_LEFT;
+    }
+
+    public static int getStadMargRight() {
+        return STADIUM_MARGIN_RIGHT;
+    }
 
     public static int getScreenHeight() {
         return SCREEN_HEIGHT;
@@ -16,7 +26,7 @@ public class Constants {
     public static int getScreenWidth() {
         return SCREEN_WIDTH;
     }
-    
+
     public static double getFrameDuration() {
         return FRAME_DURATION;
     }
@@ -40,9 +50,4 @@ public class Constants {
     public static int getStartingSpeed() {
         return STARTING_SPEED;
     }
-
-    public BackgroundItem getBackground() {
-        return background;
-    }
-
 }

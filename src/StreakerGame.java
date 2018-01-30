@@ -111,13 +111,13 @@ public class StreakerGame extends Application {
         root = new Group();
         scene = new Scene(root);
         stage.setScene(scene);
-        background = new BackgroundItem(Constants.getScreenHeight(), movingSpeed.value);
+        background = new BackgroundItem();
         canvas = new Canvas(background.getWidth(), Constants.getScreenHeight());
         root.getChildren().add(canvas);
         input = new ArrayList<String>();
         gc = canvas.getGraphicsContext2D();
         graphicsController = new GraphicsController(gc);
-        character = new Streaker(Constants.getFrameDuration(), Constants.getScreenHeight());
+        character = new Streaker();
         setOnKeyPress();
         setOnKeyRelease();
         createCoins();
