@@ -1,7 +1,8 @@
 import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
 
-public class AnimatedImage extends Character {
+public class AnimatedImage extends WorldItem {
+
     public Image[] frames;
     public double duration;
        

@@ -1,7 +1,7 @@
 import javafx.scene.canvas.GraphicsContext;
 import java.util.Random;
 
-public class Tunnel extends Character {
+public class Tunnel extends WorldItem {
     private static final String _PATHS [] = {
         "./assets/tunnelLeft.png",
         "./assets/tunnelRight.png"
