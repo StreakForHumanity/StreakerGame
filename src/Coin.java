@@ -1,7 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
 
-import java.util.ArrayList;
-
 public class Coin extends WorldItem {
     private static final String _PATH = "./assets/coin.png";
     private static Constants constants;
@@ -22,14 +20,4 @@ public class Coin extends WorldItem {
         double y = - constants.getBackground().getHeight() * Math.random();
         this.setPosition(x, y);
     }
-
-    public static ArrayList<Coin> createCoins() {
-        ArrayList<Coin> coins = new ArrayList<Coin>();
-        for(int i = 0; i < constants.getNumCoins(); i++) {
-            Coin coin = new Coin();
-            coins.add(coin);
-        }
-        return coins;
-    }
-
 }
