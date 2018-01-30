@@ -66,19 +66,6 @@ public class StreakerGame extends Application {
         stage.show();
     }
 
-    private void handleCoinIntersects(){
-        for (Coin coin : coins) {
-            if (coin.getY() > constants.getScreenHeight()) {
-                coin.resetPosition();
-            }
-            if (character.intersects(coin.getBoundary())) {
-                coin.resetPosition();
-                collected.value += 10;
-            }
-            coin.handleSpeed(gc);
-        }
-    }
-
     private void setOnKeyPress() {
         scene.setOnKeyPressed(
             new EventHandler<KeyEvent>() {
