@@ -5,13 +5,10 @@ import java.util.concurrent.TimeUnit;
 public class GraphicsController {
 
     private GraphicsContext gc;
-    private Constants constants;
-    private IntValue collected;
+    private static Constants constants;
 
-    public GraphicsController(GraphicsContext gc, Constants constants, IntValue collected){
+    public GraphicsController(GraphicsContext gc){
         this.gc = gc;
-        this.constants = constants;
-        this.collected = collected;
     }
 
     public void showTime(double nanot) {

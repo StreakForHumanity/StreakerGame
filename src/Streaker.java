@@ -9,12 +9,11 @@ public class Streaker extends AnimatedImage {
             "./assets/guyForward.png",
             "./assets/guyRight.png"
     };
-
     private double FRAME_DURATION;
-    private int SCREEN_HEIGHT;
-    private Constants constants;
+    private double SCREEN_HEIGHT;
+    private static Constants constants;
 
-    public Streaker(double FRAME_DURATION, int SCREEN_HEIGHT, BackgroundItem background) {
+    public Streaker(double FRAME_DURATION, int SCREEN_HEIGHT) {
         this.FRAME_DURATION = FRAME_DURATION;
         this.SCREEN_HEIGHT = SCREEN_HEIGHT;
         Image[] imageArray = new Image[4];
@@ -24,10 +23,9 @@ public class Streaker extends AnimatedImage {
         imageArray[3] = new Image(_PATHS[3]);
         this.setFrame(imageArray);
         this.duration = FRAME_DURATION;
-        this.setPosition((background.getWidth() / 2) - 40, SCREEN_HEIGHT / 2);
+        this.setPosition((constants.getBackground().getWidth() / 2) - 40, SCREEN_HEIGHT / 2);
         width = imageArray[0].getWidth();
         height = imageArray[0].getHeight();
-        constants = new Constants(background);
     }
 
     public void handleCharacterPosition() {

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 
 public class BackgroundItem {
+
     private static final String _PATH = "./assets/stadium.png";
     private ArrayList<WorldItem> backgrounds;
     private int SCREEN_HEIGHT;

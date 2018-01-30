@@ -28,7 +28,7 @@ public class StreakerGame extends Application {
     private LongValue lastNanoTime;
     private IntValue collected;
     private IntValue movingSpeed;
-    private Constants constants;
+    private static Constants constants;
     private Group root;
     private Scene scene;
     private BackgroundItem background;
@@ -112,8 +112,8 @@ public class StreakerGame extends Application {
         gc = canvas.getGraphicsContext2D();
         //
         constants = new Constants(background);
-        character = new Streaker(constants.getFrameDuration(), constants.getScreenHeight(), background);
-        graphicsController = new GraphicsController(gc, constants, collected);
+        character = new Streaker(constants.getFrameDuration(), constants.getScreenHeight());
+        graphicsController = new GraphicsController(gc);
         setOnKeyPress();
         setOnKeyRelease();
         createCoins();
@@ -123,7 +123,7 @@ public class StreakerGame extends Application {
     private void createCoins() {
         coins = new ArrayList<Coin>();
         for(int i = 0; i < constants.getNumCoins(); i++) {
-            Coin coin = new Coin(background, movingSpeed.value);
+            Coin coin = new Coin();
             coins.add(coin);
         }
     }

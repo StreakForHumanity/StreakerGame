@@ -7,16 +7,21 @@ public class Constants {
     private static final double _PRECISION = 1000000000.0;
     private static final int STADIUM_BORDER = 80;
     private static final int STARTING_SPEED = 7;
-    private BackgroundItem background;
+    private static IntValue MOVING_SPEED;
+    private static BackgroundItem background;
 
     public Constants(BackgroundItem backgroundItem){
-        this.setBackground(backgroundItem);
+        background = backgroundItem;
+        MOVING_SPEED = new IntValue(this.getStartingSpeed());
     }
 
     public static int getScreenHeight() {
         return SCREEN_HEIGHT;
     }
 
+    public static int getMovingSpeed(){
+        return MOVING_SPEED.value;
+    }
     public static double getFrameDuration() {
         return FRAME_DURATION;
     }
@@ -45,7 +50,4 @@ public class Constants {
         return background;
     }
 
-    public void setBackground(BackgroundItem background) {
-        this.background = background;
-    }
 }
