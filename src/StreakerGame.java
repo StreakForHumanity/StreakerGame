@@ -28,7 +28,9 @@ public class StreakerGame extends Application {
     private static final int NUM_COINS = 4;
     private static final int CHARACTER_VELOCITY = 550;
     private static final double _PRECISION = 1000000000.0;
+
     private static final int STADIUM_BORDER = 80;
+
     private static final int STARTING_SPEED = 7;
     private long startNanoTime;
     private LongValue lastNanoTime;
@@ -163,8 +165,10 @@ public class StreakerGame extends Application {
         String hms = String.format("%02d:%02d:%02d ", TimeUnit.NANOSECONDS.toHours((long)nanot),
         TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
         TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot))); 
+
         gc.fillText(hms, background.getWidth() - 150, 40);
         gc.strokeText(hms , background.getWidth() - 150, 40);
+
     }
     public void showCoins() {
         String coinStr = "ButtCoin: $" + collected.value;
