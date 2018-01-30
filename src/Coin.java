@@ -15,7 +15,7 @@ public class Coin extends WorldItem {
     }
 
     public void resetPosition() {
-        double x = (Constants.SCREEN_WIDTH - 2 * Constants.STADIUM_BORDER) * Math.random() + Constants.STADIUM_BORDER;
+        double x = (Constants.SCREEN_WIDTH - 2 * Constants.COIN_BOUNDS) * Math.random() + Constants.COIN_BOUNDS;
         double y = - Constants.SCREEN_HEIGHT * Math.random();
         this.setPosition(x, y);
     }
