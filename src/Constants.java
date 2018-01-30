@@ -6,7 +6,7 @@ public class Constants {
     private static final int NUM_TUNNELS = 3;
     private static final int CHARACTER_VELOCITY = 550;
     private static final double _PRECISION = 1000000000.0;
-    private static final int STADIUM_BORDER = 80;
+    private static final int STADIUM_BORDER = 105;
     private static final int STARTING_SPEED = 7;
     private static final int SCREEN_WIDTH = 800;
     private static final int STADIUM_MARGIN_LEFT = 50;

@@ -15,11 +15,7 @@ public class Coin extends WorldItem {
     }
 
     public void resetPosition() {
-        /*
-        Needs to be more clear
-        Needs to spawn coins in stadium
-        */
-        double x = ((Constants.getScreenWidth() - 100) * Math.random()) + 50;
+        double x = ((Constants.getScreenWidth() - Constants.getStadiumBorder()) * Math.random());
         double y = - Constants.getScreenHeight() * Math.random();
         this.setPosition(x, y);
     }
