@@ -11,7 +11,7 @@ public class Tunnel extends WorldItem {
         this.resetPosition();
     }
     public void handleSpeed(GraphicsContext gc) {
-        this.setSpeed(0, Constants.getStartingSpeed());
+        this.setSpeed(0, Constants.STARTING_SPEED);
         this.updateSpeed();
         this.render(gc);
     }
@@ -20,14 +20,14 @@ public class Tunnel extends WorldItem {
     */
     public void resetPosition() {
         boolean left = new Random().nextBoolean();
-        double y = - Constants.getScreenHeight() * Math.random();
+        double y = - Constants.SCREEN_HEIGHT * Math.random();
         double x;
         if (left) {
             this.setImage(_PATHS[0]);
-            x = Constants.getStadMargLeft();
+            x = Constants.STADIUM_MARGIN_LEFT;
         } else {
             this.setImage(_PATHS[1]);
-            x = Constants.getStadMargRight();
+            x = Constants.STADIUM_MARGIN_RIGHT;
         }
         this.setPosition(x, y);
     }

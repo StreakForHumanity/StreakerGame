@@ -27,7 +27,6 @@ public class StreakerGame extends Application {
     private long startNanoTime;
     private LongValue lastNanoTime;
     private IntValue collected;
-    private IntValue movingSpeed;
     private Group root;
     private Scene scene;
     private BackgroundItem background;
@@ -45,14 +44,13 @@ public class StreakerGame extends Application {
 
     @Override
     public void start(Stage stage) {
-        movingSpeed = new IntValue(Constants.getStartingSpeed());
         setupGameState(stage);
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                double elapsedTime = (currentNanoTime - lastNanoTime.value) / Constants.getPrecision();
+                double elapsedTime = (currentNanoTime - lastNanoTime.value) / Constants._PRECISION;
                 lastNanoTime.value = currentNanoTime;
                 double nanot = currentNanoTime - startNanoTime;
-                double t = nanot / Constants.getPrecision();
+                double t = nanot / Constants._PRECISION;
                 background.loop();
                 background.setBackgroundSpeed(gc);
                 character.handleVelocity(input);
@@ -60,7 +58,7 @@ public class StreakerGame extends Application {
                 character.updateVelocity(elapsedTime);
                 character.render(gc, t);
                 for (Coin coin : coins) {
-                    if (coin.getY() > Constants.getScreenHeight()) {
+                    if (coin.getY() > Constants.SCREEN_HEIGHT) {
                         coin.resetPosition();
                     }
                     if (character.intersects(coin.getBoundary())) {
@@ -70,7 +68,7 @@ public class StreakerGame extends Application {
                     coin.handleSpeed(gc);
                 }
                 for (Tunnel tunnel : tunnels) {
-                    if (tunnel.getY() > Constants.getScreenHeight()) {
+                    if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
                         tunnel.resetPosition();
                     }
                     tunnel.handleSpeed(gc);
@@ -112,7 +110,7 @@ public class StreakerGame extends Application {
         scene = new Scene(root);
         stage.setScene(scene);
         background = new BackgroundItem();
-        canvas = new Canvas(background.getWidth(), Constants.getScreenHeight());
+        canvas = new Canvas(background.getWidth(), Constants.SCREEN_HEIGHT);
         root.getChildren().add(canvas);
         input = new ArrayList<String>();
         gc = canvas.getGraphicsContext2D();
@@ -127,7 +125,7 @@ public class StreakerGame extends Application {
 
     private void createCoins() {
         coins = new ArrayList<Coin>();
-        for(int i = 0; i < Constants.getNumCoins(); i++) {
+        for(int i = 0; i < Constants.NUM_COINS; i++) {
             Coin coin = new Coin();
             coins.add(coin);
         }
@@ -135,7 +133,7 @@ public class StreakerGame extends Application {
 
     private void createTunnels() {
         tunnels = new ArrayList<Tunnel>();
-        for(int i = 0; i < Constants.getNumTunnels(); i++) {
+        for(int i = 0; i < Constants.NUM_TUNNELS; i++) {
             Tunnel tunnel = new Tunnel();
             tunnels.add(tunnel);
         }
