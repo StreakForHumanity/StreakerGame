@@ -59,25 +59,21 @@ public class StreakerGame extends Application {
                 character.handleCharacterPosition();
                 character.updateVelocity(elapsedTime);
                 character.render(gc, t);
-                handleCoinIntersects();
+                for (Coin coin : coins) {
+                    if (coin.getY() > constants.getScreenHeight()) {
+                        coin.resetPosition();
+                    }
+                    if (character.intersects(coin.getBoundary())) {
+                        coin.resetPosition();
+                        collected.value += 10;
+                    }
+                    coin.handleSpeed(gc);
+                }
                 graphicsController.showTime(nanot);
                 showCoins();
             }
         }.start();
         stage.show();
-    }
-
-    private void handleCoinIntersects(){
-        for (Coin coin : coins) {
-            if (coin.getY() > constants.getScreenHeight()) {
-                coin.resetPosition();
-            }
-            if (character.intersects(coin.getBoundary())) {
-                coin.resetPosition();
-                collected.value += 10;
-            }
-            coin.handleSpeed(gc);
-        }
     }
 
     private void setOnKeyPress() {
@@ -120,8 +116,16 @@ public class StreakerGame extends Application {
         graphicsController = new GraphicsController(gc);
         setOnKeyPress();
         setOnKeyRelease();
-        Coin.createCoins();
+        createCoins();
         setInitialScore();
+    }
+
+    private void createCoins() {
+        coins = new ArrayList<Coin>();
+        for(int i = 0; i < constants.getNumCoins(); i++) {
+            Coin coin = new Coin();
+            coins.add(coin);
+        }
     }
 
     private void setInitialScore() {
