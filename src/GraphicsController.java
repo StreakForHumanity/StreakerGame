@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 public class GraphicsController {
 
     private GraphicsContext gc;
-    private static Constants constants;
 
     public GraphicsController(GraphicsContext gc){
         this.gc = gc;
@@ -16,7 +15,7 @@ public class GraphicsController {
                 TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
                 TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));
 
-        gc.fillText(hms,  constants.getBackground().getWidth() - 150, 40);
-        gc.strokeText(hms , constants.getBackground().getWidth() - 150, 40);
+        gc.fillText(hms,  Constants.SCREEN_WIDTH - 150, 40);
+        gc.strokeText(hms , Constants.SCREEN_WIDTH - 150, 40);
     }
 }

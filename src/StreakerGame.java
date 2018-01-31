@@ -27,8 +27,6 @@ public class StreakerGame extends Application {
     private long startNanoTime;
     private LongValue lastNanoTime;
     private IntValue collected;
-    private IntValue movingSpeed;
-    private static Constants constants;
     private Group root;
     private Scene scene;
     private BackgroundItem background;
@@ -36,6 +34,7 @@ public class StreakerGame extends Application {
     private ArrayList<String> input;
     private GraphicsContext gc;
     private ArrayList<Coin> coins;
+    private ArrayList<Tunnel> tunnels;
     private Streaker character;
     private GraphicsController graphicsController;
 
@@ -45,14 +44,13 @@ public class StreakerGame extends Application {
 
     @Override
     public void start(Stage stage) {
-        movingSpeed = new IntValue(constants.getStartingSpeed());
         setupGameState(stage);
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                double elapsedTime = (currentNanoTime - lastNanoTime.value) / constants.getPrecision();
+                double elapsedTime = (currentNanoTime - lastNanoTime.value) / Constants._PRECISION;
                 lastNanoTime.value = currentNanoTime;
                 double nanot = currentNanoTime - startNanoTime;
-                double t = nanot / constants.getPrecision();
+                double t = nanot / Constants._PRECISION;
                 background.loop();
                 background.setBackgroundSpeed(gc);
                 character.handleVelocity(input);
@@ -60,24 +58,12 @@ public class StreakerGame extends Application {
                 character.updateVelocity(elapsedTime);
                 character.render(gc, t);
                 handleCoinIntersects();
+                handleTunnelLoop();
                 graphicsController.showTime(nanot);
                 showCoins();
             }
         }.start();
         stage.show();
-    }
-
-    private void handleCoinIntersects(){
-        for (Coin coin : coins) {
-            if (coin.getY() > constants.getScreenHeight()) {
-                coin.resetPosition();
-            }
-            if (character.intersects(coin.getBoundary())) {
-                coin.resetPosition();
-                collected.value += 10;
-            }
-            coin.handleSpeed(gc);
-        }
     }
 
     private void setOnKeyPress() {
@@ -109,18 +95,17 @@ public class StreakerGame extends Application {
         root = new Group();
         scene = new Scene(root);
         stage.setScene(scene);
-        background = new BackgroundItem(constants.getScreenHeight(), movingSpeed.value);
-        canvas = new Canvas(background.getWidth(), constants.getScreenHeight());
+        background = new BackgroundItem();
+        canvas = new Canvas(background.getWidth(), Constants.SCREEN_HEIGHT);
         root.getChildren().add(canvas);
         input = new ArrayList<String>();
         gc = canvas.getGraphicsContext2D();
-        //
-        constants = new Constants(background);
-        character = new Streaker(constants.getFrameDuration(), constants.getScreenHeight());
         graphicsController = new GraphicsController(gc);
+        character = new Streaker();
         setOnKeyPress();
         setOnKeyRelease();
-        Coin.createCoins();
+        coins = Coin.createCoins();
+        tunnels = Tunnel.createTunnels();
         setInitialScore();
     }
 
@@ -130,12 +115,32 @@ public class StreakerGame extends Application {
         startNanoTime = System.nanoTime();
     }
 
-    //cannot refactor method without breaking code
     private void showCoins() {
         String coinStr = "ButtCoin: $" + collected.value;
         gc.fillText(coinStr, background.getWidth() - 150, 70);
         gc.setStroke(Color.WHITE);
         gc.setFont(new Font("Serif", 20));
         gc.strokeText(coinStr , background.getWidth() - 150, 70);
+    }
+
+    private void handleCoinIntersects() {
+        for (Coin coin : coins) {
+            if (coin.getY() > Constants.SCREEN_HEIGHT) {
+                coin.resetPosition();
+            }
+            if (character.intersects(coin.getBoundary())) {
+                coin.resetPosition();
+                collected.value += 10;
+            }
+            coin.handleSpeed(gc);
+        }
+    }
+    private void handleTunnelLoop() {
+        for (Tunnel tunnel : tunnels) {
+            if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
+                tunnel.resetPosition();
+            }
+            tunnel.handleSpeed(gc);
+        }
     }
 }
