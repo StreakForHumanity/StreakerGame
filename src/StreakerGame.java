@@ -142,6 +142,8 @@ public class StreakerGame extends Application {
         for (Tunnel tunnel : tunnels) {
             if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
                 tunnel.resetPosition();
+            } else if (noCollisionOther(tunnel)) {
+                tunnel.resetPosition();
             } else {
                 if (tunnel.noGuard()) {
                     guards.add(tunnel.spawnGuard(gc, time));
@@ -154,5 +156,15 @@ public class StreakerGame extends Application {
         for (Guard guard : guards) {
             guard.handleSpeed(gc, t);
         }
+    }
+
+    private boolean noCollisionOther(Tunnel tunnel) {
+        boolean noColl = true;
+        for (Tunnel other : tunnels) {
+            if (tunnel.intersects(other.getBoundary())) {
+                noColl = false;
+            }
+        }
+        return noColl;
     }
 }
