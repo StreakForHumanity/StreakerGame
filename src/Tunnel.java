@@ -4,19 +4,20 @@ import java.util.ArrayList;
 
 public class Tunnel extends WorldItem {
 
+    private boolean noGuard;
+    private boolean left;
+
     public Tunnel() {
         this.resetPosition();
+        noGuard = true;
     }
     public void handleSpeed(GraphicsContext gc) {
         this.setSpeed(0, Constants.STARTING_SPEED);
         this.updateSpeed();
         this.render(gc);
     }
-    /*  currently spawns tunnels on top of each other
-        to do: fix spawning so no overlap
-    */
     public void resetPosition() {
-        boolean left = new Random().nextBoolean();
+        left = new Random().nextBoolean();
         double y = - Constants.SCREEN_HEIGHT * Math.random();
         double x;
         if (left) {
@@ -27,10 +28,15 @@ public class Tunnel extends WorldItem {
             x = Constants.STADIUM_MARGIN_RIGHT;
         }
         this.setPosition(x, y);
+        this.noGuard = true;
     }
-    /* implement
-    */
-    public void spawnGuard() {}
+    public Guard spawnGuard(GraphicsContext gc, double time) {
+        Guard g = new Guard(left);
+        g.setPosition(getX(), getY());
+        g.handleSpeed(gc, time);
+        noGuard = false;
+        return g;
+    }
 
     public static ArrayList<Tunnel> createTunnels() {
         ArrayList<Tunnel> tunnels = new ArrayList<Tunnel>();
@@ -39,5 +45,8 @@ public class Tunnel extends WorldItem {
             tunnels.add(tunnel);
         }
         return tunnels;
+    }
+    public boolean noGuard() {
+        return noGuard;
     }
 }

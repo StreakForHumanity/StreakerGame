@@ -35,6 +35,7 @@ public class StreakerGame extends Application {
     private GraphicsContext gc;
     private ArrayList<Coin> coins;
     private ArrayList<Tunnel> tunnels;
+    private ArrayList<Guard> guards;
     private Streaker character;
     private GraphicsController graphicsController;
 
@@ -58,7 +59,8 @@ public class StreakerGame extends Application {
                 character.updateVelocity(elapsedTime);
                 character.render(gc, t);
                 handleCoinIntersects();
-                handleTunnelLoop();
+                handleTunnelLoop(t);
+                handleGuardSpeed(t);
                 graphicsController.showTime(nanot);
                 showCoins();
             }
@@ -106,6 +108,7 @@ public class StreakerGame extends Application {
         setOnKeyRelease();
         coins = Coin.createCoins();
         tunnels = Tunnel.createTunnels();
+        guards = new ArrayList<Guard>();
         setInitialScore();
     }
 
@@ -135,12 +138,21 @@ public class StreakerGame extends Application {
             coin.handleSpeed(gc);
         }
     }
-    private void handleTunnelLoop() {
+    private void handleTunnelLoop(double time) {
         for (Tunnel tunnel : tunnels) {
             if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
                 tunnel.resetPosition();
+            } else {
+                if (tunnel.noGuard()) {
+                    guards.add(tunnel.spawnGuard(gc, time));
+                }
             }
             tunnel.handleSpeed(gc);
+        }
+    }
+    private void handleGuardSpeed(double t) {
+        for (Guard guard : guards) {
+            guard.handleSpeed(gc, t);
         }
     }
 }
