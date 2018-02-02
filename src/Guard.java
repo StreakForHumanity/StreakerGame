@@ -1,5 +1,4 @@
 import javafx.scene.image.Image;
-import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Guard extends AnimatedImage {
