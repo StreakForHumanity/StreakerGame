@@ -11,4 +11,5 @@ public class Constants {
     public static final int SCREEN_WIDTH = 800;
     public static final int STADIUM_MARGIN_LEFT = 50;
     public static final int STADIUM_MARGIN_RIGHT = 695;
+    public static final double GUARD_SPAWN_RATE = .98;
 }

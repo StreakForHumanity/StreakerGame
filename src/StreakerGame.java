@@ -140,13 +140,17 @@ public class StreakerGame extends Application {
     }
     private void handleTunnelLoop(double time) {
         for (Tunnel tunnel : tunnels) {
+            removeTunnelCollisions(tunnel);
             if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
-                tunnel.resetPosition();
-            } else if (noCollisionOther(tunnel)) {
                 tunnel.resetPosition();
             } else {
                 if (tunnel.noGuard()) {
-                    guards.add(tunnel.spawnGuard(gc, time));
+                    /*
+                        There should be a better way to do this
+                    */
+                    if (Math.random() > Constants.GUARD_SPAWN_RATE) {
+                        guards.add(tunnel.spawnGuard(gc, time));
+                    }
                 }
             }
             tunnel.handleSpeed(gc);
@@ -155,16 +159,25 @@ public class StreakerGame extends Application {
     private void handleGuardSpeed(double t) {
         for (Guard guard : guards) {
             guard.handleSpeed(gc, t);
+            if (guard.getX() < 0 || guard.getX() > Constants.SCREEN_WIDTH) {
+                guards.remove(guard);
+            }
         }
     }
 
-    private boolean noCollisionOther(Tunnel tunnel) {
-        boolean noColl = true;
+    private boolean areCollisions(Tunnel tunnel) {
+        boolean noColl = false;
         for (Tunnel other : tunnels) {
             if (tunnel.intersects(other.getBoundary())) {
-                noColl = false;
+                noColl = true;
             }
         }
         return noColl;
+    }
+    private void removeTunnelCollisions(Tunnel tunnel) {
+        boolean cols = true;
+        do {
+            tunnel.resetPosition();
+        } while (cols = areCollisions(tunnel));
     }
 }
