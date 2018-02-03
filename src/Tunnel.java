@@ -25,7 +25,7 @@ public class Tunnel extends WorldItem {
             x = Constants.STADIUM_MARGIN_LEFT;
         } else {
             this.setImage(Paths.TUNNEL_PATHS[1]);
-            x = Constants.STADIUM_MARGIN_RIGHT;
+            x = Constants.SCREEN_WIDTH - Constants.STADIUM_MARGIN_RIGHT;
         }
         this.setPosition(x, y);
         this.noGuard = true;

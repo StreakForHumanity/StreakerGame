@@ -19,9 +19,9 @@ public class Guard extends AnimatedImage {
 
     public void handleSpeed(GraphicsContext gc, double time) {
         if (left) {
-            this.setSpeed(Constants.STARTING_SPEED, Constants.STARTING_SPEED);
+            this.setSpeed(Constants.GUARD_SPEED, Constants.STARTING_SPEED);
         } else {
-            this.setSpeed(-1 * Constants.STARTING_SPEED, Constants.STARTING_SPEED);
+            this.setSpeed(-1 * Constants.GUARD_SPEED, Constants.STARTING_SPEED);
         }
         this.updateSpeed();
         this.render(gc, time);

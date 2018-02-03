@@ -1,5 +1,5 @@
 public class Paths {
-    public static final String BACKGROUND_PATH = "./assets/stadium.png";
+    public static final String BACKGROUND_PATH = "./assets/stadium_large.png";
     public static final String COIN_PATH = "./assets/coin.png";
     public static final String[] GUARD_PATHS = {
             "./assets/guardForward.png",
