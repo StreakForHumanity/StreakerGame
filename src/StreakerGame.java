@@ -11,6 +11,9 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -35,6 +38,7 @@ public class StreakerGame extends Application {
     private GraphicsContext gc;
     private ArrayList<Coin> coins;
     private ArrayList<Tunnel> tunnels;
+    //private HashMap<Double,Tunnel> tunnels;
     private ArrayList<Guard> guards;
     private Streaker character;
     private GraphicsController graphicsController;
@@ -139,14 +143,13 @@ public class StreakerGame extends Application {
         }
     }
     private void handleTunnelLoop(double time) {
+        
         for (Tunnel tunnel : tunnels) {
             if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
                 tunnel.resetPosition();
             } else {
                 if (tunnel.noGuard()) {
-                    /*
-                        There should be a better way to do this
-                    */
+                    //There should be a better way to do this
                     if (Math.random() > Constants.GUARD_SPAWN_RATE) {
                         guards.add(tunnel.spawnGuard(gc, time));
                     }
@@ -154,13 +157,41 @@ public class StreakerGame extends Application {
             }
             tunnel.handleSpeed(gc);
         }
+        
+        
+        /*Iterator<Map.Entry<Double, Tunnel>> iter = tunnels.entrySet().iterator();
+        Random rand = new Random();
+        while(iter.hasNext()) {
+            Tunnel tunnel = iter.next().getValue();
+            if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
+                iter.remove();
+                System.out.println("removing tunnel; " + tunnels.size() + " remaining.");
+            } else {
+                if (Math.random() > Constants.GUARD_SPAWN_RATE) {
+                    guards.add(tunnel.spawnGuard(gc, time));
+                    tunnel.handleSpeed(gc);
+                }
+            }
+        }
+        while(tunnels.size() < Constants.NUM_TUNNELS) {
+            double ypos = - (Constants.SCREEN_HEIGHT * rand.nextInt(11) / 10);
+            while(tunnels.containsKey(ypos)) {
+                ypos = - (Constants.SCREEN_HEIGHT * rand.nextInt(11) / 10);
+            }
+            Tunnel tunnel = new Tunnel(ypos);
+            tunnels.put(ypos, tunnel);
+        }*/
     }
+
     private void handleGuardSpeed(double t) {
         Iterator<Guard> iter = guards.iterator();
         while (iter.hasNext()) {
             Guard guard = iter.next();
             guard.handleSpeed(gc, t);
-            if (guard.getX() < 0.0 || guard.getX() > Constants.SCREEN_WIDTH) {
+            //added getY() tests to account for guards' new motion abillities 
+            if (guard.getX() < 0.0 || guard.getX() > Constants.SCREEN_WIDTH || 
+                    guard.getY() > Constants.SCREEN_HEIGHT || 
+                    guard.getY() < - Constants.SCREEN_HEIGHT) {
                 iter.remove();
             }
         }
