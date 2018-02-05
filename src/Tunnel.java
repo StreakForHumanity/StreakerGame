@@ -84,21 +84,6 @@ public class Tunnel extends WorldItem {
         return tunnels;
     }
     
-
-    /*public static HashMap<Double, Tunnel> createTunnels() {
-        HashMap<Double, Tunnel> tunnels = new HashMap<>();
-        Random rand = new Random();
-        for(int i = 0; i < Constants.NUM_TUNNELS; i++) {
-            Tunnel tunnel = new Tunnel();
-            double ypos = tunnel.getY();
-            tunnels.put(ypos, tunnel);
-        }
-
-        tunnelPositions = tunnels;
-
-        return tunnels;
-    }*/
-
     public boolean noGuard() {
         return noGuard;
     }
