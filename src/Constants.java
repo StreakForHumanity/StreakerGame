@@ -3,7 +3,7 @@ public class Constants {
     public static final int     SCREEN_WIDTH    = 800;
     public static final double  FRAME_DURATION  = 0.150;
     public static final int     NUM_COINS       = 4;
-    public static final int     NUM_TUNNELS     = 4;
+    public static final int     NUM_TUNNELS     = 5;
     public static final double _PRECISION       = 1000000000.0;
     public static final int     STADIUM_BORDER  = 110;
     public static final int     COIN_BOUNDS     = 150;

@@ -2,17 +2,24 @@ import javafx.scene.canvas.GraphicsContext;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Tunnel extends WorldItem {
 
     private boolean noGuard;
     private boolean left;
     private TunnelPosition initialY;
+    private Random rand;
     private static ArrayList<TunnelPosition> tunnelPositions = new ArrayList<>();
 
+    //get rid of stuff after this
+    private Scanner verify = new Scanner(System.in);
+    //get rid of stuff before this
+
     public Tunnel() {
-        this.resetPosition();
+        rand = new Random();
         noGuard = true;
+        this.establishPosition();
     }
 
     public void handleSpeed(GraphicsContext gc) {
@@ -22,13 +29,37 @@ public class Tunnel extends WorldItem {
     }
 
     public void resetPosition() {
-        Random rand = new Random();
+        left = rand.nextBoolean();
+        double x;
+        if(left) {
+            this.setImage(Paths.TUNNEL_PATHS[0]);
+            x = Constants.STADIUM_MARGIN_LEFT;
+        }
+        else {
+            this.setImage(Paths.TUNNEL_PATHS[1]);
+            x = Constants.STADIUM_MARGIN_RIGHT;
+        }
+        this.setPosition(x, - (3 * Constants.SCREEN_HEIGHT / 4));
+        this.noGuard = true;
+
+    }
+
+    public void establishPosition() {        
         left = rand.nextBoolean();
         double y = - (Constants.SCREEN_HEIGHT * rand.nextDouble());
-        while(tunnelPositions.contains(new TunnelPosition(y))) {
+
+        while (tunnelPositions.contains(new TunnelPosition(y))) {
             y = - (Constants.SCREEN_HEIGHT * rand.nextDouble());
         }
-        System.out.println("y: " + y + " | left?: " + left);
+        this.initialY = new TunnelPosition(y);
+        tunnelPositions.add(this.initialY);
+        
+        System.out.println("Current Positions:");
+        for (TunnelPosition p : tunnelPositions) {
+            System.out.format("%.3f, ", p.getPosition());
+        }
+        System.out.println();
+        
         double x;
         if (left) {
             this.setImage(Paths.TUNNEL_PATHS[0]);
@@ -37,8 +68,6 @@ public class Tunnel extends WorldItem {
             this.setImage(Paths.TUNNEL_PATHS[1]);
             x = Constants.STADIUM_MARGIN_RIGHT;
         }
-        tunnelPositions.remove(this.initialY);
-        this.initialY = new TunnelPosition(y);
         this.setPosition(x, y);
         this.noGuard = true;
     }
@@ -54,7 +83,7 @@ public class Tunnel extends WorldItem {
     
     public static ArrayList<Tunnel> createTunnels() {
         ArrayList<Tunnel> tunnels = new ArrayList<Tunnel>();
-        for(int i = 0; i < Constants.NUM_TUNNELS; i++) {
+        for (int i = 0; i < Constants.NUM_TUNNELS; i++) {
             Tunnel tunnel = new Tunnel();
             tunnels.add(tunnel);
         }

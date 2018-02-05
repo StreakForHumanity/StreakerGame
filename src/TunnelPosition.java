@@ -19,4 +19,8 @@ public class TunnelPosition {
         TunnelPosition other = (TunnelPosition)o;
         return (Math.abs(other.pos - this.pos) < Constants.TUNNEL_SIZE);
     }
+
+    public double getPosition() {
+        return pos;
+    }
 }
