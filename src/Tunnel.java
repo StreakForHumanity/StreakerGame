@@ -1,8 +1,6 @@
 import javafx.scene.canvas.GraphicsContext;
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
 
 public class Tunnel extends WorldItem {
 
