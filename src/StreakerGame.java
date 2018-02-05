@@ -38,7 +38,6 @@ public class StreakerGame extends Application {
     private GraphicsContext gc;
     private ArrayList<Coin> coins;
     private ArrayList<Tunnel> tunnels;
-    //private HashMap<Double,Tunnel> tunnels;
     private ArrayList<Guard> guards;
     private Streaker character;
     private GraphicsController graphicsController;
@@ -157,30 +156,6 @@ public class StreakerGame extends Application {
             }
             tunnel.handleSpeed(gc);
         }
-        
-        
-        /*Iterator<Map.Entry<Double, Tunnel>> iter = tunnels.entrySet().iterator();
-        Random rand = new Random();
-        while(iter.hasNext()) {
-            Tunnel tunnel = iter.next().getValue();
-            if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
-                iter.remove();
-                System.out.println("removing tunnel; " + tunnels.size() + " remaining.");
-            } else {
-                if (Math.random() > Constants.GUARD_SPAWN_RATE) {
-                    guards.add(tunnel.spawnGuard(gc, time));
-                    tunnel.handleSpeed(gc);
-                }
-            }
-        }
-        while(tunnels.size() < Constants.NUM_TUNNELS) {
-            double ypos = - (Constants.SCREEN_HEIGHT * rand.nextInt(11) / 10);
-            while(tunnels.containsKey(ypos)) {
-                ypos = - (Constants.SCREEN_HEIGHT * rand.nextInt(11) / 10);
-            }
-            Tunnel tunnel = new Tunnel(ypos);
-            tunnels.put(ypos, tunnel);
-        }*/
     }
 
     private void handleGuardSpeed(double t) {

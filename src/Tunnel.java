@@ -53,13 +53,7 @@ public class Tunnel extends WorldItem {
         }
         this.initialY = new TunnelPosition(y);
         tunnelPositions.add(this.initialY);
-        
-        System.out.println("Current Positions:");
-        for (TunnelPosition p : tunnelPositions) {
-            System.out.format("%.3f, ", p.getPosition());
-        }
-        System.out.println();
-        
+
         double x;
         if (left) {
             this.setImage(Paths.TUNNEL_PATHS[0]);
