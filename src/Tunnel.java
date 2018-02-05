@@ -10,10 +10,6 @@ public class Tunnel extends WorldItem {
     private Random rand;
     private static ArrayList<TunnelPosition> tunnelPositions = new ArrayList<>();
 
-    //get rid of stuff after this
-    private Scanner verify = new Scanner(System.in);
-    //get rid of stuff before this
-
     public Tunnel() {
         rand = new Random();
         noGuard = true;
