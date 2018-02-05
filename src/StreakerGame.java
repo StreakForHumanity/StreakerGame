@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -139,14 +140,13 @@ public class StreakerGame extends Application {
         }
     }
     private void handleTunnelLoop(double time) {
+        
         for (Tunnel tunnel : tunnels) {
             if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
                 tunnel.resetPosition();
             } else {
                 if (tunnel.noGuard()) {
-                    /*
-                        There should be a better way to do this
-                    */
+                    //There should be a better way to do this
                     if (Math.random() > Constants.GUARD_SPAWN_RATE) {
                         guards.add(tunnel.spawnGuard(gc, time));
                     }
@@ -155,12 +155,16 @@ public class StreakerGame extends Application {
             tunnel.handleSpeed(gc);
         }
     }
+
     private void handleGuardSpeed(double t) {
         Iterator<Guard> iter = guards.iterator();
         while (iter.hasNext()) {
             Guard guard = iter.next();
             guard.handleSpeed(gc, t);
-            if (guard.getX() < 0.0 || guard.getX() > Constants.SCREEN_WIDTH) {
+            //added getY() tests to account for guards' new motion abillities 
+            if (guard.getX() < 0.0 || guard.getX() > Constants.SCREEN_WIDTH || 
+                    guard.getY() > Constants.SCREEN_HEIGHT || 
+                    guard.getY() < - Constants.SCREEN_HEIGHT) {
                 iter.remove();
             }
         }
