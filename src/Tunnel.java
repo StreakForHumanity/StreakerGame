@@ -31,14 +31,14 @@ public class Tunnel extends WorldItem {
         }
         else {
             this.setImage(Paths.TUNNEL_PATHS[1]);
-            x = Constants.STADIUM_MARGIN_RIGHT;
+            x = Constants.SCREEN_WIDTH - Constants.STADIUM_MARGIN_RIGHT;
         }
         this.setPosition(x, - (3 * Constants.SCREEN_HEIGHT / 4));
         this.noGuard = true;
 
     }
 
-    public void establishPosition() {        
+    public void establishPosition() {
         left = rand.nextBoolean();
         double y = - (Constants.SCREEN_HEIGHT * rand.nextDouble());
 
@@ -68,7 +68,7 @@ public class Tunnel extends WorldItem {
         return g;
     }
 
-    
+
     public static ArrayList<Tunnel> createTunnels() {
         ArrayList<Tunnel> tunnels = new ArrayList<Tunnel>();
         for (int i = 0; i < Constants.NUM_TUNNELS; i++) {
@@ -77,7 +77,7 @@ public class Tunnel extends WorldItem {
         }
         return tunnels;
     }
-    
+
     public boolean noGuard() {
         return noGuard;
     }

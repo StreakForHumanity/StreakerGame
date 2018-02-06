@@ -7,7 +7,7 @@ public class Constants {
     public static final int STADIUM_BORDER          = 110;
     public static final int COIN_BOUNDS             = 150;
     public static final int STARTING_SPEED          = 7;
-    public static final int GUARD_SPEED             = 4;
+    public static final int GUARD_SPEED             = 5;
     public static final int SCREEN_HEIGHT           = 700;
     public static final int SCREEN_WIDTH            = 1000;
     public static final int STADIUM_MARGIN_LEFT     = 50;
