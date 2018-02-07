@@ -14,7 +14,7 @@ public class Paths {
             "./assets/guyRight.png",
             "./assets/guyJump.png"
     };
-    public static final String TUNNEL_PATHS [] = {
+    public static final String[] TUNNEL_PATHS = {
         "./assets/tunnelLeft.png",
         "./assets/tunnelRight.png"
     };

@@ -1,0 +1,4 @@
+.idea/
+.scannerwork
+sonar-project.properties
+src/*.class

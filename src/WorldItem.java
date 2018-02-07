@@ -85,6 +85,16 @@ public class WorldItem {
         speedY = y;
     }
 
+    /* Bennett - I'm not super sure what thet utility of the 'velocity' group of functions is,
+        but if someone is planning on using them, I've made this function so as not to step
+        on any of the pre-established nomenclature. It's a bit awkward, and should definitely
+        be changed pending future communication.
+    */
+    public void modifySpeed(double x, double y) {
+        speedX += x;
+        speedY += y;
+    }
+
     public void updateSpeed() {
         updatePosition(speedX, speedY);
     }

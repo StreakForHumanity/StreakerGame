@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -35,6 +36,7 @@ public class StreakerGame extends Application {
     private GraphicsContext gc;
     private ArrayList<Coin> coins;
     private ArrayList<Tunnel> tunnels;
+    private ArrayList<Guard> guards;
     private Streaker character;
     private GraphicsController graphicsController;
 
@@ -59,7 +61,8 @@ public class StreakerGame extends Application {
                 character.handleJump(input);
                 character.render(gc, t);
                 handleCoinIntersects();
-                handleTunnelLoop();
+                handleTunnelLoop(t);
+                handleGuardSpeed(t);
                 graphicsController.showTime(nanot);
                 showCoins();
             }
@@ -107,6 +110,7 @@ public class StreakerGame extends Application {
         setOnKeyRelease();
         coins = Coin.createCoins();
         tunnels = Tunnel.createTunnels();
+        guards = new ArrayList<Guard>();
         setInitialScore();
     }
 
@@ -136,12 +140,34 @@ public class StreakerGame extends Application {
             coin.handleSpeed(gc);
         }
     }
-    private void handleTunnelLoop() {
+    private void handleTunnelLoop(double time) {
+        
         for (Tunnel tunnel : tunnels) {
             if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
                 tunnel.resetPosition();
+            } else {
+                if (tunnel.noGuard()) {
+                    //There should be a better way to do this
+                    if (Math.random() > Constants.GUARD_SPAWN_RATE) {
+                        guards.add(tunnel.spawnGuard(gc, time));
+                    }
+                }
             }
             tunnel.handleSpeed(gc);
+        }
+    }
+
+    private void handleGuardSpeed(double t) {
+        Iterator<Guard> iter = guards.iterator();
+        while (iter.hasNext()) {
+            Guard guard = iter.next();
+            guard.handleSpeed(gc, t);
+            //added getY() tests to account for guards' new motion abillities 
+            if (guard.getX() < 0.0 || guard.getX() > Constants.SCREEN_WIDTH || 
+                    guard.getY() > Constants.SCREEN_HEIGHT || 
+                    guard.getY() < - Constants.SCREEN_HEIGHT) {
+                iter.remove();
+            }
         }
     }
 }
