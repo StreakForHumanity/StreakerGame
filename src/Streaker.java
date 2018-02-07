@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Streaker extends AnimatedImage {
 
 	boolean isJumping;
+	boolean canJump;
 
     public Streaker() {
         Image[] imageArray = new Image[4];
@@ -16,6 +17,7 @@ public class Streaker extends AnimatedImage {
         this.duration = Constants.FRAME_DURATION;
         this.setPosition((Constants.SCREEN_WIDTH / 2) - 40, Constants.SCREEN_HEIGHT / 2);
 		this.isJumping = false;
+		this.canJump = true;
         width = imageArray[0].getWidth();
         height = imageArray[0].getHeight();
     }
@@ -53,7 +55,9 @@ public class Streaker extends AnimatedImage {
 
 	public void handleJump(ArrayList<String> input) {
 		if (input.contains("SPACE")) {
-			updateCharForJump();
+			if(canJump) {
+				updateCharForJump();
+			}
 		}
 	}
 
@@ -68,8 +72,7 @@ public class Streaker extends AnimatedImage {
 			new Thread(new Runnable() {
 				public void run() {
 					double sT = System.currentTimeMillis();
-					while((System.currentTimeMillis()-sT) < Constants.JUMP_TIME) {
-					}
+					while((System.currentTimeMillis()-sT) < Constants.JUMP_TIME) {}
 					Image[] imageArray = new Image[4];
 					imageArray[0] = new Image(Paths.STREAKER_PATHS[0]);
 			        imageArray[1] = new Image(Paths.STREAKER_PATHS[1]);
@@ -77,6 +80,9 @@ public class Streaker extends AnimatedImage {
 			        imageArray[3] = new Image(Paths.STREAKER_PATHS[3]);
 			        setFrame(imageArray);
 					isJumping = false;
+					sT = System.currentTimeMillis();
+					while((System.currentTimeMillis()-sT) < Constants.COOLDOWN_TIME) {canJump = false;}
+					canJump = true;
 				}
 			}).start();
 		}
