@@ -72,7 +72,11 @@ public class Streaker extends AnimatedImage {
 			new Thread(new Runnable() {
 				public void run() {
 					double sT = System.currentTimeMillis();
-					while((System.currentTimeMillis()-sT) < Constants.JUMP_TIME) {}
+					try {
+					Thread.sleep(Constants.JUMP_TIME);}
+					catch InterruptedException {
+						
+					}
 					Image[] imageArray = new Image[4];
 					imageArray[0] = new Image(Paths.STREAKER_PATHS[0]);
 			        imageArray[1] = new Image(Paths.STREAKER_PATHS[1]);
