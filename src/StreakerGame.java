@@ -56,6 +56,7 @@ public class StreakerGame extends Application {
                 character.handleVelocity(input);
                 character.handleCharacterPosition();
                 character.updateVelocity(elapsedTime);
+                character.handleJump(input);
                 character.render(gc, t);
                 handleCoinIntersects();
                 handleTunnelLoop();
