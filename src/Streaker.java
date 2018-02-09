@@ -54,11 +54,11 @@ public class Streaker extends AnimatedImage {
     }
 
     public void handleJump(ArrayList<String> input) {
-		if (input.contains("SPACE")) {
-			if(canJump) {
-				updateCharForJump();
-			}
-		}
+        if (input.contains("SPACE")) {
+            if(canJump) {
+                updateCharForJump();
+            }
+        }
 	}
 
 	private void updateCharForJump() {
