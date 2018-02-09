@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Streaker extends AnimatedImage {
 
-	boolean isJumping;
-	boolean canJump;
+	public boolean isJumping;
+	private boolean canJump;
 
     public Streaker() {
         Image[] imageArray = new Image[4];
@@ -16,8 +16,8 @@ public class Streaker extends AnimatedImage {
         this.setFrame(imageArray);
         this.duration = Constants.FRAME_DURATION;
         this.setPosition((Constants.SCREEN_WIDTH / 2) - 40, Constants.SCREEN_HEIGHT / 2);
-		this.isJumping = false;
-		this.canJump = true;
+        this.isJumping = false;
+        this.canJump = true;
         width = imageArray[0].getWidth();
         height = imageArray[0].getHeight();
     }
@@ -53,7 +53,7 @@ public class Streaker extends AnimatedImage {
         }
     }
 
-	public void handleJump(ArrayList<String> input) {
+    public void handleJump(ArrayList<String> input) {
 		if (input.contains("SPACE")) {
 			if(canJump) {
 				updateCharForJump();
