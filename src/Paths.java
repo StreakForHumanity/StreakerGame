@@ -11,7 +11,8 @@ public class Paths {
             "./assets/guyForward.png",
             "./assets/guyLeft.png",
             "./assets/guyForward.png",
-            "./assets/guyRight.png"
+            "./assets/guyRight.png",
+            "./assets/guyJump.png"
     };
     public static final String[] TUNNEL_PATHS = {
         "./assets/tunnelLeft.png",
