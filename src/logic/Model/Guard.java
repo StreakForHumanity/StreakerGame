@@ -1,8 +1,12 @@
+package logic.Model;
+
 import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
+import logic.Controllers.AnimatedImageController;
+
 import java.util.Random;
 
-public class Guard extends AnimatedImage {
+public class Guard extends AnimatedImageController {
     private boolean left;
     private Random rand;
 

@@ -1,7 +1,10 @@
+package logic.Controllers;
+
 import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
+import logic.Model.WorldItem;
 
-public class AnimatedImage extends WorldItem {
+public class AnimatedImageController extends WorldItem {
 
     public Image[] frames;
     public double duration;

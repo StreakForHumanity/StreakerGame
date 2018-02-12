@@ -1,3 +1,5 @@
+package logic.Model;
+
 public class LongValue {
     public long value;
 

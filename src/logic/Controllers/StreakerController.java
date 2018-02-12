@@ -1,13 +1,18 @@
+package logic.Controllers;
+
 import javafx.scene.image.Image;
 import javafx.geometry.Rectangle2D;
+import logic.Model.Constants;
+import logic.Model.Paths;
+
 import java.util.ArrayList;
 
-public class Streaker extends AnimatedImage {
+public class StreakerController extends AnimatedImageController {
 
 	public boolean isJumping;
 	private boolean canJump;
 
-    public Streaker() {
+    public StreakerController() {
         Image[] imageArray = new Image[4];
         imageArray[0] = new Image(Paths.STREAKER_PATHS[0]);
         imageArray[1] = new Image(Paths.STREAKER_PATHS[1]);

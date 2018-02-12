@@ -1,27 +1,22 @@
+package logic.Views;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
-import javafx.event.EventHandler;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.GridPane;
-import javafx.scene.control.Button;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+
 import javafx.scene.text.*;
+import logic.Controllers.GraphicsController;
+import logic.Controllers.StreakerController;
+import logic.Model.*;
 
 public class StreakerGame extends Application {
 
@@ -37,7 +32,7 @@ public class StreakerGame extends Application {
     private ArrayList<Coin> coins;
     private ArrayList<Tunnel> tunnels;
     private ArrayList<Guard> guards;
-    private Streaker character;
+    private StreakerController character;
     private GraphicsController graphicsController;
 
     public static void main(String[] args) {
@@ -95,7 +90,7 @@ public class StreakerGame extends Application {
     }
 
     private void setupGameState(Stage stage) {
-        stage.setTitle("Streaker");
+        stage.setTitle("logic.Controllers.StreakerController");
         root = new Group();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -105,7 +100,7 @@ public class StreakerGame extends Application {
         input = new ArrayList<String>();
         gc = canvas.getGraphicsContext2D();
         graphicsController = new GraphicsController(gc);
-        character = new Streaker();
+        character = new StreakerController();
         setOnKeyPress();
         setOnKeyRelease();
         coins = Coin.createCoins();

@@ -1,3 +1,5 @@
+package logic.Model;
+
 public class IntValue {
     public int value;
 

@@ -1,3 +1,5 @@
+package logic.Model;
+
 import java.lang.Math;
 
 public class TunnelPosition {
