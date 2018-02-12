@@ -1,3 +1,5 @@
+package logic.Model;
+
 public class Constants {
     public static final double FRAME_DURATION       = 0.150;
     public static final int NUM_COINS               = 4;

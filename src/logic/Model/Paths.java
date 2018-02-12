@@ -1,3 +1,5 @@
+package logic.Model;
+
 public class Paths {
     public static final String BACKGROUND_PATH = "./assets/stadium_large.png";
     public static final String COIN_PATH = "./assets/coin.png";

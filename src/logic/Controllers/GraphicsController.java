@@ -1,4 +1,7 @@
+package logic.Controllers;
+
 import javafx.scene.canvas.GraphicsContext;
+import logic.Model.Constants;
 
 import java.util.concurrent.TimeUnit;
 

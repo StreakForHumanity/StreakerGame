@@ -1,4 +1,7 @@
+package logic.Model;
+
 import javafx.scene.canvas.GraphicsContext;
+
 import java.util.Random;
 import java.util.ArrayList;
 

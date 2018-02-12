@@ -1,5 +1,8 @@
-import java.util.ArrayList;
+package logic.Model;
+
 import javafx.scene.canvas.GraphicsContext;
+
+import java.util.ArrayList;
 
 public class BackgroundItem {
 
