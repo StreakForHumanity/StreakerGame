@@ -9,9 +9,9 @@ public class Guard extends AnimatedImage {
     public Guard(boolean left) {
         rand = new Random();
         if (left) {
-            this.setSpeed(Constants.STARTING_SPEED, Constants.STARTING_SPEED);
+            this.setSpeed(Constants.GUARD_SPEED, Constants.STARTING_SPEED);
         } else {
-            this.setSpeed(-1 * Constants.STARTING_SPEED, Constants.STARTING_SPEED);
+            this.setSpeed(-1 * Constants.GUARD_SPEED, Constants.STARTING_SPEED);
         }
         Image[] imageArray = new Image[4];
         imageArray[0] = new Image(Paths.GUARD_PATHS[0]);
@@ -26,8 +26,8 @@ public class Guard extends AnimatedImage {
 
     public void handleSpeed(GraphicsContext gc, double time) {
         double dx = (-0.5 + rand.nextDouble()) / 10;
-        double dy = 1.5 * (-0.55 + rand.nextDouble());
-        
+        double dy = 2.0 * (-0.485 + rand.nextDouble());
+        // maybe use predrawn parabolas instead of random
         this.modifySpeed(dx, dy);
         this.updateSpeed();
         this.render(gc, time);
