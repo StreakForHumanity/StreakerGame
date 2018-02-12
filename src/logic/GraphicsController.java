@@ -1,3 +1,5 @@
+package logic;
+
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.concurrent.TimeUnit;
