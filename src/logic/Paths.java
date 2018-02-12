@@ -1,3 +1,5 @@
+package logic;
+
 public class Paths {
     public static final String BACKGROUND_PATH = "./assets/stadium.png";
     public static final String COIN_PATH = "./assets/coin.png";

@@ -1,3 +1,5 @@
+package logic;
+
 public class LongValue {
     public long value;
 

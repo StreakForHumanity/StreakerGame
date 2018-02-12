@@ -1,4 +1,9 @@
+package logic;
+
 import javafx.scene.image.Image;
+import logic.AnimatedImage;
+import logic.Constants;
+import logic.Paths;
 
 import java.util.ArrayList;
 

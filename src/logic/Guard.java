@@ -1,5 +1,8 @@
+package logic;
+
 import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
+
 import java.util.Random;
 
 public class Guard extends AnimatedImage {

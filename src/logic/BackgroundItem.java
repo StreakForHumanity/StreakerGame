@@ -1,3 +1,5 @@
+package logic;
+
 import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 
