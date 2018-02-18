@@ -9,7 +9,6 @@ import logic.Controllers.AnimatedImageController;
 import java.util.Random;
 
 public class Guard extends AnimatedImageController {
-    private boolean left;
     private Random rand;
 
     public Guard(boolean left) {

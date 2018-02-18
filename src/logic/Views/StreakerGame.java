@@ -65,6 +65,19 @@ public class StreakerGame extends Application {
         }.start();
         stage.show();
     }
+    
+    /* Returns instance of StreakerGame; useful for testing,
+     * 	allows us to test individual methods and object interactions.
+     * 
+     * Note: essentially sets up all necessary parts of game without actually launching
+     * 	the javafx application.
+     * 
+     * TODO: add 'tick' or 'update' method to game instance which will handle background
+     * 	interactions and update positions/states of on-screen objects.
+     */
+    public StreakerGame() {
+    	setupGameState(new Stage());
+    }
 
     private void setOnKeyPress() {
         scene.setOnKeyPressed(
@@ -114,6 +127,17 @@ public class StreakerGame extends Application {
         collected = new IntValue(0);
         lastNanoTime = new LongValue(System.nanoTime());
         startNanoTime = System.nanoTime();
+    }
+    
+    /* wrapper function for use inside of AnimationTimer's handle() -
+     * 	handles calls for updating object positions, checking
+     * 	collisions, updating speeds/velocities, and 
+     * 	updating tunnel/guard spawns and paths
+     * 
+     * Note: we could set the access to public for the sake of testing
+     */
+    private void updateGameState() {
+    	
     }
 
     private void showCoins() {
