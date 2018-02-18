@@ -5,8 +5,8 @@ jdk:
 addons:
   sonarcloud:
     organization: "brobinson15-github" # the key of the org you chose at step #3
-  branches:
-   - refactor
+    branches:
+      - refactor
 
 script:
  - ant build
