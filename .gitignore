@@ -1,6 +1,5 @@
 .idea/
 .scannerwork
-sonar-project.properties
 .classpath
 .project
 /bin/
