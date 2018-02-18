@@ -11,7 +11,10 @@ Player can move any direction while screen is scrolling without exiting bounds o
 
 ## To Run the Game:
 
-#### 1) Build via ant build.xml file in either command line or IDE of choice
+#### 1) Build via ant build.xml file in either command line or IDE of choice, e.g.
+```
+ant build
+```
 
 #### 2) from root game directory (StreakerGame), run:
 ```
