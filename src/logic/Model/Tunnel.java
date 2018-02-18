@@ -1,6 +1,8 @@
 package logic.Model;
 
 import javafx.scene.canvas.GraphicsContext;
+import logic.Configuration.Constants;
+import logic.Configuration.Paths;
 
 import java.util.Random;
 import java.util.ArrayList;

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javafx.scene.text.*;
+import logic.Configuration.Constants;
 import logic.Controllers.GraphicsController;
 import logic.Controllers.StreakerController;
 import logic.Model.*;

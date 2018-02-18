@@ -2,6 +2,8 @@ package logic.Model;
 
 import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
+import logic.Configuration.Constants;
+import logic.Configuration.Paths;
 import logic.Controllers.AnimatedImageController;
 
 import java.util.Random;

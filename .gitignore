@@ -1,4 +1,6 @@
 .idea/
 .scannerwork
 sonar-project.properties
-src/*.class
+.classpath
+.project
+/bin/

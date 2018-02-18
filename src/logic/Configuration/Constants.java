@@ -1,4 +1,4 @@
-package logic.Model;
+package logic.Configuration;
 
 public class Constants {
     public static final double FRAME_DURATION       = 0.150;
