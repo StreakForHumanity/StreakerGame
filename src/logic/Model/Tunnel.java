@@ -1,6 +1,7 @@
 package logic.Model;
 
-import javafx.scene.canvas.GraphicsContext;
+import logic.Configuration.Constants;
+import logic.Configuration.Paths;
 
 import java.util.Random;
 import java.util.ArrayList;
@@ -18,11 +19,11 @@ public class Tunnel extends WorldItem {
         noGuard = true;
         this.establishPosition();
     }
-
-    public void handleSpeed(GraphicsContext gc) {
-        this.setSpeed(0, Constants.STARTING_SPEED);
-        this.updateSpeed();
-        this.render(gc);
+    
+    @Override
+    public void updatePosition() {
+    	this.setSpeed(0, Constants.STARTING_SPEED);
+    	super.updatePosition();
     }
 
     public void resetPosition() {
@@ -63,10 +64,9 @@ public class Tunnel extends WorldItem {
         this.noGuard = true;
     }
 
-    public Guard spawnGuard(GraphicsContext gc, double time) {
+    public Guard spawnGuard() {
         Guard g = new Guard(left);
         g.setPosition(getX(), getY());
-        g.handleSpeed(gc, time);
         noGuard = false;
         return g;
     }
