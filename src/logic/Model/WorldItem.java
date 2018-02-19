@@ -1,7 +1,6 @@
 package logic.Model;
 
 import javafx.scene.image.Image;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.geometry.Rectangle2D;
 
 public class WorldItem {
@@ -28,15 +27,21 @@ public class WorldItem {
         Image i = new Image(filename);
         setImage(i);
     }
+    
+    /* added for use in GraphicsController rendering*/
+    public Image getImage() {
+    	return image;
+    }
 
     public void setPosition(double x, double y) {
         positionX = x;
         positionY = y;
     }
-
-    public void updatePosition(double x, double y) {
-        positionX += x;
-        positionY += y;
+    
+    // increments position of WorldItem with respect to preset speed values.
+    public void updatePosition() {
+    	positionX += speedX;
+    	positionY += speedY;
     }
 
     public double getX() {
@@ -55,10 +60,6 @@ public class WorldItem {
         return height;
     }
 
-    public void render(GraphicsContext gc) {
-        gc.drawImage(image, positionX, positionY);
-    }
-
     public Rectangle2D getBoundary() {
         return new Rectangle2D(positionX, positionY, width, height);
     }
@@ -72,12 +73,12 @@ public class WorldItem {
         velocityY = y;
     }
 
-    public void addVelocity(double x, double y) {
+    public void incrementVelocity(double x, double y) {
         velocityX += x;
         velocityY += y;
     }
 
-    public void updateVelocity(double time) {
+    public void applyVelocity(double time) {
         positionX += velocityX * time;
         positionY += velocityY * time;
     }
@@ -92,12 +93,8 @@ public class WorldItem {
         on any of the pre-established nomenclature. It's a bit awkward, and should definitely
         be changed pending future communication.
     */
-    public void modifySpeed(double x, double y) {
+    public void incrementSpeed(double x, double y) {
         speedX += x;
         speedY += y;
-    }
-
-    public void updateSpeed() {
-        updatePosition(speedX, speedY);
     }
 }

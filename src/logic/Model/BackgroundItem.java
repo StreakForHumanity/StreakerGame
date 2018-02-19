@@ -1,6 +1,5 @@
 package logic.Model;
 
-import javafx.scene.canvas.GraphicsContext;
 import logic.Configuration.Constants;
 import logic.Configuration.Paths;
 
@@ -16,6 +15,10 @@ public class BackgroundItem {
         WorldItem backgroundTwo = new WorldItem();
         this.setBackground(backgroundOne, true);
         this.setBackground(backgroundTwo, false);
+    }
+    
+    public WorldItem getSection(int index) {
+    	return backgrounds.get(index);
     }
 
     public void setBackground(WorldItem background, boolean first) {
@@ -44,13 +47,11 @@ public class BackgroundItem {
             backgrounds.get(1).setPosition(0, backgrounds.get(0).getY() - backgrounds.get(1).getHeight());
         }
     }
-
-    public void setBackgroundSpeed(GraphicsContext gc) {
-        backgrounds.get(0).setSpeed(0, Constants.STARTING_SPEED);
-        backgrounds.get(0).updateSpeed();
-        backgrounds.get(0).render(gc);
+    
+    public void updateBackgroundPosition() {
+    	backgrounds.get(0).setSpeed(0, Constants.STARTING_SPEED);
+        backgrounds.get(0).updatePosition();
         backgrounds.get(1).setSpeed(0, Constants.STARTING_SPEED);
-        backgrounds.get(1).updateSpeed();
-        backgrounds.get(1).render(gc);
+        backgrounds.get(1).updatePosition();
     }
 }

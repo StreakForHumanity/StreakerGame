@@ -4,11 +4,10 @@ import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
 import logic.Configuration.Constants;
 import logic.Configuration.Paths;
-import logic.Controllers.AnimatedImageController;
 
 import java.util.Random;
 
-public class Guard extends AnimatedImageController {
+public class Guard extends AnimatedItem {
     private Random rand;
 
     public Guard(boolean left) {
@@ -29,12 +28,22 @@ public class Guard extends AnimatedImageController {
         height = imageArray[0].getHeight();
     }
 
+    @Override
+    public void updatePosition() {
+    	double dx = (-0.5 + rand.nextDouble()) / 10;
+        double dy = 2.0 * (-0.485 + rand.nextDouble());
+        // maybe use predrawn parabolas instead of random
+        this.incrementSpeed(dx, dy);
+        super.updatePosition();
+    }
+    
+    // deprecated
     public void handleSpeed(GraphicsContext gc, double time) {
         double dx = (-0.5 + rand.nextDouble()) / 10;
         double dy = 2.0 * (-0.485 + rand.nextDouble());
         // maybe use predrawn parabolas instead of random
-        this.modifySpeed(dx, dy);
-        this.updateSpeed();
+        this.incrementSpeed(dx, dy);
+        this.updatePosition();
         this.render(gc, time);
     }
 

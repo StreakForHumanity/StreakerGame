@@ -13,9 +13,16 @@ public class Coin extends WorldItem {
         this.resetPosition();
     }
 
+    @Override
+    public void updatePosition() {
+    	this.setSpeed(0, Constants.STARTING_SPEED);
+    	super.updatePosition();
+    }
+    
+    // deprecated
     public void handleSpeed(GraphicsContext gc) {
         this.setSpeed(0, Constants.STARTING_SPEED);
-        this.updateSpeed();
+        this.updatePosition();
         this.render(gc);
     }
 

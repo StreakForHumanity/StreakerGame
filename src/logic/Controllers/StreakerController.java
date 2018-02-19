@@ -3,11 +3,12 @@ package logic.Controllers;
 import javafx.scene.image.Image;
 import logic.Configuration.Constants;
 import logic.Configuration.Paths;
+import logic.Model.AnimatedItem;
 import javafx.geometry.Rectangle2D;
 
 import java.util.ArrayList;
 
-public class StreakerController extends AnimatedImageController {
+public class StreakerController extends AnimatedItem {
 
 	public boolean isJumping;
 	private boolean canJump;
@@ -27,6 +28,7 @@ public class StreakerController extends AnimatedImageController {
         height = imageArray[0].getHeight();
     }
 
+    // ensures character is in bounds of stadium background
     public void handleCharacterPosition() {
         if (this.getX() < Constants.STADIUM_BORDER) {
             this.setPosition(Constants.STADIUM_BORDER, this.getY());
@@ -42,19 +44,19 @@ public class StreakerController extends AnimatedImageController {
         }
     }
 
-    public void handleVelocity(ArrayList<String> input) {
+    public void applyUserInputToVelocity(ArrayList<String> input) {
         this.setVelocity(0,0);
         if (input.contains("LEFT")) {
-            this.addVelocity(-Constants.CHARACTER_VELOCITY, 0);
+            this.incrementVelocity(-Constants.CHARACTER_VELOCITY, 0);
         }
         if (input.contains("RIGHT")) {
-            this.addVelocity(Constants.CHARACTER_VELOCITY, 0);
+            this.incrementVelocity(Constants.CHARACTER_VELOCITY, 0);
         }
         if (input.contains("UP")) {
-            this.addVelocity(0, -Constants.CHARACTER_VELOCITY);
+            this.incrementVelocity(0, -Constants.CHARACTER_VELOCITY);
         }
         if (input.contains("DOWN")) {
-            this.addVelocity(0, Constants.CHARACTER_VELOCITY);
+            this.incrementVelocity(0, Constants.CHARACTER_VELOCITY);
         }
     }
 

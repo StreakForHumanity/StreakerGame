@@ -16,6 +16,6 @@ public class Constants {
     public static final int STADIUM_MARGIN_RIGHT    = 105;
     public static final double  TUNNEL_SIZE         = 52;
     public static final double GUARD_SPAWN_RATE     = .98;
-	  public static final int 	  JUMP_TIME           = 1000;
-    public static final int 	  COOLDOWN_TIME       = 3000;
+	public static final int JUMP_TIME         		= 1000;
+    public static final int COOLDOWN_TIME     		= 3000;
 }
