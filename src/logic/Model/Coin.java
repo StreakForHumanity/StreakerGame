@@ -1,6 +1,5 @@
 package logic.Model;
 
-import javafx.scene.canvas.GraphicsContext;
 import logic.Configuration.Constants;
 import logic.Configuration.Paths;
 
@@ -17,13 +16,6 @@ public class Coin extends WorldItem {
     public void updatePosition() {
     	this.setSpeed(0, Constants.STARTING_SPEED);
     	super.updatePosition();
-    }
-    
-    // deprecated
-    public void handleSpeed(GraphicsContext gc) {
-        this.setSpeed(0, Constants.STARTING_SPEED);
-        this.updatePosition();
-        this.render(gc);
     }
 
     public void resetPosition() {

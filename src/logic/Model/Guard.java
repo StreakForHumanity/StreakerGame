@@ -1,7 +1,6 @@
 package logic.Model;
 
 import javafx.scene.image.Image;
-import javafx.scene.canvas.GraphicsContext;
 import logic.Configuration.Constants;
 import logic.Configuration.Paths;
 
@@ -37,16 +36,6 @@ public class Guard extends AnimatedItem {
         super.updatePosition();
     }
     
-    // deprecated
-    public void handleSpeed(GraphicsContext gc, double time) {
-        double dx = (-0.5 + rand.nextDouble()) / 10;
-        double dy = 2.0 * (-0.485 + rand.nextDouble());
-        // maybe use predrawn parabolas instead of random
-        this.incrementSpeed(dx, dy);
-        this.updatePosition();
-        this.render(gc, time);
-    }
-
     public void resetPosition() {
         double x = (Constants.SCREEN_WIDTH - 2 * Constants.COIN_BOUNDS) * Math.random() + Constants.COIN_BOUNDS;
         double y = - Constants.SCREEN_HEIGHT * Math.random();
