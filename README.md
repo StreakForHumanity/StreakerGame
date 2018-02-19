@@ -21,3 +21,13 @@ ant build
 java -cp /ABSOLUTE/PATH/TO/GAME_DIRECTORY/bin logic.Views.StreakerGame
 ```
 ##### Note: replace absolute path with the correct location for your local system.
+
+## Build Statuses:
+
+### Travis CI
+[![Build Status](https://travis-ci.org/brobinson15/StreakerGame.svg?branch=refactor)](https://travis-ci.org/brobinson15/StreakerGame)
+
+### SonarCloud
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=streakergame:refactor)](https://sonarcloud.io/dashboard/index/streakergame:refactor)
+[![LOC](https://sonarcloud.io/api/badges/measure?key=streakergame:refactor&metric=ncloc)](https://sonarcloud.io/dashboard/index/streakergame:refactor)
+[![Code Smells](https://sonarcloud.io/api/badges/measure?key=streakergame:refactor&metric=code_smells)](https://sonarcloud.io/dashboard/index/streakergame:refactor)
