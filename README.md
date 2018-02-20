@@ -25,9 +25,9 @@ java -cp /ABSOLUTE/PATH/TO/GAME_DIRECTORY/bin logic.Views.MainMenuView
 ## Build Statuses:
 
 ### Travis CI
-[![Build Status](https://travis-ci.org/brobinson15/StreakerGame.svg?branch=master)](https://travis-ci.org/brobinson15/StreakerGame)
+[![Build Status](https://travis-ci.org/brobinson15/StreakerGame.svg?)](https://travis-ci.org/brobinson15/StreakerGame)
 
 ### SonarCloud
-[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=streakergame:master)](https://sonarcloud.io/dashboard/index/streakergame:refactor)
-[![LOC](https://sonarcloud.io/api/badges/measure?key=streakergame:master&metric=ncloc)](https://sonarcloud.io/dashboard/index/streakergame:master)
-[![Code Smells](https://sonarcloud.io/api/badges/measure?key=streakergame:master&metric=code_smells)](https://sonarcloud.io/dashboard/index/streakergame:master)
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=streakergame)](https://sonarcloud.io/dashboard/index/streakergame:refactor)
+[![LOC](https://sonarcloud.io/api/badges/measure?key=streakergame&metric=ncloc)](https://sonarcloud.io/dashboard/index/streakergame:master)
+[![Code Smells](https://sonarcloud.io/api/badges/measure?key=streakergame&metric=code_smells)](https://sonarcloud.io/dashboard/index/streakergame)
