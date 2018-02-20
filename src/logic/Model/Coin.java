@@ -1,6 +1,7 @@
 package logic.Model;
 
-import javafx.scene.canvas.GraphicsContext;
+import logic.Configuration.Constants;
+import logic.Configuration.Paths;
 
 import java.util.ArrayList;
 
@@ -11,10 +12,10 @@ public class Coin extends WorldItem {
         this.resetPosition();
     }
 
-    public void handleSpeed(GraphicsContext gc) {
-        this.setSpeed(0, Constants.STARTING_SPEED);
-        this.updateSpeed();
-        this.render(gc);
+    @Override
+    public void updatePosition() {
+    	this.setSpeed(0, Constants.STARTING_SPEED);
+    	super.updatePosition();
     }
 
     public void resetPosition() {
