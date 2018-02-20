@@ -13,7 +13,7 @@ import logic.Configuration.Constants;
 import logic.Controllers.*;
 import logic.Model.*;
 
-public class StreakerGame extends Application {
+public class GameplayView {
 
     private long startNanoTime;
     private LongValue lastNanoTime;
@@ -24,14 +24,30 @@ public class StreakerGame extends Application {
     private GraphicsController graphicsController;
     private WorldItemController worldItems;
     private KeyInputController keyController;
-
-    public static void main(String[] args) {
-        launch(args);
+    
+    public AnimationTimer getGameLoop() {
+    	return new AnimationTimer() {
+            public void handle(long currentNanoTime) {
+            	double elapsedTime = (currentNanoTime - lastNanoTime.value) / Constants._PRECISION;
+            	lastNanoTime.value = currentNanoTime;
+            	double nanot = currentNanoTime - startNanoTime;
+            	updateGameState(elapsedTime, keyController.input);
+            	drawAll(getCurrentFrameTime(nanot), nanot);
+            }
+        };
     }
-
-    @Override
-    public void start(Stage stage) {
-        setupGameState(stage);
+    
+    public Scene setupGameScene() {
+    	root = new Group();
+        scene = new Scene(root);
+        canvas = new Canvas(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        root.getChildren().add(canvas);
+        
+        return scene;
+    }
+    
+    public void startGame(Stage stage) {
+        setupGameState();
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
             	double elapsedTime = (currentNanoTime - lastNanoTime.value) / Constants._PRECISION;
@@ -41,26 +57,13 @@ public class StreakerGame extends Application {
             	drawAll(getCurrentFrameTime(nanot), nanot);
             }
         }.start();
-        stage.show();
-    }
-    
-    /* Returns instance of StreakerGame; useful for testing,
-     * 	allows us to test individual methods and object interactions.
-     * 
-     * Note: essentially sets up all necessary parts of game without actually launching
-     * 	the javafx application.
-     */
-    public StreakerGame() {
-    	setupGameState(new Stage());
     }
 
-    private void setupGameState(Stage stage) {
-    	stage.setTitle("logic.Controllers.StreakerController");
-        root = new Group();
+    private void setupGameState() {
+        /*root = new Group();
         scene = new Scene(root);
-        stage.setScene(scene);
         canvas = new Canvas(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-        root.getChildren().add(canvas);
+        root.getChildren().add(canvas);*/
         graphicsController = new GraphicsController(canvas.getGraphicsContext2D());
         worldItems = new WorldItemController();
         keyController = new KeyInputController(scene);
@@ -104,7 +107,7 @@ public class StreakerGame extends Application {
     	graphicsController.drawItem(worldItems.background);
     	
     	//draw character to screen
-    	graphicsController.drawItem(worldItems.character, time);
+    	graphicsController.drawItem(worldItems.character.streaker, time);
     	
     	//draw coins to screen
     	for (Coin c : worldItems.coins) {

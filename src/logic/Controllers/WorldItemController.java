@@ -23,9 +23,9 @@ public class WorldItemController {
 	}
 	
 	public void updateCharacterState(double elapsedTime, ArrayList<String> input) {
-		character.applyUserInputToVelocity(input);
-        character.handleCharacterPosition();
-        character.applyVelocity(elapsedTime);
+		character.streaker.applyUserInputToVelocity(input);
+        character.streaker.handleCharacterPosition();
+        character.streaker.applyVelocity(elapsedTime);
         character.handleJump(input);
 	}
 	
