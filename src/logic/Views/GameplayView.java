@@ -25,18 +25,12 @@ public class GameplayView {
     private WorldItemController worldItems;
     private KeyInputController keyController;
     
-    public AnimationTimer getGameLoop() {
-    	return new AnimationTimer() {
-            public void handle(long currentNanoTime) {
-            	double elapsedTime = (currentNanoTime - lastNanoTime.value) / Constants._PRECISION;
-            	lastNanoTime.value = currentNanoTime;
-            	double nanot = currentNanoTime - startNanoTime;
-            	updateGameState(elapsedTime, keyController.input);
-            	drawAll(getCurrentFrameTime(nanot), nanot);
-            }
-        };
-    }
-    
+    /* Call this method from another scene by instantiating a GameplayView
+     * object and setting this equal to a scene reference. From this point,
+     * you MUST call setScene on the stage with this scene reference, and 
+     * follow that with a call to startGame(stage) on the GameplayView
+     * instance.
+     */
     public Scene setupGameScene() {
     	root = new Group();
         scene = new Scene(root);
@@ -44,6 +38,17 @@ public class GameplayView {
         root.getChildren().add(canvas);
         
         return scene;
+    }
+    
+    private void setupGameState() {
+        /*root = new Group();
+        scene = new Scene(root);
+        canvas = new Canvas(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        root.getChildren().add(canvas);*/
+        graphicsController = new GraphicsController(canvas.getGraphicsContext2D());
+        worldItems = new WorldItemController();
+        keyController = new KeyInputController(scene);
+        setInitialScore();
     }
     
     public void startGame(Stage stage) {
@@ -57,17 +62,6 @@ public class GameplayView {
             	drawAll(getCurrentFrameTime(nanot), nanot);
             }
         }.start();
-    }
-
-    private void setupGameState() {
-        /*root = new Group();
-        scene = new Scene(root);
-        canvas = new Canvas(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-        root.getChildren().add(canvas);*/
-        graphicsController = new GraphicsController(canvas.getGraphicsContext2D());
-        worldItems = new WorldItemController();
-        keyController = new KeyInputController(scene);
-        setInitialScore();
     }
 
     private void setInitialScore() {
