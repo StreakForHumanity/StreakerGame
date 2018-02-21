@@ -1,7 +1,5 @@
 package logic.views;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
@@ -9,11 +7,12 @@ import javafx.animation.AnimationTimer;
 
 import java.util.ArrayList;
 
+import logic.controllers.ViewController;
 import logic.configuration.Constants;
 import logic.controllers.*;
 import logic.models.*;
 
-public class GameplayView {
+public class GameplayView extends StreakerView {
 
     private long startNanoTime;
     private LongValue lastNanoTime;
@@ -25,13 +24,11 @@ public class GameplayView {
     private WorldItemController worldItems;
     private KeyInputController keyController;
     
-    /* Call this method from another scene by instantiating a GameplayView
-     * object and setting this equal to a scene reference. From this point,
-     * you MUST call setScene on the stage with this scene reference, and 
-     * follow that with a call to startGame(stage) on the GameplayView
-     * instance.
-     */
-    public Scene setupGameScene() {
+    public GameplayView(ViewController vc) {
+    	super(vc);
+    }
+    
+    public Scene setupScene() {
     	root = new Group();
         scene = new Scene(root);
         canvas = new Canvas(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
@@ -51,7 +48,7 @@ public class GameplayView {
         setInitialScore();
     }
     
-    public void startGame(Stage stage) {
+    public void startGameLoop() {
         setupGameState();
         new AnimationTimer() {
             public void handle(long currentNanoTime) {

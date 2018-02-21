@@ -18,7 +18,7 @@ ant build
 
 #### 2) from root game directory (StreakerGame), run:
 ```
-java -cp /ABSOLUTE/PATH/TO/GAME_DIRECTORY/bin logic.views.MainMenuView
+java -cp /ABSOLUTE/PATH/TO/GAME_DIRECTORY/bin logic.client.Client
 ```
 ##### Note: replace absolute path with the correct location for your local system.
 
