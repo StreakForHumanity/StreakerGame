@@ -1,4 +1,4 @@
-package logic.Model;
+package logic.models;
 
 public class LongValue {
     public long value;

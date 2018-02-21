@@ -1,8 +1,8 @@
-package logic.Model;
+package logic.models;
 
 import java.lang.Math;
 
-import logic.Configuration.Constants;
+import logic.configuration.Constants;
 
 public class TunnelPosition {
     private double pos;

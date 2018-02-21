@@ -1,9 +1,10 @@
-package logic.Model;
-
-import logic.Configuration.Constants;
-import logic.Configuration.Paths;
+package logic.models;
 
 import java.util.Random;
+
+import logic.configuration.Constants;
+import logic.configuration.Paths;
+
 import java.util.ArrayList;
 
 public class Tunnel extends WorldItem {

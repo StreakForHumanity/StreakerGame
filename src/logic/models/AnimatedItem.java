@@ -1,4 +1,4 @@
-package logic.Model;
+package logic.models;
 
 import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;

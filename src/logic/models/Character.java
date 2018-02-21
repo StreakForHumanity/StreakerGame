@@ -1,9 +1,9 @@
-package logic.Model;
+package logic.models;
 
 import javafx.scene.image.Image;
-import logic.Configuration.Constants;
-import logic.Configuration.Paths;
-import logic.Model.AnimatedItem;
+import logic.configuration.Constants;
+import logic.configuration.Paths;
+import logic.models.AnimatedItem;
 
 import java.util.ArrayList;
 

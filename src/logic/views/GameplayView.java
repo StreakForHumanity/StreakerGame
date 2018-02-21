@@ -1,4 +1,4 @@
-package logic.Views;
+package logic.views;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -9,9 +9,9 @@ import javafx.animation.AnimationTimer;
 
 import java.util.ArrayList;
 
-import logic.Configuration.Constants;
-import logic.Controllers.*;
-import logic.Model.*;
+import logic.configuration.Constants;
+import logic.controllers.*;
+import logic.models.*;
 
 public class GameplayView {
 

@@ -1,8 +1,8 @@
-package logic.Model;
+package logic.models;
 
 import javafx.scene.image.Image;
-import logic.Configuration.Constants;
-import logic.Configuration.Paths;
+import logic.configuration.Constants;
+import logic.configuration.Paths;
 
 import java.util.Random;
 

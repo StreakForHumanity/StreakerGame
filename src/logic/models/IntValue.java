@@ -1,4 +1,4 @@
-package logic.Model;
+package logic.models;
 
 public class IntValue {
     public int value;

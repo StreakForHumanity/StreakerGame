@@ -1,10 +1,10 @@
-package logic.Views;
+package logic.views;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import logic.Configuration.Constants;
+import logic.configuration.Constants;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
