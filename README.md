@@ -28,6 +28,6 @@ java -cp /ABSOLUTE/PATH/TO/GAME_DIRECTORY/bin logic.client.Client
 [![Build Status](https://travis-ci.org/brobinson15/StreakerGame.svg?)](https://travis-ci.org/brobinson15/StreakerGame)
 
 ### SonarCloud
-[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=streakergame)](https://sonarcloud.io/dashboard/index/streakergame:refactor)
-[![LOC](https://sonarcloud.io/api/badges/measure?key=streakergame&metric=ncloc)](https://sonarcloud.io/dashboard/index/streakergame:master)
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=streakergame)](https://sonarcloud.io/dashboard/index/streakergame)
+[![LOC](https://sonarcloud.io/api/badges/measure?key=streakergame&metric=ncloc)](https://sonarcloud.io/dashboard/index/streakergame)
 [![Code Smells](https://sonarcloud.io/api/badges/measure?key=streakergame&metric=code_smells)](https://sonarcloud.io/dashboard/index/streakergame)
