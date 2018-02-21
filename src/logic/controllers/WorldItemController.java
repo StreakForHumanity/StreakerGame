@@ -1,10 +1,11 @@
-package logic.Controllers;
+package logic.controllers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import logic.Model.*;
-import logic.Configuration.Constants;
-import logic.Controllers.StreakerController;
+
+import logic.configuration.Constants;
+import logic.controllers.StreakerController;
+import logic.models.*;
 
 public class WorldItemController {
 	

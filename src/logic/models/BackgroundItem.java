@@ -1,9 +1,9 @@
-package logic.Model;
-
-import logic.Configuration.Constants;
-import logic.Configuration.Paths;
+package logic.models;
 
 import java.util.ArrayList;
+
+import logic.configuration.Constants;
+import logic.configuration.Paths;
 
 public class BackgroundItem {
 

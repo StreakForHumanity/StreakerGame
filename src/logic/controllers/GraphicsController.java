@@ -1,12 +1,12 @@
-package logic.Controllers;
+package logic.controllers;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import logic.Configuration.Constants;
-import logic.Model.WorldItem;
-import logic.Model.AnimatedItem;
-import logic.Model.BackgroundItem;
+import logic.configuration.Constants;
+import logic.models.AnimatedItem;
+import logic.models.BackgroundItem;
+import logic.models.WorldItem;
 
 import java.util.concurrent.TimeUnit;
 

@@ -18,7 +18,7 @@ ant build
 
 #### 2) from root game directory (StreakerGame), run:
 ```
-java -cp /ABSOLUTE/PATH/TO/GAME_DIRECTORY/bin logic.Views.MainMenuView
+java -cp /ABSOLUTE/PATH/TO/GAME_DIRECTORY/bin logic.client.Client
 ```
 ##### Note: replace absolute path with the correct location for your local system.
 
@@ -28,6 +28,6 @@ java -cp /ABSOLUTE/PATH/TO/GAME_DIRECTORY/bin logic.Views.MainMenuView
 [![Build Status](https://travis-ci.org/brobinson15/StreakerGame.svg?)](https://travis-ci.org/brobinson15/StreakerGame)
 
 ### SonarCloud
-[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=streakergame)](https://sonarcloud.io/dashboard/index/streakergame:refactor)
-[![LOC](https://sonarcloud.io/api/badges/measure?key=streakergame&metric=ncloc)](https://sonarcloud.io/dashboard/index/streakergame:master)
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=streakergame)](https://sonarcloud.io/dashboard/index/streakergame)
+[![LOC](https://sonarcloud.io/api/badges/measure?key=streakergame&metric=ncloc)](https://sonarcloud.io/dashboard/index/streakergame)
 [![Code Smells](https://sonarcloud.io/api/badges/measure?key=streakergame&metric=code_smells)](https://sonarcloud.io/dashboard/index/streakergame)

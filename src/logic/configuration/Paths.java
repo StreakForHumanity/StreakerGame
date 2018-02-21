@@ -1,4 +1,4 @@
-package logic.Configuration;
+package logic.configuration;
 
 public class Paths {
     public static final String BACKGROUND_PATH = "./assets/stadium_large.png";

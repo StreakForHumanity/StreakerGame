@@ -1,9 +1,9 @@
-package logic.Controllers;
+package logic.controllers;
 
 import javafx.scene.image.Image;
-import logic.Configuration.Constants;
-import logic.Configuration.Paths;
-import logic.Model.Character;
+import logic.configuration.Constants;
+import logic.configuration.Paths;
+import logic.models.Character;
 import javafx.geometry.Rectangle2D;
 
 import java.util.ArrayList;
