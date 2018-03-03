@@ -7,6 +7,13 @@ public abstract class StreakerView {
 	
 	protected ViewController viewController;
 	
+	
+	/* 
+	 * The constructor for a class which
+	 * extends StreakerView includes a reference
+	 * to the ViewController instantiated initially in 
+	 * the Client class.
+	 */
 	public StreakerView(ViewController v) {
 		viewController = v;
 	}

@@ -3,6 +3,7 @@ package logic.configuration;
 public class Paths {
     public static final String BACKGROUND_PATH = "./assets/stadium_large.png";
     public static final String COIN_PATH = "./assets/coin.png";
+    public static final String TERRAIN_PATH = "./assets/terrain.png";
     public static final String[] GUARD_PATHS = {
             "./assets/guardForward.png",
             "./assets/guardLeft.png",
