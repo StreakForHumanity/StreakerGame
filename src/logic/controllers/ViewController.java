@@ -36,6 +36,16 @@ public class ViewController {
 		stage.show();
 	}
 	
+	/*
+	 * Items will be added to this list as
+	 * we flush out specific functionalities,
+	 * i.e. pause menu, settings menu, etc.
+	 * 
+	 * TODO: upon adding a new view type to
+	 * this list, make sure to add the new 
+	 * material to the updateView switch 
+	 * block to include the addition.
+	 */
 	public enum VIEW_TYPE {
 		MAIN_MENU,
 		GAMEPLAY,

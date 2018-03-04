@@ -85,6 +85,7 @@ public class GameplayView extends StreakerView {
 		collected.value += worldItems.updateCoinStates();
 		worldItems.updateTunnelStates();
 		worldItems.updateGuardStates();
+		worldItems.updateTerrainStates();
     }
     
     /* dispatches GraphicsController to draw all relevant objects
@@ -92,10 +93,18 @@ public class GameplayView extends StreakerView {
      * 
      * time - this parameter corresponds to that returned each loop by getCurrentFrameTime(nanot),
      * 		where nanot is defined at the top of the loop already.
+     * 
+     * HUGE MUCHO IMPORANTE NOTE: the calls within are order-dependent! Those called last
+     * 		will overlap those called previously - keep this in mind when modifying!
      */
     private void drawAll(double time, double nanot) {
     	//draw background to screen
     	graphicsController.drawItem(worldItems.background);
+    	
+    	//draw terrain items to screen
+    	for (Terrain t : worldItems.terrains) {
+    		graphicsController.drawItem(t);
+    	}
     	
     	//draw character to screen
     	graphicsController.drawItem(worldItems.character.streaker, time);

@@ -12,6 +12,7 @@ public class WorldItemController {
 	public ArrayList<Coin> coins;
 	public ArrayList<Tunnel> tunnels;
 	public ArrayList<Guard> guards;
+	public ArrayList<Terrain> terrains;
 	public StreakerController character;
 	public BackgroundItem background;
 	
@@ -19,15 +20,28 @@ public class WorldItemController {
 		coins = Coin.createCoins();
 		tunnels = Tunnel.createTunnels();
 		guards = new ArrayList<>();
+		terrains = new ArrayList<>();
 		character = new StreakerController();
 		background = new BackgroundItem();
 	}
 	
 	public void updateCharacterState(double elapsedTime, ArrayList<String> input) {
-		character.streaker.applyUserInputToVelocity(input);
+		character.streaker.updatePosition(elapsedTime, input, charIsInMud(), character.isJumping);
         character.streaker.handleCharacterPosition();
-        character.streaker.applyVelocity(elapsedTime);
         character.handleJump(input);
+	}
+	
+	
+	//currently only checks for collisions w mud, but could add guards
+	private boolean charIsInMud() {
+		boolean isInMud = false;
+		for (Terrain t : terrains) {
+			if (character.streaker.intersects(t.getBoundary())) {
+				isInMud = true;
+				break;
+			}
+		}
+		return isInMud;
 	}
 	
 	/* checks coins for intersection with character - if so,
@@ -62,7 +76,7 @@ public class WorldItemController {
             } else {
                 if (tunnel.noGuard()) {
                     //There should be a better way to do this
-                    if (Math.random() > Constants.GUARD_SPAWN_RATE) {
+                    if (Math.random() < Constants.GUARD_SPAWN_RATE) {
                         guards.add(tunnel.spawnGuard());
                     }
                 }
@@ -88,5 +102,38 @@ public class WorldItemController {
 	public void updateBackgroundState() {
 		background.loop();
 		background.updateBackgroundPosition();
+	}
+	
+	public void updateTerrainStates() {
+		Iterator<Terrain> iter = terrains.iterator();
+		while (iter.hasNext()) {
+			Terrain terrain = iter.next();
+			if (terrain.getY() > Constants.SCREEN_HEIGHT) {
+				iter.remove();
+				continue;
+			}
+			terrain.updatePosition();
+		}
+		if (Math.random() < Constants.TERRAIN_SPAWN_RATE) {
+			terrains.add(createTerrain());
+		}
+	}
+	
+	// ensures that terrain items do not overlap
+	private Terrain createTerrain() {
+		boolean positionIsSafe = false;
+		Terrain ter = new Terrain(); {
+			while (!positionIsSafe) {
+				ter = new Terrain();
+				for (Terrain t : terrains) {
+					if (ter.intersects(t.getBoundary())) {
+						break;
+					}
+				}
+				positionIsSafe = true;
+			}
+		}
+		
+		return ter;
 	}
 }

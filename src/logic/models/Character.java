@@ -20,6 +20,7 @@ public class Character extends AnimatedItem {
         this.setPosition((Constants.SCREEN_WIDTH / 2) - 40, Constants.SCREEN_HEIGHT / 2);
         width = imageArray[0].getWidth();
         height = imageArray[0].getHeight();
+        this.setSpeed(0, 0);
 	}
 	
 	// ensures character is in bounds of stadium background
@@ -38,19 +39,35 @@ public class Character extends AnimatedItem {
         }
     }
     
-    public void applyUserInputToVelocity(ArrayList<String> input) {
+    public void applyUserInputToVelocity(ArrayList<String> input, boolean inMud, boolean isJumping) {
+    	double vel = Constants.CHARACTER_VELOCITY;
+    	if(inMud && !isJumping) {
+    		vel = vel/2;
+    	}
         this.setVelocity(0,0);
         if (input.contains("LEFT")) {
-            this.incrementVelocity(-Constants.CHARACTER_VELOCITY, 0);
+            this.incrementVelocity(-vel, 0);
         }
         if (input.contains("RIGHT")) {
-            this.incrementVelocity(Constants.CHARACTER_VELOCITY, 0);
+            this.incrementVelocity(vel, 0);
         }
         if (input.contains("UP")) {
-            this.incrementVelocity(0, -Constants.CHARACTER_VELOCITY);
+            this.incrementVelocity(0, -vel);
         }
         if (input.contains("DOWN")) {
-            this.incrementVelocity(0, Constants.CHARACTER_VELOCITY);
+            this.incrementVelocity(0, vel);
         }
-    }    
+    }
+    
+    public void updatePosition(double elapsedTime, ArrayList<String> input, boolean inMud, boolean isJumping) {
+    	applyUserInputToVelocity(input, inMud, isJumping);
+    	super.applyVelocity(elapsedTime);
+    	if (inMud && !isJumping) {
+    		this.setSpeed(0, Constants.STARTING_SPEED / 2);
+    	}
+    	else {
+    		this.setSpeed(0, 0);
+    	}
+    	super.updatePosition();
+    }
 }
