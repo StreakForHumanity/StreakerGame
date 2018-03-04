@@ -28,6 +28,7 @@ public class WorldItemController {
 	public void updateCharacterState(double elapsedTime, ArrayList<String> input) {
 		character.streaker.updatePosition(elapsedTime, input, charIsInMud(), character.isJumping);
         character.streaker.handleCharacterPosition();
+        handleGuardCollisions();
         character.handleJump(input);
 	}
 	
@@ -42,6 +43,17 @@ public class WorldItemController {
 			}
 		}
 		return isInMud;
+	}
+	
+	private void handleGuardCollisions() {
+		boolean isTouching = false;
+		for (Guard g : guards) {
+			if (character.streaker.intersects(g.getBoundary())) {
+				isTouching = true;
+				character.streaker.changeHealth(Constants.GUARD_DAMAGE);
+				break;
+			}
+		}
 	}
 	
 	/* checks coins for intersection with character - if so,

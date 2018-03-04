@@ -24,6 +24,10 @@ public class ViewController {
 			updateView(newView.setupScene());
 			((GameplayView)newView).startGameLoop();
 			break;
+		case GAME_OVER:
+			newView = new GameOverView(this);
+			updateView(newView.setupScene());
+			break;
 		default:
 			newView = new MainMenuView(this);
 			updateView(newView.setupScene());
@@ -49,6 +53,7 @@ public class ViewController {
 	public enum VIEW_TYPE {
 		MAIN_MENU,
 		GAMEPLAY,
+		GAME_OVER,
 		PAUSE_MENU
 	}
 }
