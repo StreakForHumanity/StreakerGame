@@ -8,6 +8,8 @@ import logic.models.AnimatedItem;
 import java.util.ArrayList;
 
 public class Character extends AnimatedItem {
+	
+	private double charHealth;
 
 	public Character() {
 		Image[] imageArray = new Image[4];
@@ -21,6 +23,7 @@ public class Character extends AnimatedItem {
         width = imageArray[0].getWidth();
         height = imageArray[0].getHeight();
         this.setSpeed(0, 0);
+        charHealth = Constants.CHAR_MAX_HEALTH;
 	}
 	
 	// ensures character is in bounds of stadium background
@@ -69,5 +72,14 @@ public class Character extends AnimatedItem {
     		this.setSpeed(0, 0);
     	}
     	super.updatePosition();
+    }
+    
+    public double getHealth() {
+    	return charHealth;
+    }
+    
+    //increment or decrement health
+    public void changeHealth(double dH) {
+    	charHealth += dH;
     }
 }

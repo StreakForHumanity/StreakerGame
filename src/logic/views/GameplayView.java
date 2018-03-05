@@ -8,6 +8,7 @@ import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
 
 import logic.controllers.ViewController;
+import logic.controllers.ViewController.VIEW_TYPE;
 import logic.configuration.Constants;
 import logic.controllers.*;
 import logic.models.*;
@@ -52,9 +53,14 @@ public class GameplayView extends StreakerView {
         setupGameState();
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
+            	double nanot = currentNanoTime - startNanoTime;
+            	if (worldItems.character.streaker.getHealth() < 0.0) {
+            		viewController.updateView(graphicsController.getHMS(nanot).trim(), collected.value);
+            		this.stop();
+            	}
+            	
             	double elapsedTime = (currentNanoTime - lastNanoTime.value) / Constants._PRECISION;
             	lastNanoTime.value = currentNanoTime;
-            	double nanot = currentNanoTime - startNanoTime;
             	updateGameState(elapsedTime, keyController.input);
             	drawAll(getCurrentFrameTime(nanot), nanot);
             }
@@ -129,5 +135,8 @@ public class GameplayView extends StreakerView {
     	
     	//update displayed game time
     	graphicsController.showTime(nanot);
+    	
+    	//display character health
+    	graphicsController.drawHealth(worldItems.character.streaker.getHealth());
     }
 }
