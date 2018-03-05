@@ -2,10 +2,8 @@ package logic.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
+
 
 
 /*
@@ -19,36 +17,36 @@ import javafx.scene.input.KeyEvent;
 public class KeyInputController {
 	
 	private Scene scene;
-	public static List<String> input;
+	private static List<String> input;
 	
 	public KeyInputController(Scene scene) {
 		this.scene = scene;
-		input = new ArrayList<String>();
+		input = new ArrayList<>();
 		setOnKeyPress();
 		setOnKeyRelease();
 	}
+
+	public List<String> getInput(){
+	    return input;
+    }
 	
 	private void setOnKeyPress() {
 		scene.setOnKeyPressed(
-            new EventHandler<KeyEvent>() {
-                public void handle(KeyEvent e) {
+                e -> {
                     String code = e.getCode().toString();
                     if (!input.contains(code)) {
                         input.add(code);
                     }
                 }
-            }
-		);
+        );
 	}
 	
 	private void setOnKeyRelease() {
         scene.setOnKeyReleased(
-            new EventHandler<KeyEvent>() {
-                public void handle(KeyEvent e) {
+                e -> {
                     String code = e.getCode().toString();
                     input.remove(code);
                 }
-            }
         );
     }
 

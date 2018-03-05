@@ -15,7 +15,6 @@ import logic.controllers.ViewController.VIEW_TYPE;
  */
 public class Client extends Application {
 
-
 	public static void main(String[] args) {
 		launch(args);
 	}

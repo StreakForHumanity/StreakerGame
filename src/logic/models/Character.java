@@ -19,8 +19,8 @@ public class Character extends AnimatedItem {
         imageArray[2] = new Image(Paths.STREAKER_PATHS[2]);
         imageArray[3] = new Image(Paths.STREAKER_PATHS[3]);
         this.setFrame(imageArray);
-        this.duration = Constants.FRAME_DURATION;
-        this.setPosition((Constants.SCREEN_WIDTH / 2) - 40, Constants.SCREEN_HEIGHT / 2);
+        this.setDuration(Constants.FRAME_DURATION);
+        this.setPosition((Constants.SCREEN_WIDTH / 2) - 40.0, Constants.SCREEN_HEIGHT / 2.0);
         width = imageArray[0].getWidth();
         height = imageArray[0].getHeight();
         this.setSpeed(0, 0);
@@ -67,7 +67,7 @@ public class Character extends AnimatedItem {
     	applyUserInputToVelocity(input, inMud, isJumping);
     	super.applyVelocity(elapsedTime);
     	if (inMud && !isJumping) {
-    		this.setSpeed(0, Constants.STARTING_SPEED / 2);
+    		this.setSpeed(0, Constants.STARTING_SPEED / 2.0);
     	}
     	else {
     		this.setSpeed(0, 0);

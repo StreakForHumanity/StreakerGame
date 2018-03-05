@@ -5,28 +5,32 @@ import logic.configuration.Constants;
 import logic.configuration.Paths;
 import logic.models.Character;
 import javafx.geometry.Rectangle2D;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class StreakerController {
 
-	public boolean isJumping;
+	private boolean isJumping;
 	private boolean canJump;
-	public Character streaker;
+	private Character streaker;
 
-    public StreakerController() {
+    protected StreakerController() {
     	streaker = new Character();
         this.isJumping = false;
         this.canJump = true;
     }
 
-    public void handleJump(List<String> input) {
-        if (input.contains("SPACE")) {
-            if(canJump) {
+	public Character getStreaker() {
+		return streaker;
+	}
+
+	protected void handleJump(List<String> input) {
+        if (input.contains("SPACE") && canJump) {
                 updateCharForJump();
-            }
         }
+	}
+
+	protected boolean isJumping() {
+		return isJumping;
 	}
 
 	private void updateCharForJump() {
@@ -37,28 +41,30 @@ public class StreakerController {
 			imageArray[0] = new Image(Paths.STREAKER_PATHS[4]);
 			streaker.setFrame(imageArray);
 			
-			new Thread(new Runnable() {
-				public void run() {
-					double sT = System.currentTimeMillis();
-					while((System.currentTimeMillis()-sT) < Constants.JUMP_TIME) {}
-					Image[] imageArray = new Image[4];
-					imageArray[0] = new Image(Paths.STREAKER_PATHS[0]);
-			        imageArray[1] = new Image(Paths.STREAKER_PATHS[1]);
-			        imageArray[2] = new Image(Paths.STREAKER_PATHS[2]);
-			        imageArray[3] = new Image(Paths.STREAKER_PATHS[3]);
-			        streaker.setFrame(imageArray);
-					isJumping = false;
-					sT = System.currentTimeMillis();
-					canJump = false;
-					while((System.currentTimeMillis()-sT) < Constants.COOLDOWN_TIME) {}
-					canJump = true;
+			new Thread(() -> {
+                double sT = System.currentTimeMillis();
+                while((System.currentTimeMillis()-sT) < Constants.JUMP_TIME) {
+                	continue;
 				}
-			}).start();
+                Image[] imageArray1 = new Image[4];
+                imageArray1[0] = new Image(Paths.STREAKER_PATHS[0]);
+                imageArray1[1] = new Image(Paths.STREAKER_PATHS[1]);
+                imageArray1[2] = new Image(Paths.STREAKER_PATHS[2]);
+                imageArray1[3] = new Image(Paths.STREAKER_PATHS[3]);
+                streaker.setFrame(imageArray1);
+                isJumping = false;
+                sT = System.currentTimeMillis();
+                canJump = false;
+                while((System.currentTimeMillis()-sT) < Constants.COOLDOWN_TIME) {
+                	continue;
+				}
+                canJump = true;
+            }).start();
 		}
 		
 	}
 
-	public boolean intersects(Rectangle2D s) {
+	protected boolean intersects(Rectangle2D s) {
 		return (streaker.intersects(s) && !isJumping);
 	}
 }
