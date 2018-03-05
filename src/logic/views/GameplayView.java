@@ -5,7 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.animation.AnimationTimer;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import logic.controllers.ViewController;
 import logic.configuration.Constants;
@@ -53,7 +53,7 @@ public class GameplayView extends StreakerView {
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
             	double nanot = currentNanoTime - startNanoTime;
-            	if (worldItems.character.streaker.getHealth() < 0.0) {
+            	if (worldItems.characterController.streaker.getHealth() < 0.0) {
             		viewController.updateViewGameOver(graphicsController.getHMS(nanot).trim(), collected.value);
             		this.stop();
             	}
@@ -84,7 +84,7 @@ public class GameplayView extends StreakerView {
      * 
      * Note: we could set the access to public for the sake of testing
      */
-    private void updateGameState(double elapsedTime, ArrayList<String> input) {
+    private void updateGameState(double elapsedTime, List<String> input) {
     	worldItems.updateBackgroundState();
     	worldItems.updateCharacterState(elapsedTime, input);
 		collected.value += worldItems.updateCoinStates();
@@ -111,8 +111,8 @@ public class GameplayView extends StreakerView {
     		graphicsController.drawItem(t);
     	}
     	
-    	//draw character to screen
-    	graphicsController.drawItem(worldItems.character.streaker, time);
+    	//draw characterController to screen
+    	graphicsController.drawItem(worldItems.characterController.streaker, time);
     	
     	//draw coins to screen
     	for (Coin c : worldItems.coins) {
@@ -135,7 +135,7 @@ public class GameplayView extends StreakerView {
     	//update displayed game time
     	graphicsController.showTime(nanot);
     	
-    	//display character health
-    	graphicsController.drawHealth(worldItems.character.streaker.getHealth());
+    	//display characterController health
+    	graphicsController.drawHealth(worldItems.characterController.streaker.getHealth());
     }
 }

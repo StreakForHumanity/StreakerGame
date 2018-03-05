@@ -1,6 +1,7 @@
 package logic.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -18,11 +19,11 @@ import javafx.scene.input.KeyEvent;
 public class KeyInputController {
 	
 	private Scene scene;
-	public ArrayList<String> input;
+	public static List<String> input;
 	
 	public KeyInputController(Scene scene) {
 		this.scene = scene;
-		input = new ArrayList<>();
+		input = new ArrayList<String>();
 		setOnKeyPress();
 		setOnKeyRelease();
 	}

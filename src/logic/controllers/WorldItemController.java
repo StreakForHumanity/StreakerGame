@@ -2,9 +2,9 @@ package logic.controllers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import logic.configuration.Constants;
-import logic.controllers.StreakerController;
 import logic.models.*;
 
 public class WorldItemController {
@@ -13,7 +13,7 @@ public class WorldItemController {
 	public ArrayList<Tunnel> tunnels;
 	public ArrayList<Guard> guards;
 	public ArrayList<Terrain> terrains;
-	public StreakerController character;
+	public StreakerController characterController;
 	public BackgroundItem background;
 	
 	public WorldItemController() {
@@ -21,15 +21,16 @@ public class WorldItemController {
 		tunnels = Tunnel.createTunnels();
 		guards = new ArrayList<>();
 		terrains = new ArrayList<>();
-		character = new StreakerController();
+		//what the fuck???
+		characterController = new StreakerController();
 		background = new BackgroundItem();
 	}
 	
-	public void updateCharacterState(double elapsedTime, ArrayList<String> input) {
-		character.streaker.updatePosition(elapsedTime, input, charIsInMud(), character.isJumping);
-        character.streaker.handleCharacterPosition();
+	public void updateCharacterState(double elapsedTime, List<String> input) {
+		characterController.streaker.updatePosition(elapsedTime, input, charIsInMud(), characterController.isJumping);
+        characterController.streaker.handleCharacterPosition();
         handleGuardCollisions();
-        character.handleJump(input);
+        characterController.handleJump(input);
 	}
 	
 	
@@ -37,7 +38,7 @@ public class WorldItemController {
 	private boolean charIsInMud() {
 		boolean isInMud = false;
 		for (Terrain t : terrains) {
-			if (character.streaker.intersects(t.getBoundary())) {
+			if (characterController.streaker.intersects(t.getBoundary())) {
 				isInMud = true;
 				break;
 			}
@@ -48,15 +49,15 @@ public class WorldItemController {
 	private void handleGuardCollisions() {
 		boolean isTouching = false;
 		for (Guard g : guards) {
-			if (character.streaker.intersects(g.getBoundary())) {
+			if (characterController.streaker.intersects(g.getBoundary())) {
 				isTouching = true;
-				character.streaker.changeHealth(Constants.GUARD_DAMAGE);
+				characterController.streaker.changeHealth(Constants.GUARD_DAMAGE);
 				break;
 			}
 		}
 	}
 	
-	/* checks coins for intersection with character - if so,
+	/* checks coins for intersection with characterController - if so,
 	 * resets their positions randomly and increments
 	 * collected point tally, returning total upon 
 	 * method's completion
@@ -67,7 +68,7 @@ public class WorldItemController {
             if (coin.getY() > Constants.SCREEN_HEIGHT) {
                 coin.resetPosition();
             }
-            if (character.intersects(coin.getBoundary())) {
+            if (characterController.intersects(coin.getBoundary())) {
                 coin.resetPosition();
                 collected += 10;
             }

@@ -7,6 +7,7 @@ import logic.models.Character;
 import javafx.geometry.Rectangle2D;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StreakerController {
 
@@ -20,7 +21,7 @@ public class StreakerController {
         this.canJump = true;
     }
 
-    public void handleJump(ArrayList<String> input) {
+    public void handleJump(List<String> input) {
         if (input.contains("SPACE")) {
             if(canJump) {
                 updateCharForJump();
