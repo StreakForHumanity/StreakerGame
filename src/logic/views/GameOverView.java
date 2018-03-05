@@ -2,11 +2,8 @@ package logic.views;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -66,9 +63,7 @@ public class GameOverView extends StreakerView {
 		
 		root.getChildren().add(buttons);
 		
-		Scene scene = new Scene(root, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-		
-		return scene;
+		return(new Scene(root, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
 	}
 	
 	private VBox setupButtons() {
@@ -77,17 +72,17 @@ public class GameOverView extends StreakerView {
 		
 		ImageButton newGame = new ImageButton();
 		newGame.updateImages(new Image(Paths.GAME_OVER_BUTTONS[0]), new Image(Paths.GAME_OVER_BUTTONS_PRESSED[0]));
-		newGame.setOnAction(click -> goToNewGame(click));
+		newGame.setOnAction(this::goToNewGame);
 		buttons.getChildren().add(newGame);
 		
 		ImageButton mainMenu = new ImageButton();
 		mainMenu.updateImages(new Image(Paths.GAME_OVER_BUTTONS[1]), new Image(Paths.GAME_OVER_BUTTONS_PRESSED[1]));
-		mainMenu.setOnAction(click -> goToMainMenu(click));
+		mainMenu.setOnAction(this::goToMainMenu);
 		buttons.getChildren().add(mainMenu);
 		
 		ImageButton exitGame = new ImageButton();
 		exitGame.updateImages(new Image(Paths.GAME_OVER_BUTTONS[2]), new Image(Paths.GAME_OVER_BUTTONS_PRESSED[2]));
-		exitGame.setOnAction(click -> exitGame(click));
+		exitGame.setOnAction(this::exitGame);
 		buttons.getChildren().add(exitGame);
 		
 		return buttons;

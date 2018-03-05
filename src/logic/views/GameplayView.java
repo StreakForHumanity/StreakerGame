@@ -17,7 +17,6 @@ public class GameplayView extends StreakerView {
     private long startNanoTime;
     private LongValue lastNanoTime;
     private IntValue collected;
-    private Group root;
     private Scene scene;
     private Canvas canvas;
     private GraphicsController graphicsController;
@@ -29,7 +28,7 @@ public class GameplayView extends StreakerView {
     }
     
     public Scene setupScene() {
-    	root = new Group();
+        Group root = new Group();
         scene = new Scene(root);
         canvas = new Canvas(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         root.getChildren().add(canvas);
@@ -38,10 +37,6 @@ public class GameplayView extends StreakerView {
     }
     
     private void setupGameState() {
-        /*root = new Group();
-        scene = new Scene(root);
-        canvas = new Canvas(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-        root.getChildren().add(canvas);*/
         graphicsController = new GraphicsController(canvas.getGraphicsContext2D());
         worldItems = new WorldItemController();
         keyController = new KeyInputController(scene);
@@ -52,14 +47,14 @@ public class GameplayView extends StreakerView {
         setupGameState();
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-            	double nanot = currentNanoTime - startNanoTime;
+            	double nanot = currentNanoTime - (double)startNanoTime;
             	if (worldItems.getCharacterController().getStreaker().getHealth() < 0.0) {
-            		viewController.updateViewGameOver(graphicsController.getHMS(nanot).trim(), collected.value);
+            		viewController.updateViewGameOver(graphicsController.getHMS(nanot).trim(), collected.getValue());
             		this.stop();
             	}
             	
-            	double elapsedTime = (currentNanoTime - lastNanoTime.value) / Constants.PRECISION;
-            	lastNanoTime.value = currentNanoTime;
+            	double elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / Constants.PRECISION;
+            	lastNanoTime.setValue(currentNanoTime);
             	updateGameState(elapsedTime, keyController.getInput());
             	drawAll(getCurrentFrameTime(nanot), nanot);
             }
@@ -87,7 +82,7 @@ public class GameplayView extends StreakerView {
     private void updateGameState(double elapsedTime, List<String> input) {
     	worldItems.updateBackgroundState();
     	worldItems.updateCharacterState(elapsedTime, input);
-		collected.value += worldItems.updateCoinStates();
+		collected.setValue(collected.getValue()+worldItems.updateCoinStates());
 		worldItems.updateTunnelStates();
 		worldItems.updateGuardStates();
 		worldItems.updateTerrainStates();
@@ -130,7 +125,7 @@ public class GameplayView extends StreakerView {
     	}
     	
     	//update coin stuff
-    	graphicsController.showCoins(worldItems.getBackground().getWidth(), collected.value);
+    	graphicsController.showCoins(worldItems.getBackground().getWidth(), collected.getValue());
     	
     	//update displayed game time
     	graphicsController.showTime(nanot);

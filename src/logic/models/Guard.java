@@ -14,7 +14,7 @@ public class Guard extends AnimatedItem {
         if (left) {
             this.setSpeed(Constants.GUARD_SPEED, Constants.STARTING_SPEED);
         } else {
-            this.setSpeed(-1 * Constants.GUARD_SPEED, Constants.STARTING_SPEED);
+            this.setSpeed(-1.0 * Constants.GUARD_SPEED, Constants.STARTING_SPEED);
         }
         Image[] imageArray = new Image[4];
         imageArray[0] = new Image(Paths.GUARD_PATHS[0]);
