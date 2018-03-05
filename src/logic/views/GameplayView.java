@@ -55,7 +55,7 @@ public class GameplayView extends StreakerView {
             public void handle(long currentNanoTime) {
             	double nanot = currentNanoTime - startNanoTime;
             	if (worldItems.character.streaker.getHealth() < 0.0) {
-            		viewController.updateView(graphicsController.getHMS(nanot).trim(), collected.value);
+            		viewController.updateViewGameOver(graphicsController.getHMS(nanot).trim(), collected.value);
             		this.stop();
             	}
             	

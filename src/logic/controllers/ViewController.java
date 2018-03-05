@@ -35,7 +35,7 @@ public class ViewController {
 		}
 	}
 	
-	public void updateView(String hms, int collected) {
+	public void updateViewGameOver(String hms, int collected) {
 		GameOverView newView = new GameOverView(this, hms, collected);
 		updateView(newView.setupScene());
 	}
@@ -52,7 +52,7 @@ public class ViewController {
 	 * 
 	 * TODO: upon adding a new view type to
 	 * this list, make sure to add the new 
-	 * material to the updateView switch 
+	 * material to the updateView switch
 	 * block to include the addition.
 	 */
 	public enum VIEW_TYPE {

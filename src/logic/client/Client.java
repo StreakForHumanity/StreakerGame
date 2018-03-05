@@ -14,7 +14,7 @@ import logic.controllers.ViewController.VIEW_TYPE;
  * (a MainMenuView) to the stage.
  */
 public class Client extends Application {
-	private ViewController vc;
+
 
 	public static void main(String[] args) {
 		launch(args);
@@ -22,6 +22,7 @@ public class Client extends Application {
 	
 	@Override
 	public void start(Stage stage) {
+		ViewController vc;
 		stage.setTitle("Streakers");
 		vc = new ViewController(stage);
 		vc.updateView(VIEW_TYPE.MAIN_MENU);
