@@ -14,18 +14,12 @@ import java.util.concurrent.TimeUnit;
 public class GraphicsController {
 
     private GraphicsContext gc;
-    private Rectangle border;
-    private Rectangle health_green;
-    private Rectangle health_red;
 
     public GraphicsController(GraphicsContext gc){
         this.gc = gc;
         //gc.setStroke(Color.BLACK);
         gc.setFill(Color.WHITE);
         gc.setFont(new Font("Serif", 20));
-        border = new Rectangle(Constants.HEALTHBAR_W + 4, Constants.HEALTHBAR_H + 4, Color.BLACK);
-        health_green = new Rectangle(2*Constants.HEALTHBAR_W/3, Constants.HEALTHBAR_H, Color.GREEN);
-        health_red = new Rectangle(Constants.HEALTHBAR_W, Constants.HEALTHBAR_H, Color.RED);
     }
     
     /* this is the preferred call with which to render objects to screen -
@@ -47,7 +41,7 @@ public class GraphicsController {
     	drawItem(b.getSection(1));
     }
     
-    private String getHMS(double nanot) {
+    public String getHMS(double nanot) {
     	String hms = String.format("%02d:%02d:%02d ", TimeUnit.NANOSECONDS.toHours((long)nanot),
                 TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
                 TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));

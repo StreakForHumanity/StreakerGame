@@ -53,14 +53,14 @@ public class GameplayView extends StreakerView {
         setupGameState();
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
+            	double nanot = currentNanoTime - startNanoTime;
             	if (worldItems.character.streaker.getHealth() < 0.0) {
-            		viewController.updateView(VIEW_TYPE.GAME_OVER);
+            		viewController.updateView(graphicsController.getHMS(nanot).trim(), collected.value);
             		this.stop();
             	}
             	
             	double elapsedTime = (currentNanoTime - lastNanoTime.value) / Constants._PRECISION;
             	lastNanoTime.value = currentNanoTime;
-            	double nanot = currentNanoTime - startNanoTime;
             	updateGameState(elapsedTime, keyController.input);
             	drawAll(getCurrentFrameTime(nanot), nanot);
             }
@@ -92,10 +92,6 @@ public class GameplayView extends StreakerView {
 		worldItems.updateTunnelStates();
 		worldItems.updateGuardStates();
 		worldItems.updateTerrainStates();
-    }
-    
-    private void endGame() {
-    	Scene newscene = new Scene(root);
     }
     
     /* dispatches GraphicsController to draw all relevant objects

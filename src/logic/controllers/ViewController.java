@@ -35,6 +35,11 @@ public class ViewController {
 		}
 	}
 	
+	public void updateView(String hms, int collected) {
+		GameOverView newView = new GameOverView(this, hms, collected);
+		updateView(newView.setupScene());
+	}
+	
 	private void updateView(Scene scene) {
 		stage.setScene(scene);
 		stage.show();
