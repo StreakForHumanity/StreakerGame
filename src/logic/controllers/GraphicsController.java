@@ -2,7 +2,6 @@ package logic.controllers;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import logic.configuration.Constants;
 import logic.models.AnimatedItem;
@@ -17,7 +16,6 @@ public class GraphicsController {
 
     public GraphicsController(GraphicsContext gc){
         this.gc = gc;
-        //gc.setStroke(Color.BLACK);
         gc.setFill(Color.WHITE);
         gc.setFont(new Font("Serif", 20));
     }
@@ -42,11 +40,9 @@ public class GraphicsController {
     }
     
     public String getHMS(double nanot) {
-    	String hms = String.format("%02d:%02d:%02d ", TimeUnit.NANOSECONDS.toHours((long)nanot),
+    	return(String.format("%02d:%02d:%02d ", TimeUnit.NANOSECONDS.toHours((long)nanot),
                 TimeUnit.NANOSECONDS.toMinutes((long)nanot) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours((long)nanot)),
-                TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot)));
-
-    	return hms;
+                TimeUnit.NANOSECONDS.toSeconds((long)nanot) - TimeUnit.MINUTES.toSeconds(TimeUnit.NANOSECONDS.toMinutes((long)nanot))));
     }
 
     public void showTime(double nanot) {

@@ -1,5 +1,6 @@
 package logic.models;
 
+import java.util.List;
 import java.util.Random;
 
 import logic.configuration.Constants;
@@ -11,7 +12,6 @@ public class Tunnel extends WorldItem {
 
     private boolean noGuard;
     private boolean left;
-    private TunnelPosition initialY;
     private Random rand;
     private static ArrayList<TunnelPosition> tunnelPositions = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class Tunnel extends WorldItem {
         }
         else {
             this.setImage(Paths.TUNNEL_PATHS[1]);
-            x = Constants.SCREEN_WIDTH - Constants.STADIUM_MARGIN_RIGHT;
+            x = Constants.SCREEN_WIDTH - (double)Constants.STADIUM_MARGIN_RIGHT;
         }
         this.setPosition(x, - (3 * Constants.SCREEN_HEIGHT / 4));
         this.noGuard = true;
@@ -50,8 +50,8 @@ public class Tunnel extends WorldItem {
         while (tunnelPositions.contains(new TunnelPosition(y))) {
             y = - (Constants.SCREEN_HEIGHT * rand.nextDouble());
         }
-        this.initialY = new TunnelPosition(y);
-        tunnelPositions.add(this.initialY);
+        TunnelPosition initialY = new TunnelPosition(y);
+        tunnelPositions.add(initialY);
 
         double x;
         if (left) {
@@ -59,7 +59,7 @@ public class Tunnel extends WorldItem {
             x = Constants.STADIUM_MARGIN_LEFT;
         } else {
             this.setImage(Paths.TUNNEL_PATHS[1]);
-            x = Constants.SCREEN_WIDTH - Constants.STADIUM_MARGIN_RIGHT;
+            x = Constants.SCREEN_WIDTH - (double)Constants.STADIUM_MARGIN_RIGHT;
         }
         this.setPosition(x, y);
         this.noGuard = true;
@@ -73,8 +73,8 @@ public class Tunnel extends WorldItem {
     }
 
 
-    public static ArrayList<Tunnel> createTunnels() {
-        ArrayList<Tunnel> tunnels = new ArrayList<Tunnel>();
+    public static List<Tunnel> createTunnels() {
+        List<Tunnel> tunnels = new ArrayList<>();
         for (int i = 0; i < Constants.NUM_TUNNELS; i++) {
             Tunnel tunnel = new Tunnel();
             tunnels.add(tunnel);

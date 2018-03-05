@@ -29,13 +29,14 @@ public class ViewController {
 			updateView(newView.setupScene());
 			break;
 		default:
-			newView = new MainMenuView(this);
-			updateView(newView.setupScene());
+			StreakerView newViewDefault;
+			newViewDefault = new MainMenuView(this);
+			updateView(newViewDefault.setupScene());
 			break;
 		}
 	}
 	
-	public void updateView(String hms, int collected) {
+	public void updateViewGameOver(String hms, int collected) {
 		GameOverView newView = new GameOverView(this, hms, collected);
 		updateView(newView.setupScene());
 	}
@@ -50,9 +51,9 @@ public class ViewController {
 	 * we flush out specific functionalities,
 	 * i.e. pause menu, settings menu, etc.
 	 * 
-	 * TODO: upon adding a new view type to
+	 * TO_DO: upon adding a new view type to
 	 * this list, make sure to add the new 
-	 * material to the updateView switch 
+	 * material to the updateView switch
 	 * block to include the addition.
 	 */
 	public enum VIEW_TYPE {

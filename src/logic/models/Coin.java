@@ -1,6 +1,7 @@
 package logic.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import logic.configuration.Constants;
 import logic.configuration.Paths;
@@ -24,8 +25,8 @@ public class Coin extends WorldItem {
         this.setPosition(x, y);
     }
 
-    public static ArrayList<Coin> createCoins() {
-        ArrayList<Coin> coins = new ArrayList<Coin>();
+    public static List<Coin> createCoins() {
+        List<Coin> coins = new ArrayList<>();
         for(int i = 0; i < Constants.NUM_COINS; i++) {
             Coin coin = new Coin();
             coins.add(coin);

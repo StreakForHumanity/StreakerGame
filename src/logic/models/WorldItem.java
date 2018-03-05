@@ -15,7 +15,9 @@ public class WorldItem {
     private double speedX;
     private double speedY;
 
-    public WorldItem() {}
+    protected WorldItem(){
+
+    }
 
     public void setImage(Image i) {
         image = i;

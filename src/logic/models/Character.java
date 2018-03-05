@@ -6,6 +6,7 @@ import logic.configuration.Paths;
 import logic.models.AnimatedItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Character extends AnimatedItem {
 	
@@ -18,15 +19,15 @@ public class Character extends AnimatedItem {
         imageArray[2] = new Image(Paths.STREAKER_PATHS[2]);
         imageArray[3] = new Image(Paths.STREAKER_PATHS[3]);
         this.setFrame(imageArray);
-        this.duration = Constants.FRAME_DURATION;
-        this.setPosition((Constants.SCREEN_WIDTH / 2) - 40, Constants.SCREEN_HEIGHT / 2);
+        this.setDuration(Constants.FRAME_DURATION);
+        this.setPosition((Constants.SCREEN_WIDTH / 2) - 40.0, Constants.SCREEN_HEIGHT / 2.0);
         width = imageArray[0].getWidth();
         height = imageArray[0].getHeight();
         this.setSpeed(0, 0);
         charHealth = Constants.CHAR_MAX_HEALTH;
 	}
 	
-	// ensures character is in bounds of stadium background
+	// ensures characterController is in bounds of stadium background
     public void handleCharacterPosition() {
         if (this.getX() < Constants.STADIUM_BORDER) {
             this.setPosition(Constants.STADIUM_BORDER, this.getY());
@@ -42,7 +43,7 @@ public class Character extends AnimatedItem {
         }
     }
     
-    public void applyUserInputToVelocity(ArrayList<String> input, boolean inMud, boolean isJumping) {
+    public void applyUserInputToVelocity(List<String> input, boolean inMud, boolean isJumping) {
     	double vel = Constants.CHARACTER_VELOCITY;
     	if(inMud && !isJumping) {
     		vel = vel/2;
@@ -62,11 +63,11 @@ public class Character extends AnimatedItem {
         }
     }
     
-    public void updatePosition(double elapsedTime, ArrayList<String> input, boolean inMud, boolean isJumping) {
+    public void updatePosition(double elapsedTime, List<String> input, boolean inMud, boolean isJumping) {
     	applyUserInputToVelocity(input, inMud, isJumping);
     	super.applyVelocity(elapsedTime);
     	if (inMud && !isJumping) {
-    		this.setSpeed(0, Constants.STARTING_SPEED / 2);
+    		this.setSpeed(0, Constants.STARTING_SPEED / 2.0);
     	}
     	else {
     		this.setSpeed(0, 0);

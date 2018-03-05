@@ -10,7 +10,7 @@ public class Terrain extends WorldItem {
 		Random rand = new Random();
 		this.setImage(Paths.TERRAIN_PATH);
 		double maxXVal = Constants.SCREEN_WIDTH - 2*Constants.STADIUM_STANDS_MARGIN - this.getWidth();
-		this.setPosition(rand.nextInt((int)maxXVal) + Constants.STADIUM_STANDS_MARGIN, - Constants.SCREEN_HEIGHT);
+		this.setPosition(rand.nextInt((int)maxXVal) + (double)Constants.STADIUM_STANDS_MARGIN, - Constants.SCREEN_HEIGHT);
 	}
 	
 	@Override

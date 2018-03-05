@@ -10,7 +10,7 @@ public class BackgroundItem {
     private ArrayList<WorldItem> backgrounds;
 
     public BackgroundItem() {
-        backgrounds = new ArrayList<WorldItem>();
+        backgrounds = new ArrayList<>();
         WorldItem backgroundOne = new WorldItem();
         WorldItem backgroundTwo = new WorldItem();
         this.setBackground(backgroundOne, true);

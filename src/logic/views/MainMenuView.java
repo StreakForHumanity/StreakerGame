@@ -19,7 +19,7 @@ public class MainMenuView extends StreakerView {
 		AnchorPane root = new AnchorPane();
 		Button startButton = new Button("Start New Game");
 		
-		startButton.setOnAction(click -> startGame(click));
+		startButton.setOnAction(this::startGame);
 		
 		AnchorPane.setBottomAnchor(startButton, 300.0);
 		AnchorPane.setTopAnchor(startButton, 300.0);
@@ -27,10 +27,8 @@ public class MainMenuView extends StreakerView {
 		AnchorPane.setRightAnchor(startButton, 425.0);
 		
 		root.getChildren().add(startButton);
-		
-		Scene scene = new Scene(root, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-		
-		return scene;
+
+		return new Scene(root, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 	}
 	
 	public void startGame(ActionEvent click) {
