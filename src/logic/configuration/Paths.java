@@ -1,6 +1,10 @@
 package logic.configuration;
 
 public class Paths {
+
+    private Paths(){
+    }
+
     public static final String BACKGROUND_PATH = "./assets/stadium_large.png";
     public static final String GAME_OVER_PATH = "./assets/game_over.png";
     public static final String COIN_PATH = "./assets/coin.png";

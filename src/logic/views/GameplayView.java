@@ -8,7 +8,6 @@ import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
 
 import logic.controllers.ViewController;
-import logic.controllers.ViewController.VIEW_TYPE;
 import logic.configuration.Constants;
 import logic.controllers.*;
 import logic.models.*;
@@ -59,7 +58,7 @@ public class GameplayView extends StreakerView {
             		this.stop();
             	}
             	
-            	double elapsedTime = (currentNanoTime - lastNanoTime.value) / Constants._PRECISION;
+            	double elapsedTime = (currentNanoTime - lastNanoTime.value) / Constants.PRECISION;
             	lastNanoTime.value = currentNanoTime;
             	updateGameState(elapsedTime, keyController.input);
             	drawAll(getCurrentFrameTime(nanot), nanot);
@@ -75,7 +74,7 @@ public class GameplayView extends StreakerView {
     
     //for use with drawItem calls to animatedItems
     private double getCurrentFrameTime(double nanot) {
-        return (nanot / Constants._PRECISION);
+        return (nanot / Constants.PRECISION);
     }
     
     /* wrapper function for use inside of AnimationTimer's handle() -
