@@ -51,7 +51,7 @@ public class GameOverView extends StreakerView {
 		Text time = new Text(225, 290, hms);
 		time.setFont(new Font(20));
 		
-		Text collected = new Text(480, 290, Integer.toString(coins));
+		Text collected = new Text(480, 290, "$" + Integer.toString(coins));
 		collected.setFont(new Font(20));
 		
 		Text totScore = new Text(730, 290, calculateScore());
