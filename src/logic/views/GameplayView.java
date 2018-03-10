@@ -122,7 +122,6 @@ public class GameplayView extends StreakerView {
     	//draw guards to screen
     	for (Guard g : worldItems.getGuards()) {
     		graphicsController.drawWithRotate(g, g.getRotate(), time);
-    		//graphicsController.drawItem(g, time);
     	}
     	
     	//update coin stuff
