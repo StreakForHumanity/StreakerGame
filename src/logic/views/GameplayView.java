@@ -3,6 +3,7 @@ package logic.views;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.transform.Rotate;
 import javafx.animation.AnimationTimer;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class GameplayView extends StreakerView {
     private GraphicsController graphicsController;
     private WorldItemController worldItems;
     private KeyInputController keyController;
+    private Guard myGuard;
     
     public GameplayView(ViewController vc) {
     	super(vc);
@@ -121,7 +123,8 @@ public class GameplayView extends StreakerView {
     	
     	//draw guards to screen
     	for (Guard g : worldItems.getGuards()) {
-    		graphicsController.drawItem(g, time);
+    		graphicsController.drawWithRotate(g, g.getRotate(), time);
+    		//graphicsController.drawItem(g, time);
     	}
     	
     	//update coin stuff

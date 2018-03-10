@@ -3,6 +3,7 @@ package logic.controllers;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.transform.Rotate;
 import logic.configuration.Constants;
 import logic.models.AnimatedItem;
 import logic.models.BackgroundItem;
@@ -37,6 +38,14 @@ public class GraphicsController {
     public void drawItem(BackgroundItem b) {
     	drawItem(b.getSection(0));
     	drawItem(b.getSection(1));
+    }
+    
+    // for drawing guards at custom rotation
+    public void drawWithRotate(AnimatedItem a, Rotate r, double time) {
+    	gc.save();
+    	gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+    	drawItem(a, time);
+    	gc.restore();
     }
     
     public String getHMS(double nanot) {

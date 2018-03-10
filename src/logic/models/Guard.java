@@ -1,6 +1,7 @@
 package logic.models;
 
 import javafx.scene.image.Image;
+import javafx.scene.transform.Rotate;
 import logic.configuration.Constants;
 import logic.configuration.Paths;
 
@@ -40,5 +41,10 @@ public class Guard extends AnimatedItem {
         double x = (Constants.SCREEN_WIDTH - 2 * Constants.COIN_BOUNDS) * Math.random() + Constants.COIN_BOUNDS;
         double y = - Constants.SCREEN_HEIGHT * Math.random();
         this.setPosition(x, y);
+    }
+    
+    public Rotate getRotate() {
+    	double rads = Math.atan2(getSpeedX(), -getSpeedY());
+    	return new Rotate(Math.toDegrees(rads), this.getX() + getWidth()/2, this.getY() + getHeight()/2);
     }
 }
