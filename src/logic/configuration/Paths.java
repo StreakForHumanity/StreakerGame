@@ -45,9 +45,9 @@ public class Paths {
         "./assets/button_help.png"
     };
     public static final String[] SETTINGS_BUTTONS = {
-            "./assets/button_back.png"
+        "./assets/button_back.png"
     };
     public static final String[] HELP_BUTTONS = {
-            "./assets/button_back.png"
+        "./assets/button_back.png"
     };
 }

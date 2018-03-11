@@ -1,6 +1,13 @@
 package logic.views;
 
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+import logic.controllers.ViewController;
+import logic.controllers.ViewController.VIEW_TYPE;
+import javafx.scene.Scene;
+import logic.configuration.Constants;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -18,6 +25,7 @@ import logic.configuration.Paths;
 import logic.controllers.ViewController;
 import logic.controllers.ViewController.VIEW_TYPE;
 import logic.models.ImageButton;
+import java.io.IOException;
 
 public class MainMenuView extends StreakerView {
 
@@ -27,7 +35,6 @@ public class MainMenuView extends StreakerView {
 	}
 	
 	public Scene setupScene() {
-
 		AnchorPane root = new AnchorPane();
 		BackgroundImage bgi = new BackgroundImage(new Image(Paths.MAINMENU_BACKGROUND_PATH), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		root.setBackground(new Background(bgi));
@@ -38,6 +45,18 @@ public class MainMenuView extends StreakerView {
 		root.getChildren().add(buttons);
 		return new Scene(root, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 
+		Parent root1 = null;
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/sample.fxml"));
+			root1 = (Parent) fxmlLoader.load();
+			//Stage stage = new Stage();
+			//stage.setScene(new Scene(root1));
+			//stage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return new Scene(root1);
 	}
 
 	private VBox setupButtons() {
