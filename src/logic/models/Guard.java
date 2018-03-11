@@ -1,6 +1,7 @@
 package logic.models;
 
 import javafx.scene.image.Image;
+import javafx.scene.transform.Rotate;
 import logic.configuration.Constants;
 import logic.configuration.Paths;
 
@@ -14,7 +15,7 @@ public class Guard extends AnimatedItem {
         if (left) {
             this.setSpeed(Constants.GUARD_SPEED, Constants.STARTING_SPEED);
         } else {
-            this.setSpeed(-1 * Constants.GUARD_SPEED, Constants.STARTING_SPEED);
+            this.setSpeed(-1.0 * Constants.GUARD_SPEED, Constants.STARTING_SPEED);
         }
         Image[] imageArray = new Image[4];
         imageArray[0] = new Image(Paths.GUARD_PATHS[0]);
@@ -22,7 +23,7 @@ public class Guard extends AnimatedItem {
         imageArray[2] = new Image(Paths.GUARD_PATHS[2]);
         imageArray[3] = new Image(Paths.GUARD_PATHS[3]);
         this.setFrame(imageArray);
-        this.duration = Constants.FRAME_DURATION;
+        this.setDuration(Constants.FRAME_DURATION);
         width = imageArray[0].getWidth();
         height = imageArray[0].getHeight();
     }
@@ -40,5 +41,10 @@ public class Guard extends AnimatedItem {
         double x = (Constants.SCREEN_WIDTH - 2 * Constants.COIN_BOUNDS) * Math.random() + Constants.COIN_BOUNDS;
         double y = - Constants.SCREEN_HEIGHT * Math.random();
         this.setPosition(x, y);
+    }
+    
+    public Rotate getRotate() {
+    	double rads = Math.atan2(getSpeedX(), -getSpeedY());
+    	return new Rotate(Math.toDegrees(rads), this.getX() + getWidth()/2, this.getY() + getHeight()/2);
     }
 }

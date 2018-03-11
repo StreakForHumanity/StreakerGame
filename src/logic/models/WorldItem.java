@@ -15,7 +15,9 @@ public class WorldItem {
     private double speedX;
     private double speedY;
 
-    public WorldItem() {}
+    protected WorldItem(){
+
+    }
 
     public void setImage(Image i) {
         image = i;
@@ -50,6 +52,14 @@ public class WorldItem {
 
     public double getY() {
         return positionY;
+    }
+    
+    public double getSpeedX() {
+    	return speedX;
+    }
+    
+    public double getSpeedY() {
+    	return speedY;
     }
 
     public double getWidth() {
@@ -88,11 +98,6 @@ public class WorldItem {
         speedY = y;
     }
 
-    /* Bennett - I'm not super sure what the utility of the 'velocity' group of functions is,
-        but if someone is planning on using them, I've made this function so as not to step
-        on any of the pre-established nomenclature. It's a bit awkward, and should definitely
-        be changed pending future communication.
-    */
     public void incrementSpeed(double x, double y) {
         speedX += x;
         speedY += y;

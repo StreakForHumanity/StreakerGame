@@ -1,9 +1,17 @@
 package logic.models;
 
 public class IntValue {
-    public int value;
+    private int value;
 
     public IntValue(int i) {
         value = i;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }

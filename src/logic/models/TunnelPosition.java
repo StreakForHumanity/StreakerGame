@@ -1,7 +1,5 @@
 package logic.models;
 
-import java.lang.Math;
-
 import logic.configuration.Constants;
 
 public class TunnelPosition {
@@ -22,6 +20,10 @@ public class TunnelPosition {
         
         TunnelPosition other = (TunnelPosition)o;
         return (Math.abs(other.pos - this.pos) < Constants.TUNNEL_SIZE);
+    }
+
+    public int hashCode(){
+        return super.hashCode();
     }
 
     public double getPosition() {
