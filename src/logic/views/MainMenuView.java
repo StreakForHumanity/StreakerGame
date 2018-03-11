@@ -45,18 +45,6 @@ public class MainMenuView extends StreakerView {
 		root.getChildren().add(buttons);
 		return new Scene(root, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 
-		Parent root1 = null;
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/sample.fxml"));
-			root1 = (Parent) fxmlLoader.load();
-			//Stage stage = new Stage();
-			//stage.setScene(new Scene(root1));
-			//stage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-
-		return new Scene(root1);
 	}
 
 	private VBox setupButtons() {
