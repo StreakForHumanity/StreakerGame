@@ -6,6 +6,9 @@ public class Paths {
     }
 
     public static final String BACKGROUND_PATH = "./assets/stadium_large.png";
+    public static final String MAINMENU_BACKGROUND_PATH = "./assets/main_menu.png";
+    public static final String SETTINGS_BACKGROUND_PATH = "./assets/settings.png";
+    public static final String HELP_BACKGROUND_PATH = "./assets/help.png";
     public static final String GAME_OVER_PATH = "./assets/game_over.png";
     public static final String COIN_PATH = "./assets/coin.png";
     public static final String TERRAIN_PATH = "./assets/terrain.png";
@@ -32,8 +35,19 @@ public class Paths {
     	"./assets/button_exitGame.png"
     };
     public static final String[] GAME_OVER_BUTTONS_PRESSED = {
-    		"./assets/button_newGame_pressed.png",
-    		"./assets/button_mainMenu_pressed.png",
-    		"./assets/button_exitGame_pressed.png"
+        "./assets/button_newGame_pressed.png",
+        "./assets/button_mainMenu_pressed.png",
+        "./assets/button_exitGame_pressed.png"
+    };
+    public static final String[] MAIN_MENU_BUTTONS = {
+        "./assets/button_start_main.png",
+        "./assets/button_settings.png",
+        "./assets/button_help.png"
+    };
+    public static final String[] SETTINGS_BUTTONS = {
+        "./assets/button_back.png"
+    };
+    public static final String[] HELP_BUTTONS = {
+        "./assets/button_back.png"
     };
 }
