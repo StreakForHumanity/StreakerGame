@@ -35,6 +35,10 @@ public class ViewController {
 			break;
 		}
 	}
+
+	public void start(){
+		updateView(VIEW_TYPE.GAMEPLAY);
+	}
 	
 	public void updateViewGameOver(String hms, int collected) {
 		GameOverView newView = new GameOverView(this, hms, collected);
