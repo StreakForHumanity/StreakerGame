@@ -25,6 +25,5 @@ public class Client extends Application {
 		stage.setTitle("Streakers");
 		vc = new ViewController(stage);
 		vc.updateView(VIEW_TYPE.MAIN_MENU);
-		vc.updateView(VIEW_TYPE.MAIN_MENU);
 	}
 }
