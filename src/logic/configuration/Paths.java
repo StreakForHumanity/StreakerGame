@@ -5,6 +5,7 @@ public class Paths {
     private Paths(){
     }
 
+    public static final String HIGHSCORES_PATH = "./assets/highscores.dat";
     public static final String BACKGROUND_PATH = "./assets/stadium_large.png";
     public static final String MAINMENU_BACKGROUND_PATH = "./assets/main_menu.png";
     public static final String SETTINGS_BACKGROUND_PATH = "./assets/settings.png";
