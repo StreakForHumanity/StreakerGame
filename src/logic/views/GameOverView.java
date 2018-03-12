@@ -155,8 +155,8 @@ public class GameOverView extends StreakerView {
 	//to be used once I actually add high scores lmao
 	private void setHighScoreAnchors(VBox scores) {
 		AnchorPane.setBottomAnchor(scores, 25.0);
-		AnchorPane.setTopAnchor(scores, 400.0);
-		AnchorPane.setLeftAnchor(scores, 550.0);
+		AnchorPane.setTopAnchor(scores, 425.0);
+		AnchorPane.setLeftAnchor(scores, 575.0);
 		AnchorPane.setRightAnchor(scores, 150.0);
 	}
 	
