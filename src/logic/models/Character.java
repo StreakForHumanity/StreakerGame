@@ -5,7 +5,6 @@ import logic.configuration.Constants;
 import logic.configuration.Paths;
 import logic.models.AnimatedItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Character extends AnimatedItem {
