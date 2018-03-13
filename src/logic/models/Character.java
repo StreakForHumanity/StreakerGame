@@ -5,7 +5,6 @@ import logic.configuration.Constants;
 import logic.configuration.Paths;
 import logic.models.AnimatedItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Character extends AnimatedItem {
@@ -27,6 +26,15 @@ public class Character extends AnimatedItem {
         charHealth = Constants.CHAR_MAX_HEALTH;
 	}
 	
+	public Character(int test) {
+        this.setDuration(Constants.FRAME_DURATION);
+        this.setPosition((Constants.SCREEN_WIDTH / 2) - 40.0, Constants.SCREEN_HEIGHT / 2.0);
+        width = 0;
+        height = 0;
+        this.setSpeed(0, 0);
+        charHealth = Constants.CHAR_MAX_HEALTH;
+	}
+	
 	// ensures characterController is in bounds of stadium background
     public void handleCharacterPosition() {
         if (this.getX() < Constants.STADIUM_BORDER) {
@@ -44,10 +52,11 @@ public class Character extends AnimatedItem {
     }
     
     public void applyUserInputToVelocity(List<String> input, boolean inMud, boolean isJumping) {
-    	double vel = Constants.CHARACTER_VELOCITY;
-    	if(inMud && !isJumping) {
-    		vel = vel/2;
-    	}
+    		double vel = Constants.CHARACTER_VELOCITY;
+    		if(inMud && !isJumping) {
+    			vel = vel/2;
+    		}
+    		
         this.setVelocity(0,0);
         if (input.contains("LEFT")) {
             this.incrementVelocity(-vel, 0);

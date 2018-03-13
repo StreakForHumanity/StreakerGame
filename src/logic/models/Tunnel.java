@@ -21,10 +21,15 @@ public class Tunnel extends WorldItem {
         this.establishPosition();
     }
     
+    public Tunnel(int test) {
+    		rand = new Random();
+        noGuard = true;
+    }
+    
     @Override
     public void updatePosition() {
-    	this.setSpeed(0, Constants.STARTING_SPEED);
-    	super.updatePosition();
+    		this.setSpeed(0, Constants.STARTING_SPEED);
+    		super.updatePosition();
     }
 
     public void resetPosition() {

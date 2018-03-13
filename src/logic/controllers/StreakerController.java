@@ -14,9 +14,15 @@ public class StreakerController {
 	private Character streaker;
 
     protected StreakerController() {
-    	streaker = new Character();
+    		streaker = new Character();
         this.isJumping = false;
         this.canJump = true;
+    }
+    
+    public StreakerController(int i) {
+    		streaker = new Character(1);
+    		this.isJumping = false;
+    		this.canJump = true;
     }
 
 	public Character getStreaker() {
@@ -27,6 +33,10 @@ public class StreakerController {
         if (input.contains("SPACE") && canJump) {
                 updateCharForJump();
         }
+	}
+	
+	public boolean getIsJumping() {
+		return isJumping;
 	}
 
 	protected boolean isJumping() {

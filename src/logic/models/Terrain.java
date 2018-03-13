@@ -13,6 +13,12 @@ public class Terrain extends WorldItem {
 		this.setPosition(rand.nextInt((int)maxXVal) + (double)Constants.STADIUM_STANDS_MARGIN, - Constants.SCREEN_HEIGHT);
 	}
 	
+	public Terrain(int test) {
+		Random rand = new Random();
+		double maxXVal = Constants.SCREEN_WIDTH - 2*Constants.STADIUM_STANDS_MARGIN - this.getWidth();
+		this.setPosition(rand.nextInt((int)maxXVal) + (double)Constants.STADIUM_STANDS_MARGIN, - Constants.SCREEN_HEIGHT);
+	}
+	
 	@Override
     public void updatePosition() {
     	this.setSpeed(0, Constants.STARTING_SPEED);

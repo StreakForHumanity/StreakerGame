@@ -17,8 +17,16 @@ public class BackgroundItem {
         this.setBackground(backgroundTwo, false);
     }
     
+    public BackgroundItem(int t) {
+    		backgrounds = new ArrayList<>();
+        WorldItem backgroundOne = new WorldItem(t);
+        WorldItem backgroundTwo = new WorldItem(t);
+        backgrounds.add(backgroundOne);
+        backgrounds.add(backgroundTwo);
+    }
+    
     public WorldItem getSection(int index) {
-    	return backgrounds.get(index);
+    		return backgrounds.get(index);
     }
 
     public void setBackground(WorldItem background, boolean first) {

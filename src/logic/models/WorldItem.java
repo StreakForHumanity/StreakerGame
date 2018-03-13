@@ -14,10 +14,10 @@ public class WorldItem {
     private double velocityY;
     private double speedX;
     private double speedY;
-
-    protected WorldItem(){
-
-    }
+    
+    protected WorldItem() {}
+    
+    public WorldItem(int test) {}
 
     public void setImage(Image i) {
         image = i;
@@ -42,8 +42,8 @@ public class WorldItem {
     
     // increments position of WorldItem with respect to preset speed values.
     public void updatePosition() {
-    	positionX += speedX;
-    	positionY += speedY;
+    		positionX += speedX;
+    		positionY += speedY;
     }
 
     public double getX() {
@@ -94,4 +94,20 @@ public class WorldItem {
         speedX += x;
         speedY += y;
     }
+    
+    public double getVelocityX() {
+    		return velocityX;
+    }
+    
+    public double getVelocityY() {
+		return velocityX;
+}
+
+	public double getSpeedX() {
+		return speedX;
+	}
+
+	public double getSpeedY() {
+		return speedY;
+	}
 }

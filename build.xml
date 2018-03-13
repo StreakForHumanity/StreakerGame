@@ -5,11 +5,17 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="StreakerGame">
     <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../../../eclipse/modeling-oxygen/Eclipse.app/Contents/Eclipse/"/>
     <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="/lib/junit-4.12.jar"/>
+        <pathelement location="/lib/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+    </path>
     <path id="StreakerGame.classpath">
+        <path refid="JUnit 4.libraryclasspath"/>
         <pathelement location="bin"/>
     </path>
     <target name="init">
@@ -47,14 +53,233 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="TestWorldItemPosition">
+    <target name="AllTests">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="test.TestWorldItemPosition" todir="${junit.output.dir}"/>
+            <test name="test.AllTests" todir="${junit.output.dir}"/>
             <jvmarg line="-ea"/>
             <classpath refid="StreakerGame.classpath"/>
         </junit>
+    </target>
+    <target name="StreakerGame">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.SuiteAnimatedAndWorld" todir="${junit.output.dir}"/>
+            <test name="test.SuiteBackgroundAndTerrain" todir="${junit.output.dir}"/>
+            <test name="test.SuiteCharacterAndGuard" todir="${junit.output.dir}"/>
+            <test name="test.SuiteLongAndInt" todir="${junit.output.dir}"/>
+            <test name="test.SuiteStrControllerAndCoin" todir="${junit.output.dir}"/>
+            <test name="test.SuiteTunnelAndPosition" todir="${junit.output.dir}"/>
+            <test name="test.TestAnimatedItem" todir="${junit.output.dir}"/>
+            <test name="test.TestBackgroundItem" todir="${junit.output.dir}"/>
+            <test name="test.TestCharacter" todir="${junit.output.dir}"/>
+            <test name="test.TestCoin" todir="${junit.output.dir}"/>
+            <test name="test.TestGuard" todir="${junit.output.dir}"/>
+            <test name="test.TestIntValue" todir="${junit.output.dir}"/>
+            <test name="test.TestLongValue" todir="${junit.output.dir}"/>
+            <test name="test.TestStreakerController" todir="${junit.output.dir}"/>
+            <test name="test.TestTerrain" todir="${junit.output.dir}"/>
+            <test name="test.TestTunnel" todir="${junit.output.dir}"/>
+            <test name="test.TestTunnelPosition" todir="${junit.output.dir}"/>
+            <test name="test.TestWorldItem" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="SuiteAnimatedAndWorld">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.SuiteAnimatedAndWorld" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="SuiteBackgroundAndTerrain">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.SuiteBackgroundAndTerrain" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="SuiteCharacterAndGuard">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.SuiteCharacterAndGuard" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="SuiteLongAndInt">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.SuiteLongAndInt" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="SuiteStrControllerAndCoin">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.SuiteStrControllerAndCoin" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="SuiteTunnelAndPosition">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.SuiteTunnelAndPosition" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="Test">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.SuiteAnimatedAndWorld" todir="${junit.output.dir}"/>
+            <test name="test.SuiteBackgroundAndTerrain" todir="${junit.output.dir}"/>
+            <test name="test.SuiteCharacterAndGuard" todir="${junit.output.dir}"/>
+            <test name="test.SuiteLongAndInt" todir="${junit.output.dir}"/>
+            <test name="test.SuiteStrControllerAndCoin" todir="${junit.output.dir}"/>
+            <test name="test.SuiteTunnelAndPosition" todir="${junit.output.dir}"/>
+            <test name="test.TestAnimatedItem" todir="${junit.output.dir}"/>
+            <test name="test.TestBackgroundItem" todir="${junit.output.dir}"/>
+            <test name="test.TestCharacter" todir="${junit.output.dir}"/>
+            <test name="test.TestCoin" todir="${junit.output.dir}"/>
+            <test name="test.TestGuard" todir="${junit.output.dir}"/>
+            <test name="test.TestIntValue" todir="${junit.output.dir}"/>
+            <test name="test.TestLongValue" todir="${junit.output.dir}"/>
+            <test name="test.TestStreakerController" todir="${junit.output.dir}"/>
+            <test name="test.TestTerrain" todir="${junit.output.dir}"/>
+            <test name="test.TestTunnel" todir="${junit.output.dir}"/>
+            <test name="test.TestTunnelPosition" todir="${junit.output.dir}"/>
+            <test name="test.TestWorldItem" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="TestAnimatedItem">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestAnimatedItem" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="TestBackgroundItem">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestBackgroundItem" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCharacter">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestCharacter" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="TestCoin">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestCoin" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="TestGuard">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestGuard" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="TestIntValue">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestIntValue" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="TestLongValue">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestLongValue" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="TestStreakerController">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestStreakerController" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="TestTerrain">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestTerrain" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="TestTunnel">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestTunnel" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="TestTunnelPosition">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestTunnelPosition" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="TestWorldItem">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestWorldItem" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="StreakerGame.classpath"/>
+        </junit>
+    </target>
+    <target name="Version">
+        <java classname="junit.runner.Version" failonerror="true" fork="yes">
+            <classpath refid="StreakerGame.classpath"/>
+        </java>
     </target>
     <target name="junitreport">
         <junitreport todir="${junit.output.dir}">

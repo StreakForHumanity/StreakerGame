@@ -12,11 +12,15 @@ public class Coin extends WorldItem {
         this.setImage(Paths.COIN_PATH);
         this.resetPosition();
     }
+    
+    public Coin(int test) {
+    		this.resetPosition();
+    }
 
     @Override
     public void updatePosition() {
-    	this.setSpeed(0, Constants.STARTING_SPEED);
-    	super.updatePosition();
+    		this.setSpeed(0, Constants.STARTING_SPEED);
+    		super.updatePosition();
     }
 
     public void resetPosition() {
