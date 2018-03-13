@@ -1,6 +1,6 @@
 package logic.views;
 
-import javafx.application.Platform;
+import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -18,6 +18,9 @@ import logic.configuration.Paths;
 import logic.controllers.ViewController;
 import logic.controllers.ViewController.VIEW_TYPE;
 import logic.models.ImageButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 public class HelpView extends StreakerView {
 
@@ -35,14 +38,37 @@ public class HelpView extends StreakerView {
         VBox buttons = setupButtons();
         setButtonAnchors(buttons);
 
-        Text q0 = new Text(410, 290, getQuestion(0));
+        Text q0 = new Text(410, 250, getQuestion(0));
         q0.setFont(new Font(20));
+        q0.setFill(Color.RED);
 
-        Text a0 = new Text(210, 320, getAnswer(0));
+        Text a0 = new Text(210, 280, getAnswer(0));
         a0.setFont(new Font(20));
 
+        Text q1 = new Text(370, 350, getQuestion(1));
+        q1.setFont(new Font(20));
+        q1.setFill(Color.RED);
+
+        Text a1 = new Text(210, 380, getAnswer(1));
+        a1.setFont(new Font(20));
+
+        Image arrowKeys = new Image(Paths.HELP_KEYS_PATH);
+        ImageView av = new ImageView();
+        av.setImage(arrowKeys);
+        av.setX(240);
+        av.setY(400);
+        av.setFitWidth(500);
+        av.setFitHeight(300);
+        av.setSmooth(true);
+        av.setCache(true);
+
+//        VBox vb = new VBox();
+//        vb.getChildren().add(av);
+        root.getChildren().add(av);
         root.getChildren().add(q0);
         root.getChildren().add(a0);
+        root.getChildren().add(q1);
+        root.getChildren().add(a1);
 
         root.getChildren().add(buttons);
         return new Scene(root, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
@@ -78,6 +104,9 @@ public class HelpView extends StreakerView {
             case 0:
                 return "What is Streaker?";
 
+            case 1:
+                return "How do you play Streaker?";
+
             default:
                 return null;
 
@@ -90,6 +119,12 @@ public class HelpView extends StreakerView {
 
             case 0:
                 return "The best game you've never played and probably never will.";
+
+            case 1:
+                return "Use the arrow keys as displayed below to evade the guards.\n " +
+                        "Collect ButtCoin and try and stay alive as long as you can,\n" +
+                        "         Your score will based on the above two factors.\n" +
+                        "                                       Have fun :)";
 
             default:
                 return null;
