@@ -1,6 +1,5 @@
 package logic.views;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -12,15 +11,27 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import logic.configuration.Constants;
+import logic.configuration.Globals;
 import logic.configuration.Paths;
 import logic.controllers.ViewController;
 import logic.controllers.ViewController.VIEW_TYPE;
 import logic.models.ImageButton;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
+import javafx.scene.paint.Color;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.GridPane;
 
 public class SettingsView extends StreakerView {
 
+    final Slider difficulty = new Slider (0.5, 2, 1);
+    final Label difficultyCaption = new Label("Difficulty Level:");
+    final static Color textColor = Color.BLACK;
+    final Label difficultyValue = new Label(
+            Double.toString(difficulty.getValue()));
 
     public SettingsView(ViewController vc) {
         super(vc);
@@ -35,7 +46,37 @@ public class SettingsView extends StreakerView {
         VBox buttons = setupButtons();
         setButtonAnchors(buttons);
 
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(200, 300, 200, 300));
+        grid.setVgap(200);
+        grid.setHgap(50);
+
+        difficulty.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov,
+                                Number old_val, Number new_val) {
+                difficultyValue.setText(String.format("%.2f", new_val));
+            }
+        });
+
+        difficultyCaption.setTextFill(textColor);
+        difficultyCaption.setFont(new Font(20));
+        GridPane.setConstraints(difficultyCaption, 0, 1);
+        grid.getChildren().add(difficultyCaption);
+
+        difficultyValue.setTextFill(textColor);
+        difficultyValue.setFont(new Font(20));
+        GridPane.setConstraints(difficultyValue, 2, 1);
+        grid.getChildren().add(difficultyValue);
+
+        GridPane.setConstraints(difficulty, 1, 1);
+        grid.getChildren().add(difficulty);
+
+        root.getChildren().add(grid);
         root.getChildren().add(buttons);
+
+        // THIS IS NOT UPDATING SRY
+        Globals.SETTINGS_MULTIPLIER = difficulty.getValue();
+
         return new Scene(root, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 
     }

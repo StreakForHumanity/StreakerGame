@@ -18,9 +18,7 @@ import logic.configuration.Paths;
 import logic.controllers.ViewController;
 import logic.controllers.ViewController.VIEW_TYPE;
 import logic.models.ImageButton;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 
 public class HelpView extends StreakerView {
 
@@ -62,8 +60,6 @@ public class HelpView extends StreakerView {
         av.setSmooth(true);
         av.setCache(true);
 
-//        VBox vb = new VBox();
-//        vb.getChildren().add(av);
         root.getChildren().add(av);
         root.getChildren().add(q0);
         root.getChildren().add(a0);

@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import logic.configuration.Constants;
+import logic.configuration.Globals;
 import logic.models.*;
 
 public class WorldItemController {
@@ -109,7 +110,8 @@ public class WorldItemController {
             if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
                 tunnel.resetPosition();
             } else {
-                if (tunnel.noGuard() && Math.random() < Constants.GUARD_SPAWN_RATE) {
+                if (tunnel.noGuard() && Math.random() < Constants.GUARD_SPAWN_RATE*Globals.SETTINGS_MULTIPLIER) {
+                    System.out.println("Settings mult: " + Globals.SETTINGS_MULTIPLIER);
                     //There should be a better way to do this
                     guards.add(tunnel.spawnGuard());
                 }

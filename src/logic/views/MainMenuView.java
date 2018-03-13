@@ -1,15 +1,10 @@
 package logic.views;
 
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.stage.Stage;
 import logic.controllers.ViewController;
 import logic.controllers.ViewController.VIEW_TYPE;
 import javafx.scene.Scene;
 import logic.configuration.Constants;
 import javafx.event.ActionEvent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -18,14 +13,8 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import logic.configuration.Constants;
 import logic.configuration.Paths;
-import logic.controllers.ViewController;
-import logic.controllers.ViewController.VIEW_TYPE;
 import logic.models.ImageButton;
-import java.io.IOException;
 
 public class MainMenuView extends StreakerView {
 
