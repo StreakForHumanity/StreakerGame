@@ -7,10 +7,15 @@ import logic.views.*;
 public class ViewController {
 	
 	private Stage stage;
-	
+
 	public ViewController(Stage stage) {
 		this.stage = stage;
 	}
+
+	public void setStage(Stage stage){
+		this.stage = stage;
+	}
+
 		
 	public void updateView(VIEW_TYPE vt) {
 		StreakerView newView;
@@ -24,6 +29,14 @@ public class ViewController {
 			updateView(newView.setupScene());
 			((GameplayView)newView).startGameLoop();
 			break;
+		case SETTINGS:
+			newView = new SettingsView(this);
+			updateView(newView.setupScene());
+			break;
+		case HELP:
+			newView = new HelpView(this);
+			updateView(newView.setupScene());
+			break;
 		case GAME_OVER:
 			newView = new GameOverView(this);
 			updateView(newView.setupScene());
@@ -34,6 +47,10 @@ public class ViewController {
 			updateView(newViewDefault.setupScene());
 			break;
 		}
+	}
+
+	public void start(){
+		updateView(VIEW_TYPE.GAMEPLAY);
 	}
 	
 	public void updateViewGameOver(String hms, int collected) {
@@ -60,6 +77,8 @@ public class ViewController {
 		MAIN_MENU,
 		GAMEPLAY,
 		GAME_OVER,
-		PAUSE_MENU
+		PAUSE_MENU,
+		SETTINGS,
+		HELP
 	}
 }

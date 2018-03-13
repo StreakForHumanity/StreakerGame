@@ -4,3 +4,6 @@
 .project
 /bin/
 runner.sh
+/out/
+StreakerGame.iml
+.highscores.dat

@@ -53,6 +53,14 @@ public class WorldItem {
     public double getY() {
         return positionY;
     }
+    
+    public double getSpeedX() {
+    	return speedX;
+    }
+    
+    public double getSpeedY() {
+    	return speedY;
+    }
 
     public double getWidth() {
         return width;

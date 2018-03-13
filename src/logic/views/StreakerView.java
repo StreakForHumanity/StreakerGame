@@ -17,7 +17,6 @@ public abstract class StreakerView {
 	public StreakerView(ViewController v) {
 		viewController = v;
 	}
-	
 	/*
 	 * extending view classes must implement this method.
 	 * It creates a new instance of a Scene and 
