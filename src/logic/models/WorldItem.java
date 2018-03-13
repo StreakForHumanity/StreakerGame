@@ -109,13 +109,5 @@ public class WorldItem {
     
     public double getVelocityY() {
 		return velocityX;
-}
-
-	public double getSpeedX() {
-		return speedX;
-	}
-
-	public double getSpeedY() {
-		return speedY;
-	}
+    }
 }

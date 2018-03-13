@@ -50,10 +50,11 @@ public class StreakerController {
 			Image[] imageArray = new Image[1];
 			imageArray[0] = new Image(Paths.STREAKER_PATHS[4]);
 			streaker.setFrame(imageArray);
-			
+			streaker.resetCooldown();
 			new Thread(() -> {
                 double sT = System.currentTimeMillis();
                 while((System.currentTimeMillis()-sT) < Constants.JUMP_TIME) {
+                	streaker.changeCooldown(.00000005);
                 	continue;
 				}
                 Image[] imageArray1 = new Image[4];
@@ -66,7 +67,8 @@ public class StreakerController {
                 sT = System.currentTimeMillis();
                 canJump = false;
                 while((System.currentTimeMillis()-sT) < Constants.COOLDOWN_TIME) {
-                	continue;
+                		streaker.changeCooldown(.00000005);
+                		continue;
 				}
                 canJump = true;
             }).start();

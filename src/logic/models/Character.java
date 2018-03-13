@@ -10,6 +10,7 @@ import java.util.List;
 public class Character extends AnimatedItem {
 	
 	private double charHealth;
+	private double cooldownTime;
 
 	public Character() {
 		Image[] imageArray = new Image[4];
@@ -24,6 +25,7 @@ public class Character extends AnimatedItem {
         height = imageArray[0].getHeight();
         this.setSpeed(0, 0);
         charHealth = Constants.CHAR_MAX_HEALTH;
+        cooldownTime = Constants.COOLDOWN_TIME/1000;
 	}
 	
 	public Character(int test) {
@@ -33,6 +35,7 @@ public class Character extends AnimatedItem {
         height = 0;
         this.setSpeed(0, 0);
         charHealth = Constants.CHAR_MAX_HEALTH;
+        cooldownTime = Constants.COOLDOWN_TIME/1000;
 	}
 	
 	// ensures characterController is in bounds of stadium background
@@ -85,11 +88,25 @@ public class Character extends AnimatedItem {
     }
     
     public double getHealth() {
-    	return charHealth;
+    		return charHealth;
     }
     
     //increment or decrement health
     public void changeHealth(double dH) {
-    	charHealth += dH;
+    		charHealth += dH;
     }
+    
+    public double getCooldown() {
+    		return cooldownTime;
+    }
+    
+    public void changeCooldown(double dC) {
+    		cooldownTime += dC;
+    }
+    
+    public void resetCooldown() {
+    		cooldownTime = 0;
+    }
+    
+    
 }
