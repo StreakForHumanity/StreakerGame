@@ -80,8 +80,8 @@ public class GameplayView extends StreakerView {
      * Note: we could set the access to public for the sake of testing
      */
     private void updateGameState(double elapsedTime, List<String> input) {
-    	worldItems.updateBackgroundState();
-    	worldItems.updateCharacterState(elapsedTime, input);
+    		worldItems.updateBackgroundState();
+    		worldItems.updateCharacterState(elapsedTime, input);
 		collected.setValue(collected.getValue()+worldItems.updateCoinStates());
 		worldItems.updateTunnelStates();
 		worldItems.updateGuardStates();
@@ -99,38 +99,41 @@ public class GameplayView extends StreakerView {
      */
     private void drawAll(double time, double nanot) {
     	//draw background to screen
-    	graphicsController.drawItem(worldItems.getBackground());
+    		graphicsController.drawItem(worldItems.getBackground());
     	
     	//draw terrain items to screen
-    	for (Terrain t : worldItems.getTerrains()) {
-    		graphicsController.drawItem(t);
+    		for (Terrain t : worldItems.getTerrains()) {
+    			graphicsController.drawItem(t);
+    		}
+    	
+    		//draw characterController to screen
+    		graphicsController.drawItem(worldItems.getCharacterController().getStreaker(), time);
+    	
+    		//draw coins to screen
+    		for (Coin c : worldItems.getCoins()) {
+    			graphicsController.drawItem(c);
+    		}
+    	
+    		//draw tunnels to screen
+    		for (Tunnel t : worldItems.getTunnels()) {
+    			graphicsController.drawItem(t);
+    		}
+    	
+    		//draw guards to screen
+    		for (Guard g : worldItems.getGuards()) {
+    			graphicsController.drawWithRotate(g, g.getRotate(), time);
+    		}
+    	
+    		//update coin stuff
+    		graphicsController.showCoins(worldItems.getBackground().getWidth(), collected.getValue());
+    	
+    		//update displayed game time
+    		graphicsController.showTime(nanot);
+    	
+    		//display characterController health
+    		graphicsController.drawHealth(worldItems.getCharacterController().getStreaker().getHealth());
+    		
+    		//display characterController cooldown
+    		graphicsController.drawCooldownBar(worldItems.getCharacterController().getStreaker().getCooldown());
     	}
-    	
-    	//draw characterController to screen
-    	graphicsController.drawItem(worldItems.getCharacterController().getStreaker(), time);
-    	
-    	//draw coins to screen
-    	for (Coin c : worldItems.getCoins()) {
-    		graphicsController.drawItem(c);
-    	}
-    	
-    	//draw tunnels to screen
-    	for (Tunnel t : worldItems.getTunnels()) {
-    		graphicsController.drawItem(t);
-    	}
-    	
-    	//draw guards to screen
-    	for (Guard g : worldItems.getGuards()) {
-    		graphicsController.drawWithRotate(g, g.getRotate(), time);
-    	}
-    	
-    	//update coin stuff
-    	graphicsController.showCoins(worldItems.getBackground().getWidth(), collected.getValue());
-    	
-    	//update displayed game time
-    	graphicsController.showTime(nanot);
-    	
-    	//display characterController health
-    	graphicsController.drawHealth(worldItems.getCharacterController().getStreaker().getHealth());
-    }
 }

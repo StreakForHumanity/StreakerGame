@@ -26,6 +26,8 @@ public class Constants {
     public static final int COOLDOWN_TIME     		= 3000;
     public static final int HEALTHBAR_H				= 28;
     public static final int HEALTHBAR_W				= 124;
+    public static final int COOLDOWNBAR_H				= 28;
+    public static final int COOLDOWNBAR_W				= 124;
     public static final double CHAR_MAX_HEALTH		= 100.0;
     public static final double GUARD_DAMAGE			= -1.0;
 }

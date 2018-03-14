@@ -5,7 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class AnimatedItem extends WorldItem {
 
-    private Image[] frames;
+    protected Image[] frames;
     private double duration;
 
     public Image getFrame(double time) {
@@ -27,7 +27,19 @@ public class AnimatedItem extends WorldItem {
         this.frames = frames;
     }
 
+	public Image[] getFrames() {
+		return frames;
+	}
+
     public void setDuration(double duration) {
         this.duration = duration;
+    }
+    
+    public void alterDuration(double alter) {
+    		duration += alter;
+    }
+
+	public double getDuration() {
+        return duration;
     }
 }

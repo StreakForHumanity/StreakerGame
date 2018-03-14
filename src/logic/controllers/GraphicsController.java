@@ -65,19 +65,35 @@ public class GraphicsController {
     }
     
     public void drawHealth(double charHealth) {
-    	double healthWidth = (Constants.HEALTHBAR_W * (charHealth / Constants.CHAR_MAX_HEALTH));
-    	gc.fillText("Health:", 10, 34);
+    		double healthWidth = (Constants.HEALTHBAR_W * (charHealth / Constants.CHAR_MAX_HEALTH));
+    		gc.fillText("Health:", 10, 34);
     	
-    	gc.setFill(Color.BLACK);
-    	gc.fillRect(94, 10, Constants.HEALTHBAR_W + 4, Constants.HEALTHBAR_H + 4);
+    		gc.setFill(Color.BLACK);
+    		gc.fillRect(94, 10, Constants.HEALTHBAR_W + 4, Constants.HEALTHBAR_H + 4);
     	
-    	gc.setFill(Color.RED);
-    	gc.fillRect(96, 12, Constants.HEALTHBAR_W, Constants.HEALTHBAR_H);
+    		gc.setFill(Color.RED);
+    		gc.fillRect(96, 12, Constants.HEALTHBAR_W, Constants.HEALTHBAR_H);
     	
-    	gc.setFill(Color.GREEN);
-    	gc.fillRect(96, 12, (int)healthWidth, Constants.HEALTHBAR_H);
+    		gc.setFill(Color.GREEN);
+    		gc.fillRect(96, 12, (int)healthWidth, Constants.HEALTHBAR_H);
     	
-    	//resets fill color
-    	gc.setFill(Color.WHITE);
+    		//resets fill color
+    		gc.setFill(Color.WHITE);
     } 
+    
+    public void drawCooldownBar(double cooldownTime) {
+    		double cooldownWidth = (Constants.COOLDOWNBAR_W *(cooldownTime/(Constants.COOLDOWN_TIME/1000)));
+    		
+    		gc.setFill(Color.BLACK);
+    		gc.fillRect(Constants.SCREEN_WIDTH/2-Constants.COOLDOWNBAR_W/2, Constants.SCREEN_HEIGHT-50, Constants.COOLDOWNBAR_W + 4, Constants.COOLDOWNBAR_H + 4);
+    	
+    		gc.setFill(Color.BLACK);
+    		gc.fillRect(Constants.SCREEN_WIDTH/2-Constants.COOLDOWNBAR_W/2+2, Constants.SCREEN_HEIGHT-48, Constants.COOLDOWNBAR_W, Constants.COOLDOWNBAR_H);
+    	
+    		gc.setFill(Color.YELLOW);
+    		gc.fillRect(Constants.SCREEN_WIDTH/2-Constants.COOLDOWNBAR_W/2+2, Constants.SCREEN_HEIGHT-48, (int)cooldownWidth, Constants.COOLDOWNBAR_H);
+    	
+    		//resets fill color
+    		gc.setFill(Color.WHITE);
+    }
 }

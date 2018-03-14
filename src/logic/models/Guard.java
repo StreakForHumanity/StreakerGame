@@ -27,10 +27,23 @@ public class Guard extends AnimatedItem {
         width = imageArray[0].getWidth();
         height = imageArray[0].getHeight();
     }
+    
+    public Guard(boolean left, int test) {
+        rand = new Random();
+        if (left) {
+            this.setSpeed(Constants.GUARD_SPEED, Constants.STARTING_SPEED);
+        } else {
+            this.setSpeed(-1.0 * Constants.GUARD_SPEED, Constants.STARTING_SPEED);
+        }
+        frames = null;
+        this.setDuration(Constants.FRAME_DURATION);
+        width = 0;
+        height = 0;
+    }
 
     @Override
     public void updatePosition() {
-    	double dx = (-0.5 + rand.nextDouble()) / 10;
+    		double dx = (-0.5 + rand.nextDouble()) / 10;
         double dy = 2.0 * (-0.485 + rand.nextDouble());
         // maybe use predrawn parabolas instead of random
         this.incrementSpeed(dx, dy);
