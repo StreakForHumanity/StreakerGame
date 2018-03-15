@@ -13,19 +13,19 @@ public class Tunnel extends WorldItem {
     private boolean noGuard;
     private boolean left;
     private Random rand;
-    private static ArrayList<TunnelPosition> tunnelPositions = new ArrayList<>();
+    private static ArrayList<TunnelPosition> tunnelPositions;
 
     public Tunnel() {
         rand = new Random();
         noGuard = true;
         this.establishPosition();
     }
-    
+
     public Tunnel(int test) {
     		rand = new Random();
         noGuard = true;
     }
-    
+
     @Override
     public void updatePosition() {
     		this.setSpeed(0, Constants.STARTING_SPEED);
@@ -51,7 +51,6 @@ public class Tunnel extends WorldItem {
     public void establishPosition() {
         left = rand.nextBoolean();
         double y = - (Constants.SCREEN_HEIGHT * rand.nextDouble());
-
         while (tunnelPositions.contains(new TunnelPosition(y))) {
             y = - (Constants.SCREEN_HEIGHT * rand.nextDouble());
         }
@@ -79,6 +78,7 @@ public class Tunnel extends WorldItem {
 
 
     public static List<Tunnel> createTunnels() {
+        tunnelPositions = new ArrayList<>();
         List<Tunnel> tunnels = new ArrayList<>();
         for (int i = 0; i < Constants.NUM_TUNNELS; i++) {
             Tunnel tunnel = new Tunnel();
