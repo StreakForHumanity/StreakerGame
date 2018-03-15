@@ -23,6 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.configuration.Constants;
+import logic.configuration.Globals;
 import logic.configuration.Paths;
 import logic.controllers.ViewFactory;
 import logic.controllers.ViewFactory.VIEW_TYPE;
@@ -156,7 +157,7 @@ public class GameOverView extends StreakerView {
 	private void setHighScoreAnchors(VBox scores) {
 		AnchorPane.setBottomAnchor(scores, 25.0);
 		AnchorPane.setTopAnchor(scores, 425.0);
-		AnchorPane.setLeftAnchor(scores, 575.0);
+		AnchorPane.setLeftAnchor(scores, 550.0);
 		AnchorPane.setRightAnchor(scores, 150.0);
 	}
 	
@@ -215,6 +216,7 @@ public class GameOverView extends StreakerView {
 	private ScoreEntry prepareCurrentScore() {
 		String[] date = new Date().toString().split(" ");
 		String content = Integer.toString(finalScore) + " | " + date[1] + " " + date[2] + ", " + date[5];
+		content += " (" + Globals.DIFFICULTY + ")";
 		
 		return new ScoreEntry(finalScore, content);
 	}
