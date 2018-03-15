@@ -111,7 +111,6 @@ public class WorldItemController {
                 tunnel.resetPosition();
             } else {
                 if (tunnel.noGuard() && Math.random() < Constants.GUARD_SPAWN_RATE*Globals.SETTINGS_MULTIPLIER) {
-                    System.out.println("Settings mult: " + Globals.SETTINGS_MULTIPLIER);
                     //There should be a better way to do this
                     guards.add(tunnel.spawnGuard());
                 }
