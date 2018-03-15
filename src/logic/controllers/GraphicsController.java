@@ -82,7 +82,7 @@ public class GraphicsController {
     } 
     
     public void drawCooldownBar(double cooldownTime) {
-    		double cooldownWidth = (Constants.COOLDOWNBAR_W * (cooldownTime / (double)(Constants.COOLDOWN_TIME/1000)));
+    		double cooldownWidth = (Constants.COOLDOWNBAR_W * (cooldownTime / ((double)Constants.COOLDOWN_TIME/1000)));
     		gc.fillText("Jump:", 232, 34);
     		
     		gc.setFill(Color.BLACK);
