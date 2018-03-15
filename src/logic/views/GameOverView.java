@@ -1,7 +1,6 @@
 package logic.views;
 
 import java.io.File;
-import java.awt.List;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -43,12 +42,6 @@ public class GameOverView extends StreakerView {
 	}
 	
 	public GameOverView(ViewFactory vc, String hms, int coins) {
-		/*
-		 * TODO: make the game over screen relatively pritteh with 
-		 * text and stuff about how long player lasted and how many
-		 * coins they got. maybe have a picture of the background
-		 * up in there, who knows?
-		 */
 		super(vc);
 		this.coins = coins;
 		this.hms = hms;
@@ -58,15 +51,16 @@ public class GameOverView extends StreakerView {
 			highScoresFile = new File(".highscores.dat");
 		}
 		catch (Exception e) {
-			System.out.println("line 59: " + e.getMessage());
+			System.err.println("line 59: " + e.getMessage());
 		}
 		if (!highScoresFile.exists()) {
 			try {
-				System.out.println("high scores file did not exist, creating it now");
-				highScoresFile.createNewFile();
+				if (!highScoresFile.createNewFile()) {
+					throw new Exception("Unable to create High Scores File.");
+				}
 			}
 			catch (Exception e) {
-				System.out.println("line 66: " + e.getMessage());
+				System.err.println("line 66: " + e.getMessage());
 			}		
 		}
 		entries = getTopScores();
@@ -174,41 +168,43 @@ public class GameOverView extends StreakerView {
 	}
 	
 	private int calculateScore() {
-		int finalScore = 0;
+		int score = 0;
 		String[] partials = hms.split(":");
 		
-		finalScore += Integer.parseInt(partials[0]) * 1000;
-		finalScore += Integer.parseInt(partials[1]) * 100;
-		finalScore += Integer.parseInt(partials[2]);
-		finalScore += coins * 3;
+		score += Integer.parseInt(partials[0]) * 1000;
+		score += Integer.parseInt(partials[1]) * 100;
+		score += Integer.parseInt(partials[2]);
+		score += coins * 3;
 		
-		return finalScore;
+		return score;
 	}
 	
 	private ArrayList<ScoreEntry> getTopScores() {
 		ArrayList<ScoreEntry> scores = new ArrayList<>();
-		Scanner fr;
+		Scanner fr = null;
 		String content;
 		int val;
 		
 		try {
 			fr = new Scanner(highScoresFile);
+			
+			while (fr.hasNextLine()) {
+				content = fr.nextLine();
+				val = Integer.parseInt(content.split("\\|")[0].trim());
+				scores.add(new ScoreEntry(val, content));
+			}
+			scores.add(finalScoreEntry);
+
+			Collections.sort(scores);
 		}
 		catch (Exception e) {
 			//nope
 			scores.add(new ScoreEntry(0, "Error Fetching High Scores..."));
 			return scores;
 		}
-		
-		while (fr.hasNextLine()) {
-			content = fr.nextLine();
-			val = Integer.parseInt(content.split("\\|")[0].trim());
-			scores.add(new ScoreEntry(val, content));
+		finally {
+			fr.close();
 		}
-		scores.add(finalScoreEntry);
-
-		Collections.sort(scores);
-		fr.close();
 		
 		return scores;
 	}
@@ -235,7 +231,7 @@ public class GameOverView extends StreakerView {
 			writer.close();
 		}
 		catch (Exception e) {
-			System.out.println("Exception Caught:" + e.getMessage());
+			System.err.println("Exception Caught:" + e.getMessage());
 		}
 	}
 	
@@ -251,7 +247,18 @@ public class GameOverView extends StreakerView {
 		//inverts integer ordering so that Collections.sort returns list in descending order
 		@Override
 		public int compareTo(ScoreEntry sc) {
-			return - ((Integer)this.value).compareTo((Integer)sc.value);
+			Integer val = new Integer(this.value);
+			return - val.compareTo(sc.value);
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if(o == null || !(o instanceof ScoreEntry)) {
+				return false;
+			}
+			
+			ScoreEntry sc = (ScoreEntry)o;
+			return sc.value == this.value;
 		}
 	
 		public String getContent() {
