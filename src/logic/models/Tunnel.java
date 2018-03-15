@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import logic.configuration.Constants;
+import logic.configuration.Globals;
 import logic.configuration.Paths;
 
 import java.util.ArrayList;
@@ -80,7 +81,7 @@ public class Tunnel extends WorldItem {
     public static List<Tunnel> createTunnels() {
         tunnelPositions = new ArrayList<>();
         List<Tunnel> tunnels = new ArrayList<>();
-        for (int i = 0; i < Constants.NUM_TUNNELS; i++) {
+        for (int i = 0; i < Constants.NUM_TUNNELS + Globals.TUNNELS_MODIFIER; i++) {
             Tunnel tunnel = new Tunnel();
             tunnels.add(tunnel);
         }

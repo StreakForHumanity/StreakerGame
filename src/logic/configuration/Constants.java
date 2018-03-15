@@ -9,7 +9,7 @@ public class Constants {
     public static final int NUM_COINS               = 4;
     public static final int NUM_TUNNELS             = 4;
     public static final int CHARACTER_VELOCITY      = 550;
-    public static final double PRECISION = 1000000000.0;
+    public static final double PRECISION 			= 1000000000.0;
     public static final int STADIUM_BORDER          = 110;
     public static final int COIN_BOUNDS             = 150;
     public static final int STARTING_SPEED          = 7;
@@ -26,8 +26,8 @@ public class Constants {
     public static final int COOLDOWN_TIME     		= 3000;
     public static final int HEALTHBAR_H				= 28;
     public static final int HEALTHBAR_W				= 124;
-    public static final int COOLDOWNBAR_H				= 28;
-    public static final int COOLDOWNBAR_W				= 124;
+    public static final int COOLDOWNBAR_H			= 28;
+    public static final int COOLDOWNBAR_W			= 124;
     public static final double CHAR_MAX_HEALTH		= 100.0;
     public static final double GUARD_DAMAGE			= -1.0;
 }
