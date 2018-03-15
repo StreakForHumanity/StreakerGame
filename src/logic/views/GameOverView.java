@@ -229,8 +229,6 @@ public class GameOverView extends StreakerView {
 			for(int i = 0; i < bound; i++) {
 				writer.write(entries.get(i).getContent() + "\n");
 			}
-			
-			writer.close();
 		}
 		catch (Exception e) {
 			//do nothing lmao
