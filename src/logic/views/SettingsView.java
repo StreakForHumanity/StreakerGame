@@ -107,7 +107,7 @@ public class SettingsView extends StreakerView {
         buttons.setSpacing(30);
         
         ImageButton BackButton = new ImageButton();
-        BackButton.updateImages(new Image(Paths.SETTINGS_BUTTONS[0]), new Image(Paths.SETTINGS_BUTTONS[0]));
+        BackButton.updateImages(new Image(Paths.getSettingsButtons()[0]), new Image(Paths.getSettingsButtons()[0]));
         BackButton.setOnAction(this::goBack);
         buttons.getChildren().add(BackButton);
         

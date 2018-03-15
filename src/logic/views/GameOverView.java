@@ -107,17 +107,17 @@ public class GameOverView extends StreakerView {
 		buttons.setSpacing(30);
 		
 		ImageButton newGame = new ImageButton();
-		newGame.updateImages(new Image(Paths.GAME_OVER_BUTTONS[0]), new Image(Paths.GAME_OVER_BUTTONS_PRESSED[0]));
+		newGame.updateImages(new Image(Paths.getGameOverButtons()[0]), new Image(Paths.getGameOverButtonsPressed()[0]));
 		newGame.setOnAction(this::goToNewGame);
 		buttons.getChildren().add(newGame);
 		
 		ImageButton mainMenu = new ImageButton();
-		mainMenu.updateImages(new Image(Paths.GAME_OVER_BUTTONS[1]), new Image(Paths.GAME_OVER_BUTTONS_PRESSED[1]));
+		mainMenu.updateImages(new Image(Paths.getGameOverButtons()[1]), new Image(Paths.getGameOverButtonsPressed()[1]));
 		mainMenu.setOnAction(this::goToMainMenu);
 		buttons.getChildren().add(mainMenu);
 		
 		ImageButton exitGame = new ImageButton();
-		exitGame.updateImages(new Image(Paths.GAME_OVER_BUTTONS[2]), new Image(Paths.GAME_OVER_BUTTONS_PRESSED[2]));
+		exitGame.updateImages(new Image(Paths.getGameOverButtons()[2]), new Image(Paths.getGameOverButtonsPressed()[2]));
 		exitGame.setOnAction(this::exitGame);
 		buttons.getChildren().add(exitGame);
 		

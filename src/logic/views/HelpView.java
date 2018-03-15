@@ -76,7 +76,7 @@ public class HelpView extends StreakerView {
         buttons.setSpacing(30);
 
         ImageButton backButton = new ImageButton();
-        backButton.updateImages(new Image(Paths.HELP_BUTTONS[0]), new Image(Paths.HELP_BUTTONS[0]));
+        backButton.updateImages(new Image(Paths.getHelpButtons()[0]), new Image(Paths.getHelpButtons()[0]));
         backButton.setOnAction(this::goBack);
         buttons.getChildren().add(backButton);
 

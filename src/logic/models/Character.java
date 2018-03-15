@@ -14,10 +14,10 @@ public class Character extends AnimatedItem {
 
 	public Character() {
 		Image[] imageArray = new Image[4];
-        imageArray[0] = new Image(Paths.STREAKER_PATHS[0]);
-        imageArray[1] = new Image(Paths.STREAKER_PATHS[1]);
-        imageArray[2] = new Image(Paths.STREAKER_PATHS[2]);
-        imageArray[3] = new Image(Paths.STREAKER_PATHS[3]);
+        imageArray[0] = new Image(Paths.getStreakerPaths()[0]);
+        imageArray[1] = new Image(Paths.getStreakerPaths()[1]);
+        imageArray[2] = new Image(Paths.getStreakerPaths()[2]);
+        imageArray[3] = new Image(Paths.getStreakerPaths()[3]);
         this.setFrame(imageArray);
         this.setDuration(Constants.FRAME_DURATION);
         this.setPosition((Constants.SCREEN_WIDTH / 2.0) - 40.0, Constants.SCREEN_HEIGHT / 2.0);

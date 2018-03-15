@@ -48,7 +48,7 @@ public class StreakerController {
 			isJumping = true;
 			// Change image of streaker
 			Image[] imageArray = new Image[1];
-			imageArray[0] = new Image(Paths.STREAKER_PATHS[4]);
+			imageArray[0] = new Image(Paths.getStreakerPaths()[4]);
 			streaker.setFrame(imageArray);
 			streaker.resetCooldown();
 			new Thread(() -> {
@@ -57,10 +57,10 @@ public class StreakerController {
                 	streaker.changeCooldown(.00000005);
 				}
                 Image[] imageArray1 = new Image[4];
-                imageArray1[0] = new Image(Paths.STREAKER_PATHS[0]);
-                imageArray1[1] = new Image(Paths.STREAKER_PATHS[1]);
-                imageArray1[2] = new Image(Paths.STREAKER_PATHS[2]);
-                imageArray1[3] = new Image(Paths.STREAKER_PATHS[3]);
+                imageArray1[0] = new Image(Paths.getStreakerPaths()[0]);
+                imageArray1[1] = new Image(Paths.getStreakerPaths()[1]);
+                imageArray1[2] = new Image(Paths.getStreakerPaths()[2]);
+                imageArray1[3] = new Image(Paths.getStreakerPaths()[3]);
                 streaker.setFrame(imageArray1);
                 isJumping = false;
                 sT = System.currentTimeMillis();

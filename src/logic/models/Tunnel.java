@@ -37,11 +37,11 @@ public class Tunnel extends WorldItem {
         left = rand.nextBoolean();
         double x;
         if(left) {
-            this.setImage(Paths.TUNNEL_PATHS[0]);
+            this.setImage(Paths.getTunnelPaths()[0]);
             x = Constants.STADIUM_MARGIN_LEFT;
         }
         else {
-            this.setImage(Paths.TUNNEL_PATHS[1]);
+            this.setImage(Paths.getTunnelPaths()[1]);
             x = Constants.SCREEN_WIDTH - (double)Constants.STADIUM_MARGIN_RIGHT;
         }
         this.setPosition(x, - (3 * Constants.SCREEN_HEIGHT / 4));
@@ -60,10 +60,10 @@ public class Tunnel extends WorldItem {
 
         double x;
         if (left) {
-            this.setImage(Paths.TUNNEL_PATHS[0]);
+            this.setImage(Paths.getTunnelPaths()[0]);
             x = Constants.STADIUM_MARGIN_LEFT;
         } else {
-            this.setImage(Paths.TUNNEL_PATHS[1]);
+            this.setImage(Paths.getTunnelPaths()[1]);
             x = Constants.SCREEN_WIDTH - (double)Constants.STADIUM_MARGIN_RIGHT;
         }
         this.setPosition(x, y);
