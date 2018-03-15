@@ -84,7 +84,6 @@ public class Tunnel extends WorldItem {
             Tunnel tunnel = new Tunnel();
             tunnels.add(tunnel);
         }
-        System.out.println();
         return tunnels;
     }
 
