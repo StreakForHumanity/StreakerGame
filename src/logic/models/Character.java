@@ -20,22 +20,22 @@ public class Character extends AnimatedItem {
         imageArray[3] = new Image(Paths.STREAKER_PATHS[3]);
         this.setFrame(imageArray);
         this.setDuration(Constants.FRAME_DURATION);
-        this.setPosition((Constants.SCREEN_WIDTH / 2) - 40.0, Constants.SCREEN_HEIGHT / 2.0);
+        this.setPosition((Constants.SCREEN_WIDTH / 2.0) - 40.0, Constants.SCREEN_HEIGHT / 2.0);
         width = imageArray[0].getWidth();
         height = imageArray[0].getHeight();
         this.setSpeed(0, 0);
         charHealth = Constants.CHAR_MAX_HEALTH;
-        cooldownTime = Constants.COOLDOWN_TIME/1000;
+        cooldownTime = Constants.COOLDOWN_TIME / 1000.0;
 	}
 	
 	public Character(int test) {
         this.setDuration(Constants.FRAME_DURATION);
-        this.setPosition((Constants.SCREEN_WIDTH / 2) - 40.0, Constants.SCREEN_HEIGHT / 2.0);
+        this.setPosition((Constants.SCREEN_WIDTH / 2.0) - 40.0, Constants.SCREEN_HEIGHT / 2.0);
         width = 0;
         height = 0;
         this.setSpeed(0, 0);
         charHealth = Constants.CHAR_MAX_HEALTH;
-        cooldownTime = Constants.COOLDOWN_TIME/1000;
+        cooldownTime = Constants.COOLDOWN_TIME / 1000.0;
 	}
 	
 	// ensures characterController is in bounds of stadium background
