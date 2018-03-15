@@ -18,10 +18,10 @@ public class Guard extends AnimatedItem {
             this.setSpeed(-1.0 * Constants.GUARD_SPEED, Constants.STARTING_SPEED);
         }
         Image[] imageArray = new Image[4];
-        imageArray[0] = new Image(Paths.GUARD_PATHS[0]);
-        imageArray[1] = new Image(Paths.GUARD_PATHS[1]);
-        imageArray[2] = new Image(Paths.GUARD_PATHS[2]);
-        imageArray[3] = new Image(Paths.GUARD_PATHS[3]);
+        imageArray[0] = new Image(Paths.getGuardPaths()[0]);
+        imageArray[1] = new Image(Paths.getGuardPaths()[1]);
+        imageArray[2] = new Image(Paths.getGuardPaths()[2]);
+        imageArray[3] = new Image(Paths.getGuardPaths()[3]);
         this.setFrame(imageArray);
         this.setDuration(Constants.FRAME_DURATION);
         width = imageArray[0].getWidth();
@@ -35,7 +35,10 @@ public class Guard extends AnimatedItem {
         } else {
             this.setSpeed(-1.0 * Constants.GUARD_SPEED, Constants.STARTING_SPEED);
         }
-        frames = null;
+        if (test == 1) {
+        	frames = null;
+        }
+        
         this.setDuration(Constants.FRAME_DURATION);
         width = 0;
         height = 0;

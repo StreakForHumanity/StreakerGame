@@ -34,7 +34,7 @@ public class HelpView extends StreakerView {
         root.setBackground(new Background(bgi));
 
         VBox buttons = setupButtons();
-        setButtonAnchors(buttons);
+        setAnchors(buttons, 25.0, 20.0, 140.0, 550.0);
 
         Text q0 = new Text(410, 250, getQuestion(0));
         q0.setFont(new Font(20));
@@ -76,21 +76,17 @@ public class HelpView extends StreakerView {
         buttons.setSpacing(30);
 
         ImageButton backButton = new ImageButton();
-        backButton.updateImages(new Image(Paths.HELP_BUTTONS[0]), new Image(Paths.HELP_BUTTONS[0]));
+        backButton.updateImages(new Image(Paths.getHelpButtons()[0]), new Image(Paths.getHelpButtons()[0]));
         backButton.setOnAction(this::goBack);
         buttons.getChildren().add(backButton);
 
         return buttons;
     }
 
-    private void setButtonAnchors(VBox buttons) {
-        AnchorPane.setBottomAnchor(buttons, 25.0);
-        AnchorPane.setTopAnchor(buttons, 20.0);
-        AnchorPane.setLeftAnchor(buttons, 140.0);
-        AnchorPane.setRightAnchor(buttons, 550.0);
-    }
-
     public void goBack(ActionEvent click) {
+    	if (click == null) {
+			return;
+		}
         viewController.updateView(VIEW_TYPE.MAIN_MENU);
     }
 

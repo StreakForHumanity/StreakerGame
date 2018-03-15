@@ -25,17 +25,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class SettingsView extends StreakerView {
     
-    final Slider difficulty = new Slider (0, 10, 5);
-    final Label difficultyCaption = new Label("Difficulty Level:");
-    final static Color textColor = Color.BLACK;
-    final Label difficultyValue = new Label("Medium");
-    AnchorPane root = new AnchorPane();
-    GridPane grid = new GridPane();
+    private final Slider difficulty = new Slider (0, 10, 5);
+    private final Label difficultyCaption = new Label("Difficulty Level:");
+    private static final Color textColor = Color.BLACK;
+    private final Label difficultyValue = new Label("Medium");
+    private AnchorPane root = new AnchorPane();
+    private GridPane grid = new GridPane();
     
     public SettingsView(ViewFactory vc) {
         super(vc);
@@ -47,7 +46,7 @@ public class SettingsView extends StreakerView {
         root.setBackground(new Background(bgi));
         
         VBox buttons = setupButtons();
-        setButtonAnchors(buttons);
+        setAnchors(buttons, 25.0, 20.0, 140.0, 550.0);
         
         grid.setPadding(new Insets(200, 300, 200, 300));
         grid.setVgap(200);
@@ -55,9 +54,9 @@ public class SettingsView extends StreakerView {
         
         difficulty.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov,
-                                Number old_val, Number new_val) {
-            	String diffText = "Intermediate";
-            	double n = new_val.doubleValue();
+                                Number oldVal, Number newVal) {
+            	String diffText;
+            	double n = newVal.doubleValue();
             	if (n < 2.0) {
             		diffText = "Beginner";
             	}
@@ -78,15 +77,8 @@ public class SettingsView extends StreakerView {
             }
         });
         
-        difficultyCaption.setTextFill(textColor);
-        difficultyCaption.setFont(new Font(20));
-        GridPane.setConstraints(difficultyCaption, 0, 1);
-        grid.getChildren().add(difficultyCaption);
-        
-        difficultyValue.setTextFill(textColor);
-        difficultyValue.setFont(new Font(20));
-        GridPane.setConstraints(difficultyValue, 2, 1);
-        grid.getChildren().add(difficultyValue);
+        setupLabel(difficultyCaption, 0 , 1);
+        setupLabel(difficultyValue, 2, 1);
         
         GridPane.setConstraints(difficulty, 1, 1);
         grid.getChildren().add(difficulty);
@@ -103,29 +95,36 @@ public class SettingsView extends StreakerView {
         
     }
     
+    private void setupLabel(Label l, int i, int j) {
+    	l.setTextFill(textColor);
+    	l.setFont(new Font(20));
+    	GridPane.setConstraints(l, i, j);
+    	grid.getChildren().add(l);
+    }
+    
     private VBox setupButtons() {
         VBox buttons = new VBox();
         buttons.setSpacing(30);
         
-        ImageButton BackButton = new ImageButton();
-        BackButton.updateImages(new Image(Paths.SETTINGS_BUTTONS[0]), new Image(Paths.SETTINGS_BUTTONS[0]));
-        BackButton.setOnAction(this::goBack);
-        buttons.getChildren().add(BackButton);
+        ImageButton backButton = new ImageButton();
+        backButton.updateImages(new Image(Paths.getSettingsButtons()[0]), new Image(Paths.getSettingsButtons()[0]));
+        backButton.setOnAction(this::goBack);
+        buttons.getChildren().add(backButton);
         
         return buttons;
     }
     
-    private void setButtonAnchors(VBox buttons) {
-        AnchorPane.setBottomAnchor(buttons, 25.0);
-        AnchorPane.setTopAnchor(buttons, 20.0);
-        AnchorPane.setLeftAnchor(buttons, 140.0);
-        AnchorPane.setRightAnchor(buttons, 550.0);
-    }
-    
     public void goBack(ActionEvent click) {
+    	if (click == null) {
+			return;
+		}
         viewController.updateView(VIEW_TYPE.MAIN_MENU);
     }
+    
     public void submit(ActionEvent click) {
+    	if (click == null) {
+			return;
+		}
         Text a1 = new Text(650, 600, "Difficulty set!");
         a1.setFont(new Font(20));
         a1.setFill(Color.RED);
@@ -133,7 +132,5 @@ public class SettingsView extends StreakerView {
         root.getChildren().add(a1);
         Globals.setTunnelsModifier(difficulty.getValue());
     }
-    
-    
 }
 

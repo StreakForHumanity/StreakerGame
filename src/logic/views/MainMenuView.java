@@ -41,17 +41,17 @@ public class MainMenuView extends StreakerView {
 		buttons.setSpacing(30);
 
 		ImageButton newGame = new ImageButton();
-		newGame.updateImages(new Image(Paths.MAIN_MENU_BUTTONS[0]), new Image(Paths.MAIN_MENU_BUTTONS[0]));
+		newGame.updateImages(new Image(Paths.getMainMenuButtons()[0]), new Image(Paths.getMainMenuButtons()[0]));
 		newGame.setOnAction(this::startGame);
 		buttons.getChildren().add(newGame);
 
 		ImageButton settings = new ImageButton();
-		settings.updateImages(new Image(Paths.MAIN_MENU_BUTTONS[1]), new Image(Paths.MAIN_MENU_BUTTONS[1]));
+		settings.updateImages(new Image(Paths.getMainMenuButtons()[1]), new Image(Paths.getMainMenuButtons()[1]));
 		settings.setOnAction(this::goToSettings);
 		buttons.getChildren().add(settings);
 
 		ImageButton help = new ImageButton();
-		help.updateImages(new Image(Paths.MAIN_MENU_BUTTONS[2]), new Image(Paths.MAIN_MENU_BUTTONS[2]));
+		help.updateImages(new Image(Paths.getMainMenuButtons()[2]), new Image(Paths.getMainMenuButtons()[2]));
 		help.setOnAction(this::goToHelp);
 		buttons.getChildren().add(help);
 
@@ -66,14 +66,23 @@ public class MainMenuView extends StreakerView {
 	}
 
 	public void startGame(ActionEvent click) {
+		if (click == null) {
+			return;
+		}
 		viewController.updateView(VIEW_TYPE.GAMEPLAY);
 	}
 
 	public void goToSettings(ActionEvent click) {
+		if (click == null) {
+			return;
+		}
 		viewController.updateView(VIEW_TYPE.SETTINGS);
 	}
 
 	public void goToHelp(ActionEvent click) {
+		if (click == null) {
+			return;
+		}
 		viewController.updateView(VIEW_TYPE.HELP);
 	}
 

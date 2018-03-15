@@ -1,7 +1,6 @@
 package logic.views;
 
 import java.io.File;
-import java.awt.List;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -24,6 +23,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.configuration.Constants;
 import logic.configuration.Globals;
+import logic.configuration.HighScoreException;
 import logic.configuration.Paths;
 import logic.controllers.ViewFactory;
 import logic.controllers.ViewFactory.VIEW_TYPE;
@@ -43,12 +43,6 @@ public class GameOverView extends StreakerView {
 	}
 	
 	public GameOverView(ViewFactory vc, String hms, int coins) {
-		/*
-		 * TODO: make the game over screen relatively pritteh with 
-		 * text and stuff about how long player lasted and how many
-		 * coins they got. maybe have a picture of the background
-		 * up in there, who knows?
-		 */
 		super(vc);
 		this.coins = coins;
 		this.hms = hms;
@@ -58,15 +52,16 @@ public class GameOverView extends StreakerView {
 			highScoresFile = new File(".highscores.dat");
 		}
 		catch (Exception e) {
-			System.out.println("line 59: " + e.getMessage());
+			//do nothing
 		}
 		if (!highScoresFile.exists()) {
 			try {
-				System.out.println("high scores file did not exist, creating it now");
-				highScoresFile.createNewFile();
+				if (!highScoresFile.createNewFile()) {
+					throw new HighScoreException("Unable to create High Scores File.");
+				}
 			}
 			catch (Exception e) {
-				System.out.println("line 66: " + e.getMessage());
+				//do nothing
 			}		
 		}
 		entries = getTopScores();
@@ -113,17 +108,17 @@ public class GameOverView extends StreakerView {
 		buttons.setSpacing(30);
 		
 		ImageButton newGame = new ImageButton();
-		newGame.updateImages(new Image(Paths.GAME_OVER_BUTTONS[0]), new Image(Paths.GAME_OVER_BUTTONS_PRESSED[0]));
+		newGame.updateImages(new Image(Paths.getGameOverButtons()[0]), new Image(Paths.getGameOverButtonsPressed()[0]));
 		newGame.setOnAction(this::goToNewGame);
 		buttons.getChildren().add(newGame);
 		
 		ImageButton mainMenu = new ImageButton();
-		mainMenu.updateImages(new Image(Paths.GAME_OVER_BUTTONS[1]), new Image(Paths.GAME_OVER_BUTTONS_PRESSED[1]));
+		mainMenu.updateImages(new Image(Paths.getGameOverButtons()[1]), new Image(Paths.getGameOverButtonsPressed()[1]));
 		mainMenu.setOnAction(this::goToMainMenu);
 		buttons.getChildren().add(mainMenu);
 		
 		ImageButton exitGame = new ImageButton();
-		exitGame.updateImages(new Image(Paths.GAME_OVER_BUTTONS[2]), new Image(Paths.GAME_OVER_BUTTONS_PRESSED[2]));
+		exitGame.updateImages(new Image(Paths.getGameOverButtons()[2]), new Image(Paths.getGameOverButtonsPressed()[2]));
 		exitGame.setOnAction(this::exitGame);
 		buttons.getChildren().add(exitGame);
 		
@@ -162,37 +157,53 @@ public class GameOverView extends StreakerView {
 	}
 	
 	private void goToMainMenu(ActionEvent click) {
+		if (click == null) {
+			return;
+		}
 		viewController.updateView(VIEW_TYPE.MAIN_MENU);
 	}
 	
 	private void goToNewGame(ActionEvent click) {
+		if (click == null) {
+			return;
+		}
 		viewController.updateView(VIEW_TYPE.GAMEPLAY);
 	}
 	
 	private void exitGame(ActionEvent click) {
+		if (click == null) {
+			return;
+		}
 		Platform.exit();
 	}
 	
 	private int calculateScore() {
-		int finalScore = 0;
+		int score = 0;
 		String[] partials = hms.split(":");
 		
-		finalScore += Integer.parseInt(partials[0]) * 1000;
-		finalScore += Integer.parseInt(partials[1]) * 100;
-		finalScore += Integer.parseInt(partials[2]);
-		finalScore += coins * 3;
+		score += Integer.parseInt(partials[0]) * 1000;
+		score += Integer.parseInt(partials[1]) * 100;
+		score += Integer.parseInt(partials[2]);
+		score += coins * 3;
 		
-		return finalScore;
+		return score;
 	}
 	
 	private ArrayList<ScoreEntry> getTopScores() {
 		ArrayList<ScoreEntry> scores = new ArrayList<>();
-		Scanner fr;
 		String content;
 		int val;
 		
-		try {
-			fr = new Scanner(highScoresFile);
+		try (Scanner fr = new Scanner(highScoresFile)) {
+			
+			while (fr.hasNextLine()) {
+				content = fr.nextLine();
+				val = Integer.parseInt(content.split("\\|")[0].trim());
+				scores.add(new ScoreEntry(val, content));
+			}
+			scores.add(finalScoreEntry);
+
+			Collections.sort(scores);
 		}
 		catch (Exception e) {
 			//nope
@@ -200,42 +211,27 @@ public class GameOverView extends StreakerView {
 			return scores;
 		}
 		
-		while (fr.hasNextLine()) {
-			content = fr.nextLine();
-			val = Integer.parseInt(content.split("\\|")[0].trim());
-			scores.add(new ScoreEntry(val, content));
-		}
-		scores.add(finalScoreEntry);
-
-		Collections.sort(scores);
-		fr.close();
-		
 		return scores;
 	}
 	
 	private ScoreEntry prepareCurrentScore() {
 		String[] date = new Date().toString().split(" ");
 		String content = Integer.toString(finalScore) + " | " + date[1] + " " + date[2] + ", " + date[5];
-		content += " (" + Globals.DIFFICULTY + ")";
+		content += " (" + Globals.getDifficulty() + ")";
 		
 		return new ScoreEntry(finalScore, content);
 	}
 	
 	private void saveHighScores() {
-		BufferedWriter writer;
 		int bound = entries.size() < 5 ? entries.size() : 5;
 		
-		try {
-			writer = new BufferedWriter(new FileWriter(highScoresFile));
-			
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(highScoresFile))) {
 			for(int i = 0; i < bound; i++) {
 				writer.write(entries.get(i).getContent() + "\n");
 			}
-			
-			writer.close();
 		}
 		catch (Exception e) {
-			System.out.println("Exception Caught:" + e.getMessage());
+			//do nothing lmao
 		}
 	}
 	
@@ -251,7 +247,31 @@ public class GameOverView extends StreakerView {
 		//inverts integer ordering so that Collections.sort returns list in descending order
 		@Override
 		public int compareTo(ScoreEntry sc) {
-			return - ((Integer)this.value).compareTo((Integer)sc.value);
+			if (this.value < sc.value) {
+				return -1;
+			}
+			else if (this.value > sc.value) {
+				return 1;
+			}
+			else {
+				return 0;
+			}
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if(o == null || !(o instanceof ScoreEntry)) {
+				return false;
+			}
+			
+			ScoreEntry sc = (ScoreEntry)o;
+			return sc.value == this.value;
+		}
+		
+		//boy is this method ever useful - really glad sonar had us put this one in
+		@Override
+		public int hashCode() {
+			return this.hashCode();
 		}
 	
 		public String getContent() {

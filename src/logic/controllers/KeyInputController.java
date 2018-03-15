@@ -17,11 +17,10 @@ import javafx.scene.Scene;
 public class KeyInputController {
 	
 	private Scene scene;
-	private static List<String> input;
+	private static List<String> input = new ArrayList<>();
 	
 	public KeyInputController(Scene scene) {
 		this.scene = scene;
-		input = new ArrayList<>();
 		setOnKeyPress();
 		setOnKeyRelease();
 	}
