@@ -35,7 +35,10 @@ public class Guard extends AnimatedItem {
         } else {
             this.setSpeed(-1.0 * Constants.GUARD_SPEED, Constants.STARTING_SPEED);
         }
-        frames = null;
+        if (test == 1) {
+        	frames = null;
+        }
+        
         this.setDuration(Constants.FRAME_DURATION);
         width = 0;
         height = 0;
