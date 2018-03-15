@@ -181,12 +181,10 @@ public class GameOverView extends StreakerView {
 	
 	private ArrayList<ScoreEntry> getTopScores() {
 		ArrayList<ScoreEntry> scores = new ArrayList<>();
-		Scanner fr = null;
 		String content;
 		int val;
 		
-		try {
-			fr = new Scanner(highScoresFile);
+		try (Scanner fr = new Scanner(highScoresFile)) {
 			
 			while (fr.hasNextLine()) {
 				content = fr.nextLine();
@@ -202,9 +200,6 @@ public class GameOverView extends StreakerView {
 			scores.add(new ScoreEntry(0, "Error Fetching High Scores..."));
 			return scores;
 		}
-		finally {
-			fr.close();
-		}
 		
 		return scores;
 	}
@@ -218,12 +213,9 @@ public class GameOverView extends StreakerView {
 	}
 	
 	private void saveHighScores() {
-		BufferedWriter writer;
 		int bound = entries.size() < 5 ? entries.size() : 5;
 		
-		try {
-			writer = new BufferedWriter(new FileWriter(highScoresFile));
-			
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(highScoresFile))) {
 			for(int i = 0; i < bound; i++) {
 				writer.write(entries.get(i).getContent() + "\n");
 			}
@@ -247,8 +239,15 @@ public class GameOverView extends StreakerView {
 		//inverts integer ordering so that Collections.sort returns list in descending order
 		@Override
 		public int compareTo(ScoreEntry sc) {
-			Integer val = new Integer(this.value);
-			return - val.compareTo(sc.value);
+			if (this.value < sc.value) {
+				return -1;
+			}
+			else if (this.value > sc.value) {
+				return 1;
+			}
+			else {
+				return 0;
+			}
 		}
 		
 		@Override
@@ -259,6 +258,12 @@ public class GameOverView extends StreakerView {
 			
 			ScoreEntry sc = (ScoreEntry)o;
 			return sc.value == this.value;
+		}
+		
+		//boy is this method ever useful - really glad sonar had us put this one in
+		@Override
+		public int hashCode() {
+			return this.hashCode();
 		}
 	
 		public String getContent() {
