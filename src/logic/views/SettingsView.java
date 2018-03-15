@@ -14,8 +14,8 @@ import javafx.scene.text.Font;
 import logic.configuration.Constants;
 import logic.configuration.Globals;
 import logic.configuration.Paths;
-import logic.controllers.ViewController;
-import logic.controllers.ViewController.VIEW_TYPE;
+import logic.controllers.ViewFactory;
+import logic.controllers.ViewFactory.VIEW_TYPE;
 import logic.models.ImageButton;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -38,7 +38,7 @@ public class SettingsView extends StreakerView {
     AnchorPane root = new AnchorPane();
     GridPane grid = new GridPane();
     
-    public SettingsView(ViewController vc) {
+    public SettingsView(ViewFactory vc) {
         super(vc);
     }
     

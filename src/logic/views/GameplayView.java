@@ -7,7 +7,7 @@ import javafx.animation.AnimationTimer;
 
 import java.util.List;
 
-import logic.controllers.ViewController;
+import logic.controllers.ViewFactory;
 import logic.configuration.Constants;
 import logic.controllers.*;
 import logic.models.*;
@@ -23,7 +23,7 @@ public class GameplayView extends StreakerView {
     private WorldItemController worldItems;
     private KeyInputController keyController;
     
-    public GameplayView(ViewController vc) {
+    public GameplayView(ViewFactory vc) {
     	super(vc);
     }
     

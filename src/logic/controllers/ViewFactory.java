@@ -4,11 +4,11 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import logic.views.*;
 
-public class ViewController {
+public class ViewFactory {
 	
 	private Stage stage;
 
-	public ViewController(Stage stage) {
+	public ViewFactory(Stage stage) {
 		this.stage = stage;
 	}
 

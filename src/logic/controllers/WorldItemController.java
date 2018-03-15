@@ -22,7 +22,6 @@ public class WorldItemController {
         tunnels = Tunnel.createTunnels();
         guards = new ArrayList<>();
         terrains = new ArrayList<>();
-        //what the fuck???
         characterController = new StreakerController();
         background = new BackgroundItem();
     }

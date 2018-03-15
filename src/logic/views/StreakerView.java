@@ -1,11 +1,11 @@
 package logic.views;
 
 import javafx.scene.Scene;
-import logic.controllers.ViewController;
+import logic.controllers.ViewFactory;
 
 public abstract class StreakerView {
 	
-	protected ViewController viewController;
+	protected ViewFactory viewController;
 	
 	
 	/* 
@@ -14,7 +14,7 @@ public abstract class StreakerView {
 	 * to the ViewController instantiated initially in 
 	 * the Client class.
 	 */
-	public StreakerView(ViewController v) {
+	public StreakerView(ViewFactory v) {
 		viewController = v;
 	}
 	/*

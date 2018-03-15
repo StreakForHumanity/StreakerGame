@@ -15,15 +15,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.configuration.Constants;
 import logic.configuration.Paths;
-import logic.controllers.ViewController;
-import logic.controllers.ViewController.VIEW_TYPE;
+import logic.controllers.ViewFactory;
+import logic.controllers.ViewFactory.VIEW_TYPE;
 import logic.models.ImageButton;
 import javafx.scene.image.ImageView;
 
 public class HelpView extends StreakerView {
 
 
-    public HelpView(ViewController vc) {
+    public HelpView(ViewFactory vc) {
         super(vc);
     }
 

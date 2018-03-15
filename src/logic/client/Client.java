@@ -3,8 +3,8 @@ package logic.client;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import logic.controllers.ViewController;
-import logic.controllers.ViewController.VIEW_TYPE;
+import logic.controllers.ViewFactory;
+import logic.controllers.ViewFactory.VIEW_TYPE;
 
 /*
  * The Client class acts as the environment within which the 
@@ -21,9 +21,9 @@ public class Client extends Application {
 	
 	@Override
 	public void start(Stage stage) {
-		ViewController vc;
+		ViewFactory vc;
 		stage.setTitle("Streakers");
-		vc = new ViewController(stage);
+		vc = new ViewFactory(stage);
 		vc.updateView(VIEW_TYPE.MAIN_MENU);
 	}
 }

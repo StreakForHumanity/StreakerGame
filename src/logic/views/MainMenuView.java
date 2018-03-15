@@ -1,7 +1,7 @@
 package logic.views;
 
-import logic.controllers.ViewController;
-import logic.controllers.ViewController.VIEW_TYPE;
+import logic.controllers.ViewFactory;
+import logic.controllers.ViewFactory.VIEW_TYPE;
 import javafx.scene.Scene;
 import logic.configuration.Constants;
 import javafx.event.ActionEvent;
@@ -19,7 +19,7 @@ import logic.models.ImageButton;
 public class MainMenuView extends StreakerView {
 
 	
-	public MainMenuView(ViewController vc) {
+	public MainMenuView(ViewFactory vc) {
 		super(vc);
 	}
 	

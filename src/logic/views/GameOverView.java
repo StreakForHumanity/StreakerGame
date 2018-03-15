@@ -24,8 +24,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.configuration.Constants;
 import logic.configuration.Paths;
-import logic.controllers.ViewController;
-import logic.controllers.ViewController.VIEW_TYPE;
+import logic.controllers.ViewFactory;
+import logic.controllers.ViewFactory.VIEW_TYPE;
 import logic.models.ImageButton;
 
 public class GameOverView extends StreakerView {
@@ -37,11 +37,11 @@ public class GameOverView extends StreakerView {
 	private ArrayList<ScoreEntry> entries;
 	private File highScoresFile;
 	
-	public GameOverView(ViewController vc) {
+	public GameOverView(ViewFactory vc) {
 		super(vc);
 	}
 	
-	public GameOverView(ViewController vc, String hms, int coins) {
+	public GameOverView(ViewFactory vc, String hms, int coins) {
 		/*
 		 * TODO: make the game over screen relatively pritteh with 
 		 * text and stuff about how long player lasted and how many
