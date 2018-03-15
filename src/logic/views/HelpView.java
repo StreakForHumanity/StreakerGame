@@ -91,6 +91,9 @@ public class HelpView extends StreakerView {
     }
 
     public void goBack(ActionEvent click) {
+    	if (click == null) {
+			return;
+		}
         viewController.updateView(VIEW_TYPE.MAIN_MENU);
     }
 

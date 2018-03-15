@@ -29,12 +29,12 @@ import javafx.scene.text.Text;
 
 public class SettingsView extends StreakerView {
     
-    final Slider difficulty = new Slider (0, 10, 5);
-    final Label difficultyCaption = new Label("Difficulty Level:");
-    final static Color textColor = Color.BLACK;
-    final Label difficultyValue = new Label("Medium");
-    AnchorPane root = new AnchorPane();
-    GridPane grid = new GridPane();
+    private final Slider difficulty = new Slider (0, 10, 5);
+    private final Label difficultyCaption = new Label("Difficulty Level:");
+    private static final Color textColor = Color.BLACK;
+    private final Label difficultyValue = new Label("Medium");
+    private AnchorPane root = new AnchorPane();
+    private GridPane grid = new GridPane();
     
     public SettingsView(ViewFactory vc) {
         super(vc);
@@ -54,9 +54,9 @@ public class SettingsView extends StreakerView {
         
         difficulty.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov,
-                                Number old_val, Number new_val) {
-            	String diffText = "Intermediate";
-            	double n = new_val.doubleValue();
+                                Number oldVal, Number newVal) {
+            	String diffText;
+            	double n = newVal.doubleValue();
             	if (n < 2.0) {
             		diffText = "Beginner";
             	}
@@ -106,10 +106,10 @@ public class SettingsView extends StreakerView {
         VBox buttons = new VBox();
         buttons.setSpacing(30);
         
-        ImageButton BackButton = new ImageButton();
-        BackButton.updateImages(new Image(Paths.getSettingsButtons()[0]), new Image(Paths.getSettingsButtons()[0]));
-        BackButton.setOnAction(this::goBack);
-        buttons.getChildren().add(BackButton);
+        ImageButton backButton = new ImageButton();
+        backButton.updateImages(new Image(Paths.getSettingsButtons()[0]), new Image(Paths.getSettingsButtons()[0]));
+        backButton.setOnAction(this::goBack);
+        buttons.getChildren().add(backButton);
         
         return buttons;
     }
@@ -122,9 +122,15 @@ public class SettingsView extends StreakerView {
     }
     
     public void goBack(ActionEvent click) {
+    	if (click == null) {
+			return;
+		}
         viewController.updateView(VIEW_TYPE.MAIN_MENU);
     }
     public void submit(ActionEvent click) {
+    	if (click == null) {
+			return;
+		}
         Text a1 = new Text(650, 600, "Difficulty set!");
         a1.setFont(new Font(20));
         a1.setFill(Color.RED);
@@ -132,7 +138,5 @@ public class SettingsView extends StreakerView {
         root.getChildren().add(a1);
         Globals.setTunnelsModifier(difficulty.getValue());
     }
-    
-    
 }
 

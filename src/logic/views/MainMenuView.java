@@ -66,14 +66,23 @@ public class MainMenuView extends StreakerView {
 	}
 
 	public void startGame(ActionEvent click) {
+		if (click == null) {
+			return;
+		}
 		viewController.updateView(VIEW_TYPE.GAMEPLAY);
 	}
 
 	public void goToSettings(ActionEvent click) {
+		if (click == null) {
+			return;
+		}
 		viewController.updateView(VIEW_TYPE.SETTINGS);
 	}
 
 	public void goToHelp(ActionEvent click) {
+		if (click == null) {
+			return;
+		}
 		viewController.updateView(VIEW_TYPE.HELP);
 	}
 
