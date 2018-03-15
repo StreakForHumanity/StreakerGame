@@ -30,11 +30,10 @@ import javafx.scene.text.Text;
 
 public class SettingsView extends StreakerView {
     
-    final Slider difficulty = new Slider (0.5, 2, 1);
+    final Slider difficulty = new Slider (0, 10, 5);
     final Label difficultyCaption = new Label("Difficulty Level:");
     final static Color textColor = Color.BLACK;
-    final Label difficultyValue = new Label(
-                                            Double.toString(difficulty.getValue()));
+    final Label difficultyValue = new Label("Medium");
     AnchorPane root = new AnchorPane();
     GridPane grid = new GridPane();
     
@@ -57,7 +56,25 @@ public class SettingsView extends StreakerView {
         difficulty.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov,
                                 Number old_val, Number new_val) {
-                difficultyValue.setText(String.format("%.2f", new_val));
+            	String diffText = "Intermediate";
+            	double n = new_val.doubleValue();
+            	if (n < 2.0) {
+            		diffText = "Beginner";
+            	}
+            	else if (n < 4.0) {
+            		diffText = "Easy";
+            	}
+            	else if (n < 6.0) {
+            		diffText = "Medium";
+            	}
+            	else if (n < 8.0) {
+            		diffText = "Hard";
+            	}
+            	else {
+            		diffText = "Expert";
+            	}
+            	
+                difficultyValue.setText(diffText);
             }
         });
         
@@ -114,7 +131,7 @@ public class SettingsView extends StreakerView {
         a1.setFill(Color.RED);
         
         root.getChildren().add(a1);
-        Globals.SETTINGS_MULTIPLIER = difficulty.getValue();
+        Globals.setTunnelsModifier(difficulty.getValue());
     }
     
     

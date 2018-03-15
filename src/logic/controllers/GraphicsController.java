@@ -74,7 +74,7 @@ public class GraphicsController {
     		gc.setFill(Color.RED);
     		gc.fillRect(96, 12, Constants.HEALTHBAR_W, Constants.HEALTHBAR_H);
     	
-    		gc.setFill(Color.GREEN);
+    		gc.setFill(Color.BLUE);
     		gc.fillRect(96, 12, (int)healthWidth, Constants.HEALTHBAR_H);
     	
     		//resets fill color
@@ -83,15 +83,16 @@ public class GraphicsController {
     
     public void drawCooldownBar(double cooldownTime) {
     		double cooldownWidth = (Constants.COOLDOWNBAR_W *(cooldownTime/(Constants.COOLDOWN_TIME/1000)));
+    		gc.fillText("Jump:", 232, 34);
     		
     		gc.setFill(Color.BLACK);
-    		gc.fillRect(Constants.SCREEN_WIDTH/2-Constants.COOLDOWNBAR_W/2, Constants.SCREEN_HEIGHT-50, Constants.COOLDOWNBAR_W + 4, Constants.COOLDOWNBAR_H + 4);
+    		gc.fillRect(298, 10, Constants.COOLDOWNBAR_W + 4, Constants.COOLDOWNBAR_H + 4);
     	
     		gc.setFill(Color.BLACK);
-    		gc.fillRect(Constants.SCREEN_WIDTH/2-Constants.COOLDOWNBAR_W/2+2, Constants.SCREEN_HEIGHT-48, Constants.COOLDOWNBAR_W, Constants.COOLDOWNBAR_H);
+    		gc.fillRect(300, 12, Constants.COOLDOWNBAR_W, Constants.COOLDOWNBAR_H);
     	
     		gc.setFill(Color.YELLOW);
-    		gc.fillRect(Constants.SCREEN_WIDTH/2-Constants.COOLDOWNBAR_W/2+2, Constants.SCREEN_HEIGHT-48, (int)cooldownWidth, Constants.COOLDOWNBAR_H);
+    		gc.fillRect(300, 12, (int)cooldownWidth, Constants.COOLDOWNBAR_H);
     	
     		//resets fill color
     		gc.setFill(Color.WHITE);
