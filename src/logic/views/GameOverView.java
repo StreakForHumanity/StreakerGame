@@ -51,7 +51,7 @@ public class GameOverView extends StreakerView {
 			highScoresFile = new File(".highscores.dat");
 		}
 		catch (Exception e) {
-			System.err.println("line 59: " + e.getMessage());
+			//do nothing
 		}
 		if (!highScoresFile.exists()) {
 			try {
@@ -60,7 +60,7 @@ public class GameOverView extends StreakerView {
 				}
 			}
 			catch (Exception e) {
-				System.err.println("line 66: " + e.getMessage());
+				//do nothing
 			}		
 		}
 		entries = getTopScores();
@@ -223,7 +223,7 @@ public class GameOverView extends StreakerView {
 			writer.close();
 		}
 		catch (Exception e) {
-			System.err.println("Exception Caught:" + e.getMessage());
+			//do nothing lmao
 		}
 	}
 	
