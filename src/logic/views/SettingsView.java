@@ -46,7 +46,7 @@ public class SettingsView extends StreakerView {
         root.setBackground(new Background(bgi));
         
         VBox buttons = setupButtons();
-        setButtonAnchors(buttons);
+        setAnchors(buttons, 25.0, 20.0, 140.0, 550.0);
         
         grid.setPadding(new Insets(200, 300, 200, 300));
         grid.setVgap(200);
@@ -114,19 +114,13 @@ public class SettingsView extends StreakerView {
         return buttons;
     }
     
-    private void setButtonAnchors(VBox buttons) {
-        AnchorPane.setBottomAnchor(buttons, 25.0);
-        AnchorPane.setTopAnchor(buttons, 20.0);
-        AnchorPane.setLeftAnchor(buttons, 140.0);
-        AnchorPane.setRightAnchor(buttons, 550.0);
-    }
-    
     public void goBack(ActionEvent click) {
     	if (click == null) {
 			return;
 		}
         viewController.updateView(VIEW_TYPE.MAIN_MENU);
     }
+    
     public void submit(ActionEvent click) {
     	if (click == null) {
 			return;
