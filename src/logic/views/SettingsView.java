@@ -77,15 +77,8 @@ public class SettingsView extends StreakerView {
             }
         });
         
-        difficultyCaption.setTextFill(textColor);
-        difficultyCaption.setFont(new Font(20));
-        GridPane.setConstraints(difficultyCaption, 0, 1);
-        grid.getChildren().add(difficultyCaption);
-        
-        difficultyValue.setTextFill(textColor);
-        difficultyValue.setFont(new Font(20));
-        GridPane.setConstraints(difficultyValue, 2, 1);
-        grid.getChildren().add(difficultyValue);
+        setupLabel(difficultyCaption, 0 , 1);
+        setupLabel(difficultyValue, 2, 1);
         
         GridPane.setConstraints(difficulty, 1, 1);
         grid.getChildren().add(difficulty);
@@ -100,6 +93,13 @@ public class SettingsView extends StreakerView {
         
         return new Scene(root, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         
+    }
+    
+    private void setupLabel(Label l, int i, int j) {
+    	l.setTextFill(textColor);
+    	l.setFont(new Font(20));
+    	GridPane.setConstraints(l, i, j);
+    	grid.getChildren().add(l);
     }
     
     private VBox setupButtons() {
