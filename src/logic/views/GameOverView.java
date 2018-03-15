@@ -207,7 +207,7 @@ public class GameOverView extends StreakerView {
 	private ScoreEntry prepareCurrentScore() {
 		String[] date = new Date().toString().split(" ");
 		String content = Integer.toString(finalScore) + " | " + date[1] + " " + date[2] + ", " + date[5];
-		content += " (" + Globals.DIFFICULTY + ")";
+		content += " (" + Globals.getDifficulty() + ")";
 		
 		return new ScoreEntry(finalScore, content);
 	}

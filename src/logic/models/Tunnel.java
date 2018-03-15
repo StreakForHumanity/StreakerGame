@@ -81,7 +81,7 @@ public class Tunnel extends WorldItem {
     public static List<Tunnel> createTunnels() {
         tunnelPositions = new ArrayList<>();
         List<Tunnel> tunnels = new ArrayList<>();
-        for (int i = 0; i < Constants.NUM_TUNNELS + Globals.TUNNELS_MODIFIER; i++) {
+        for (int i = 0; i < Constants.NUM_TUNNELS + Globals.getTunnelsModifier(); i++) {
             Tunnel tunnel = new Tunnel();
             tunnels.add(tunnel);
         }

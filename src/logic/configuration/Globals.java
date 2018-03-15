@@ -5,33 +5,41 @@ public class Globals {
     private Globals(){
     }
 
-    public static int TUNNELS_MODIFIER = 0;
-    public static String DIFFICULTY = "Medium";
+    private static int tunnelsModifier = 0;
+    private static String difficulty = "Medium";
     
     public static void setTunnelsModifier(double val) {
     	int difference = 0;
     	
     	if (val < 2.0) {
     		difference = -2;
-    		DIFFICULTY = "Beginner";
+    		difficulty = "Beginner";
     	}
     	else if (val < 4.0) {
     		difference = -1;
-    		DIFFICULTY = "Easy";
+    		difficulty = "Easy";
     	}
     	else if (val < 6.0) {
     		difference = 0;
-    		DIFFICULTY = "Medium";
+    		difficulty = "Medium";
     	}
     	else if (val < 8.0) {
     		difference = 1;
-    		DIFFICULTY = "Hard";
+    		difficulty = "Hard";
     	}
     	else {
     		difference = 2;
-    		DIFFICULTY = "Expert";
+    		difficulty = "Expert";
     	}
     	
-    	TUNNELS_MODIFIER = difference;
+    	tunnelsModifier = difference;
+    }
+    
+    public static int getTunnelsModifier() {
+    	return tunnelsModifier;
+    }
+    
+    public static String getDifficulty() {
+    	return difficulty;
     }
 }
