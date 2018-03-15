@@ -25,7 +25,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class SettingsView extends StreakerView {

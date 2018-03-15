@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import logic.configuration.Constants;
-import logic.configuration.Globals;
 import logic.models.*;
 
 public class WorldItemController {
