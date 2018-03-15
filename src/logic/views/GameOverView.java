@@ -23,6 +23,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.configuration.Constants;
 import logic.configuration.Globals;
+import logic.configuration.HighScoreException;
 import logic.configuration.Paths;
 import logic.controllers.ViewFactory;
 import logic.controllers.ViewFactory.VIEW_TYPE;
@@ -56,7 +57,7 @@ public class GameOverView extends StreakerView {
 		if (!highScoresFile.exists()) {
 			try {
 				if (!highScoresFile.createNewFile()) {
-					throw new Exception("Unable to create High Scores File.");
+					throw new HighScoreException("Unable to create High Scores File.");
 				}
 			}
 			catch (Exception e) {
@@ -156,14 +157,23 @@ public class GameOverView extends StreakerView {
 	}
 	
 	private void goToMainMenu(ActionEvent click) {
+		if (click == null) {
+			return;
+		}
 		viewController.updateView(VIEW_TYPE.MAIN_MENU);
 	}
 	
 	private void goToNewGame(ActionEvent click) {
+		if (click == null) {
+			return;
+		}
 		viewController.updateView(VIEW_TYPE.GAMEPLAY);
 	}
 	
 	private void exitGame(ActionEvent click) {
+		if (click == null) {
+			return;
+		}
 		Platform.exit();
 	}
 	
