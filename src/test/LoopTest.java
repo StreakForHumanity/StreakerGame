@@ -23,7 +23,7 @@ public class LoopTest {
 
 	@Test
 	public void testWorldItemCoins() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.Coins);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.coins);
 		List<Coin> coins = wic.getCoins();
 		assertEquals(Constants.NUM_COINS, coins.size());
 	}
@@ -37,7 +37,7 @@ public class LoopTest {
 	
 	@Test
 	public void testWorldItemCoinStates() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.Coins);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.coins);
 		int s = wic.getCoins().size();
 		assertEquals(s, wic.updateDumbCoinStates());
 	}
@@ -65,7 +65,7 @@ public class LoopTest {
 
 	@Test
 	public void testWorldItemAlterLastCoin() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.Coins);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.coins);
 		int s = wic.getCoins().size();
 		assertEquals(s, wic.editLastCoin(3.2, 1.1));
 	}
