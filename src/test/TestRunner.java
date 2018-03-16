@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 
 public class TestRunner {
-    static private File testFile;
+    static File testFile;
     static int entries;
 
     public static void main(String[] args) {
@@ -21,31 +21,24 @@ public class TestRunner {
         classes[3] = SuiteLongAndInt.class;
         classes[4] = SuiteStrControllerAndCoin.class;
         classes[5] = SuiteTunnelAndPosition.class;
-
         Result result = JUnitCore.runClasses(classes);
         entries = result.getFailureCount();
+
+        try {
+            testFile = new File(".testResults.dat");
+        } catch (Exception e) {
+            //do nothing
+        }
+
         for (Failure failure : result.getFailures()) {
-            System.out.println(failure.toString());
-            try {
-                testFile = new File(".testResults.dat");
-            } catch (Exception e) {
-                //do nothing
-            }
-            if (!testFile.exists()) {
-                try {
-                    if (!testFile.createNewFile()) {
-                        throw new HighScoreException("Unable to create High Scores File.");
-                    }
-                } catch (Exception e) {
-                    //do nothing
-                }
-            }
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(testFile))) {
                 for (int i = 0; i < result.getFailureCount(); i++) {
                     writer.write(failure.toString() + "\n");
                 }
             } catch (Exception e) {
+                //do nothing
             }
+            return;
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(testFile))) {
@@ -53,9 +46,7 @@ public class TestRunner {
                 writer.write(result.wasSuccessful() + "\n");
             }
         } catch (Exception e) {
+            //do nothing
         }
-
     }
-
-
 } 

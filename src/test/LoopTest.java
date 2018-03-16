@@ -30,7 +30,7 @@ public class LoopTest {
 	
 	@Test
 	public void testWorldItemTunnels() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.Tunnels);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.tunnels);
 		List<Tunnel> tunnels = wic.getTunnels();
 		assertEquals(Constants.NUM_TUNNELS, tunnels.size());
 	}
@@ -44,21 +44,21 @@ public class LoopTest {
 
 	@Test
 	public void testWorldItemTunnelStates() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.Tunnels);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.tunnels);
 		int s = wic.getTunnels().size();
 		assertEquals(s, wic.updateDumbTunnelStates());
 	}
 	
 	@Test
 	public void testWorldItemGuardStates() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.Guards);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.guards);
 		int s = wic.getGuards().size();
 		assertEquals(s, wic.updateDumbGuardStates());
 	}
 
 	@Test
 	public void testWorldItemMud() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.Guards);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.guards);
 		int s = wic.getTerrains().size();
 		assertEquals(s, wic.charIsInMudTest());
 	}
@@ -72,7 +72,7 @@ public class LoopTest {
 	
 	@Test
 	public void testWorldItemAlterLastCoinUninitiated() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.Guards);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.guards);
 		int s = wic.getCoins().size();
 		assertEquals(s, wic.editLastCoin(3.2, 1.1));
 	}
