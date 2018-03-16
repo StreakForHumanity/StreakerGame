@@ -26,10 +26,10 @@ public class WorldItemController {
     }
     
     public enum TEST_TYPE {
-        coins,
-        guards,
-        terrains,
-        tunnels
+        COINS,
+        GUARDS,
+        TERRAINS,
+        TUNNELS
     }
 
     //testing contructor
@@ -41,15 +41,15 @@ public class WorldItemController {
         characterController = new StreakerController(1);
         background = null;
         switch(type) {
-            case coins:
+            case COINS:
                 coins = Coin.createDumbCoins();
                 break;
-            case tunnels:
+            case TUNNELS:
                 tunnels = Tunnel.createDumbTunnels();
                 break;
-            case terrains:
+            case TERRAINS:
             		
-            case guards:
+            case GUARDS:
 
             default:
             	
@@ -103,7 +103,7 @@ public class WorldItemController {
     }
 
 
-    //currently only checks for collisions w mud, but could add guards
+    //currently only checks for collisions w mud, but could add GUARDS
     private boolean charIsInMud() {
         boolean isInMud = false;
         for (Terrain t : terrains) {
@@ -136,7 +136,7 @@ public class WorldItemController {
         }
     }
 
-    /* checks coins for intersection with characterController - if so,
+    /* checks COINS for intersection with characterController - if so,
      * resets their positions randomly and increments
      * collected point tally, returning total upon
      * method's completion
@@ -170,9 +170,9 @@ public class WorldItemController {
     }
 
     /* updates tunnel positions according to time, checks
-     * whether tunnels are still contained in bounds of screen.
-     * intermittently spawns guards from tunnels, adding a
-     * guard reference to the controller's guards list.
+     * whether TUNNELS are still contained in bounds of screen.
+     * intermittently spawns GUARDS from TUNNELS, adding a
+     * guard reference to the controller's GUARDS list.
      */
     public void updateTunnelStates() {
         for (Tunnel tunnel : tunnels) {
@@ -206,7 +206,7 @@ public class WorldItemController {
         while (iter.hasNext()) {
             Guard guard = iter.next();
             guard.updatePosition();
-            //added getY() tests to account for guards' new motion abilities 
+            //added getY() tests to account for GUARDS' new motion abilities
             if (guard.getX() < 0.0 || guard.getX() > Constants.SCREEN_WIDTH ||
                     guard.getY() > Constants.SCREEN_HEIGHT ||
                     guard.getY() < -Constants.SCREEN_HEIGHT) {
@@ -222,7 +222,7 @@ public class WorldItemController {
         		count++;
             Guard guard = g;
             guard.updatePosition();
-            //added getY() tests to account for guards' new motion abilities
+            //added getY() tests to account for GUARDS' new motion abilities
         }
         return count;
     }

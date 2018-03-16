@@ -113,7 +113,7 @@ public class HelpView extends StreakerView {
                 return "The best game you've never played and probably never will.";
 
             case 1:
-                return "Use the arrow keys as displayed below to evade the guards.\n " +
+                return "Use the arrow keys as displayed below to evade the GUARDS.\n " +
                         "Collect ButtCoin and try and stay alive as long as you can,\n" +
                         "         Your score will based on the above two factors.\n" +
                         "                                       Have fun :)";

@@ -29,7 +29,7 @@ public class GraphicsController {
     	gc.drawImage(w.getImage(), w.getX(), w.getY());
     }
     
-    // this call for use with animatedItems such as guards and the streaker
+    // this call for use with animatedItems such as GUARDS and the streaker
     public void drawItem(AnimatedItem a, double time) {
     	gc.drawImage(a.getFrame(time), a.getX(), a.getY());
     }
@@ -40,7 +40,7 @@ public class GraphicsController {
     	drawItem(b.getSection(1));
     }
     
-    // for drawing guards at custom rotation
+    // for drawing GUARDS at custom rotation
     public void drawWithRotate(AnimatedItem a, Rotate r, double time) {
     	gc.save();
     	gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());

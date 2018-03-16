@@ -1,6 +1,5 @@
 package test;
 
-import logic.configuration.HighScoreException;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -38,7 +37,6 @@ public class TestRunner {
             } catch (Exception e) {
                 //do nothing
             }
-            return;
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(testFile))) {
