@@ -26,10 +26,10 @@ public class WorldItemController {
     }
     
     public enum TEST_TYPE {
-        Coins,
-        Guards,
-        Terrains,
-        Tunnels
+        coins,
+        guards,
+        terrains,
+        tunnels
     }
 
     //testing contructor
@@ -41,13 +41,15 @@ public class WorldItemController {
         characterController = new StreakerController(1);
         background = null;
         switch(type) {
-            case Coins:
+            case coins:
                 coins = Coin.createDumbCoins();
-            case Tunnels:
+                break;
+            case tunnels:
                 tunnels = Tunnel.createDumbTunnels();
-            case Terrains:
+                break;
+            case terrains:
             		
-            case Guards:
+            case guards:
 
             default:
             	
@@ -220,11 +222,7 @@ public class WorldItemController {
         		count++;
             Guard guard = g;
             guard.updatePosition();
-            //added getY() tests to account for guards' new motion abilities 
-            if (guard.getX() < 0.0 || guard.getX() > Constants.SCREEN_WIDTH ||
-                    guard.getY() > Constants.SCREEN_HEIGHT ||
-                    guard.getY() < -Constants.SCREEN_HEIGHT) {
-            }
+            //added getY() tests to account for guards' new motion abilities
         }
         return count;
     }
