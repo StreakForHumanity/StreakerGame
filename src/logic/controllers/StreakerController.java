@@ -66,10 +66,9 @@ public class StreakerController {
                 sT = System.currentTimeMillis();
                 canJump = false;
                 while((System.currentTimeMillis()-sT) < Constants.COOLDOWN_TIME) {
-						if(streaker.getCooldown() < 3) {
-                			streaker.changeCooldown(.00000005);
-						}
+						streaker.setCooldown(System.currentTimeMillis() - sT);
 				}
+                streaker.setCooldown(Constants.COOLDOWN_TIME);
                 canJump = true;
             }).start();
 		}
