@@ -24,6 +24,50 @@ public class WorldItemController {
         characterController = new StreakerController();
         background = new BackgroundItem();
     }
+    
+    public enum TEST_TYPE {
+        Coins,
+        Guards,
+        Terrains,
+        Tunnels
+    }
+
+    //testing contructor
+    public WorldItemController(TEST_TYPE type) {
+        coins = new ArrayList<>();
+        tunnels = new ArrayList<>();
+        guards = new ArrayList<>();
+        terrains = new ArrayList<>();
+        characterController = new StreakerController(1);
+        background = null;
+        switch(type) {
+            case Coins:
+                coins = Coin.createDumbCoins();
+            case Tunnels:
+                tunnels = Tunnel.createDumbTunnels();
+            case Terrains:
+            		
+            case Guards:
+
+            default:
+            	
+        }
+
+    }
+    
+    // takes values to edit position of last coin
+    // returns number of iterations
+    public int editLastCoin(double x, double y) {
+    		int count = 0;
+    		for(int i = 0; i < coins.size(); i++) {
+    			if(i == coins.size() -1) {
+    				Coin c = coins.get(i);
+    				c.setPosition(x, y);
+    			}
+    			count++;
+    		}
+    		return count;
+    }
 
     public BackgroundItem getBackground() {
         return background;
@@ -68,6 +112,18 @@ public class WorldItemController {
         }
         return isInMud;
     }
+    
+    // test
+    public int charIsInMudTest() {
+        int count = 0;
+        for (Terrain t : terrains) {
+        		count ++;
+            if (characterController.getStreaker().intersects(t.getBoundary())) {
+                break;
+            }
+        }
+        return count;
+    }
 
     private void handleGuardCollisions() {
         for (Guard g : guards) {
@@ -97,6 +153,19 @@ public class WorldItemController {
         }
         return collected;
     }
+    
+    // test method
+    public int updateDumbCoinStates() {
+    		int i = 0;
+        for (Coin coin : coins) {
+        		i++;
+            if (coin.getY() > Constants.SCREEN_HEIGHT) {
+                coin.resetPosition();
+            }
+            coin.updatePosition();
+        }
+        return i;
+    }
 
     /* updates tunnel positions according to time, checks
      * whether tunnels are still contained in bounds of screen.
@@ -116,6 +185,19 @@ public class WorldItemController {
             tunnel.updatePosition();
         }
     }
+    
+    //test 
+    public int updateDumbTunnelStates() {
+    	int count = 0;
+        for (Tunnel tunnel : tunnels) {
+        		count++;
+            if (tunnel.getY() > Constants.SCREEN_HEIGHT) {
+                tunnel.resetPosition();
+            } 
+            tunnel.updatePosition();
+        }
+        return count;
+    }
 
     public void updateGuardStates() {
         Iterator<Guard> iter = guards.iterator();
@@ -129,6 +211,22 @@ public class WorldItemController {
                 iter.remove();
             }
         }
+    }
+    
+    //test
+    public int updateDumbGuardStates() {
+        int count = 0;
+        for(Guard g: guards){
+        		count++;
+            Guard guard = g;
+            guard.updatePosition();
+            //added getY() tests to account for guards' new motion abilities 
+            if (guard.getX() < 0.0 || guard.getX() > Constants.SCREEN_WIDTH ||
+                    guard.getY() > Constants.SCREEN_HEIGHT ||
+                    guard.getY() < -Constants.SCREEN_HEIGHT) {
+            }
+        }
+        return count;
     }
 
     public void updateBackgroundState() {

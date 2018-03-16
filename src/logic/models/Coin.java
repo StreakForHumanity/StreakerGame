@@ -37,4 +37,14 @@ public class Coin extends WorldItem {
         }
         return coins;
     }
+
+	public static List<Coin> createDumbCoins() {
+        List<Coin> coins = new ArrayList<>();
+        for(int i = 0; i < Constants.NUM_COINS; i++) {
+            Coin coin = new Coin(1);
+            coins.add(coin);
+        }
+        return coins;
+    }
+
 }
