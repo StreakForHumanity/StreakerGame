@@ -7,7 +7,7 @@ import org.junit.Test;
 public class TestGuard {
 	// Test assumes the random method
 	@Test
-	public void TestUpdatePositionX() {
+	public void testUpdatePositionX() {
 		Guard g = new Guard(false, 1);
 		g.setPosition(0,0);
 		g.updatePosition();
@@ -17,7 +17,7 @@ public class TestGuard {
 
 	// Test assumes the random method
     @Test
-    public void TestUpdatePositionY() {
+    public void testUpdatePositionY() {
         Guard g = new Guard(false, 1);
         g.setPosition(0,0);
         g.updatePosition();

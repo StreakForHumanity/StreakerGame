@@ -5,14 +5,14 @@ import static org.junit.Assert.assertEquals;
 
 public class TestLongValue {
 	@Test
-	public void TestConstructor() {
+	public void testConstructor() {
 		long l = (long) 4.3;
 		LongValue lv = new LongValue(l);
 		assertEquals((long) 4.3, lv.getValue(), 0);
 	}
 
 	@Test
-    public void TestSetValue() {
+    public void testSetValue() {
 		long l = (long) 3.2;
         LongValue lv = new LongValue(l);
         long l1 = (long)9.4;

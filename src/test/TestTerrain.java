@@ -7,7 +7,7 @@ import logic.configuration.Constants;
 
 public class TestTerrain {
 	@Test
-	public void TestUpdatePositionX() {
+	public void testUpdatePositionX() {
 		Terrain t = new Terrain(1);
 		t.setPosition(0, 0);
 		t.updatePosition();
@@ -15,7 +15,7 @@ public class TestTerrain {
 	}
 	
 	@Test
-	public void TestUpdatePositionY() {
+	public void testUpdatePositionY() {
 		Terrain t = new Terrain(1);
 		t.setPosition(0, 0);
 		t.updatePosition();

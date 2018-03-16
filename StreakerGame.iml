@@ -7,5 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="junit-4.12" level="project" />
+    <orderEntry type="library" name="org.hamcrest.core_1.3.0.v201303031735" level="project" />
   </component>
 </module>
