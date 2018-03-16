@@ -248,10 +248,10 @@ public class GameOverView extends StreakerView {
 		@Override
 		public int compareTo(ScoreEntry sc) {
 			if (this.value < sc.value) {
-				return -1;
+				return 1;
 			}
 			else if (this.value > sc.value) {
-				return 1;
+				return -1;
 			}
 			else {
 				return 0;
