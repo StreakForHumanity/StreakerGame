@@ -88,6 +88,16 @@ public class Tunnel extends WorldItem {
         return tunnels;
     }
 
+	public static List<Tunnel> createDumbTunnels() {
+        tunnelPositions = new ArrayList<>();
+        List<Tunnel> tunnels = new ArrayList<>();
+        for (int i = 0; i < Constants.NUM_TUNNELS + Globals.getTunnelsModifier(); i++) {
+            Tunnel tunnel = new Tunnel(1);
+            tunnels.add(tunnel);
+        }
+        return tunnels;
+    }
+
     public boolean noGuard() {
         return noGuard;
     }
