@@ -7,13 +7,13 @@ import org.junit.Test;
 
 public class TestStreakerController {
 	@Test
-	public void TestStreakerInitializationIsJumping() {
+	public void testStreakerInitializationIsJumping() {
 		StreakerController sc = new StreakerController(1);
 		assertEquals(false, sc.getIsJumping());
 	}
 	
 	@Test
-	public void TestStreakerInitializationHealth() {
+	public void testStreakerInitializationHealth() {
 		StreakerController sc = new StreakerController(1);
 		logic.models.Character c = sc.getStreaker();
 		assertEquals(Constants.CHAR_MAX_HEALTH, c.getHealth(), 0);

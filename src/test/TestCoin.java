@@ -6,19 +6,19 @@ import org.junit.Test;
 
 public class TestCoin {
 	@Test 
-	public void TestConstructorPositionX() {
+	public void testConstructorPositionX() {
 		Coin c = new Coin(1);
 		assertEquals(true, c.getX() > 0.0 && c.getX() < Constants.SCREEN_WIDTH);
 	}
 	
 	@Test 
-	public void TestConstructorPositionY() {
+	public void testConstructorPositionY() {
 		Coin c = new Coin(1);
 		assertEquals(true, c.getY() < 0.0 && c.getY() > -(Constants.SCREEN_HEIGHT));
 	}
 
 	@Test
-	public void TestUpdatePositionX() {
+	public void testUpdatePositionX() {
 		Coin c = new Coin(1);
 		double x = c.getX();
 		c.updatePosition();
@@ -26,7 +26,7 @@ public class TestCoin {
 	}
 	
 	@Test
-	public void TestUpdatePositionY() {
+	public void testUpdatePositionY() {
 		Coin c = new Coin(1);
 		double y = c.getY();
 		c.updatePosition();

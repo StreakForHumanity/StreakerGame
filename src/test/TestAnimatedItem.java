@@ -6,13 +6,13 @@ import org.junit.Test;
 
 public class TestAnimatedItem {
 	@Test
-	public void TestSetDuration() {
+	public void testSetDuration() {
 		AnimatedItem a = new AnimatedItem();
 		a.setDuration(4.0);
 		assertEquals(4.0, a.getDuration(), 0);
 	}
 	@Test
-	public void TestAlterDuration() {
+	public void testAlterDuration() {
 		AnimatedItem a = new AnimatedItem();
 		a.setDuration(4.0);
 		a.alterDuration(.3);

@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class TestTunnel {
 	@Test
-	public void TestUpdatePosition() {
+	public void testUpdatePosition() {
 		Tunnel t = new Tunnel(1);
 		t.setPosition(0, 0);
 		t.updatePosition();
@@ -15,7 +15,7 @@ public class TestTunnel {
 	}
 
 	@Test
-	public void TestNoGuard() {
+	public void testNoGuard() {
 		Tunnel t = new Tunnel(1);
 		assertEquals(true, t.noGuard());
 	}

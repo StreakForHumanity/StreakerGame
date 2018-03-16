@@ -10,13 +10,13 @@ import org.junit.Test;
 
 public class TestBackgroundItem {
 	@Test
-	public void TestGetSection() {
+	public void testGetSection() {
 		BackgroundItem bi = new BackgroundItem(1);
 		assertTrue(bi.getSection(0) instanceof WorldItem);
 	}
 
 	@Test
-	public void TestUpdateBackgroundPositionX() {
+	public void testUpdateBackgroundPositionX() {
 		BackgroundItem bi = new BackgroundItem(1);
 		WorldItem w1 = bi.getSection(0);
 		WorldItem w2 = bi.getSection(1);
@@ -27,7 +27,7 @@ public class TestBackgroundItem {
 	}
 	
 	@Test
-	public void TestUpdateBackgroundPositionY() {
+	public void testUpdateBackgroundPositionY() {
 		BackgroundItem bi = new BackgroundItem(1);
 		WorldItem w1 = bi.getSection(0);
 		WorldItem w2 = bi.getSection(1);

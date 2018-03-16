@@ -9,14 +9,14 @@ import org.junit.Test;
 public class TestWorldItem {
 
 	@Test
-	public void TestSetPosition() {
+	public void testSetPosition() {
 		WorldItem w = new WorldItem(1);
 		w.setPosition(1.6, 6.3);
 		assertEquals(1.6, w.getX(), 0);
 	}
 
 	@Test
-	public void TestUpdatePosition() {
+	public void testUpdatePosition() {
 		WorldItem w = new WorldItem(1);
 		w.setPosition(1.6, 6.3);
 		w.setSpeed(7.3, 1.2);

@@ -14,7 +14,7 @@ public class StreakerController {
 	private Character streaker;
 
     protected StreakerController() {
-    		streaker = new Character();
+		streaker = new Character();
         this.isJumping = false;
         this.canJump = true;
     }

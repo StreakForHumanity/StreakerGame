@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class TestCharacter {
 	@Test
-	public void TestInputVelocityNormalX() {
+	public void testInputVelocityNormalX() {
 		Character c = new Character(1);
 		List<String> inputs = new ArrayList<>();
 		inputs.add("LEFT");
@@ -19,16 +19,16 @@ public class TestCharacter {
 	}
 	
 	@Test
-	public void TestInputVelocityNormalY() {
+	public void testInputVelocityNormalY() {
 		Character c = new Character(1);
 		List<String> inputs = new ArrayList<>();
-		inputs.add("LEFT");
+		inputs.add("UP");
 		c.applyUserInputToVelocity(inputs, false, false);
 		assertEquals(-(Constants.CHARACTER_VELOCITY), c.getVelocityY(), 0);
 	}
 	
 	@Test
-	public void TestInputVelocityInMudX() {
+	public void testInputVelocityInMudX() {
 		Character c = new Character(1);
 		List<String> inputs = new ArrayList<>();
 		inputs.add("LEFT");
@@ -37,16 +37,16 @@ public class TestCharacter {
 	}
 	
 	@Test
-	public void TestInputVelocityInMudY() {
+	public void testInputVelocityInMudY() {
 		Character c = new Character(1);
 		List<String> inputs = new ArrayList<>();
-		inputs.add("LEFT");
+		inputs.add("UP");
 		c.applyUserInputToVelocity(inputs, true, false);
 		assertEquals(-(Constants.CHARACTER_VELOCITY)/2, c.getVelocityY(), 0);
 	}
 
 	@Test
-	public void TestInputVelocityInMudJumpingX() {
+	public void testInputVelocityInMudJumpingX() {
 		Character c = new Character(1);
         List<String> inputs = new ArrayList<>();
         inputs.add("LEFT");
@@ -55,16 +55,16 @@ public class TestCharacter {
 	}
 	
 	@Test
-	public void TestInputVelocityInMudJumpingY() {
+	public void testInputVelocityInMudJumpingY() {
 		Character c = new Character(1);
         List<String> inputs = new ArrayList<>();
-        inputs.add("LEFT");
+        inputs.add("UP");
         c.applyUserInputToVelocity(inputs, true, true);
         assertEquals(-(Constants.CHARACTER_VELOCITY), c.getVelocityY(), 0);
 	}
 
 	@Test
-	public void TestChangeHealth() {
+	public void testChangeHealth() {
 		Character c = new Character(1);
 		double diff = -15.5;
 		c.changeHealth(diff);
