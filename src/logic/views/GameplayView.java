@@ -109,17 +109,17 @@ public class GameplayView extends StreakerView {
     		//draw characterController to screen
     		graphicsController.drawItem(worldItems.getCharacterController().getStreaker(), time);
     	
-    		//draw coins to screen
+    		//draw COINS to screen
     		for (Coin c : worldItems.getCoins()) {
     			graphicsController.drawItem(c);
     		}
     	
-    		//draw tunnels to screen
+    		//draw TUNNELS to screen
     		for (Tunnel t : worldItems.getTunnels()) {
     			graphicsController.drawItem(t);
     		}
     	
-    		//draw guards to screen
+    		//draw GUARDS to screen
     		for (Guard g : worldItems.getGuards()) {
     			graphicsController.drawWithRotate(g, g.getRotate(), time);
     		}

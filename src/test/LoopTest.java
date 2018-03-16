@@ -23,56 +23,56 @@ public class LoopTest {
 
 	@Test
 	public void testWorldItemCoins() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.coins);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.COINS);
 		List<Coin> coins = wic.getCoins();
 		assertEquals(Constants.NUM_COINS, coins.size());
 	}
 	
 	@Test
 	public void testWorldItemTunnels() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.tunnels);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.TUNNELS);
 		List<Tunnel> tunnels = wic.getTunnels();
 		assertEquals(Constants.NUM_TUNNELS, tunnels.size());
 	}
 	
 	@Test
 	public void testWorldItemCoinStates() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.coins);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.COINS);
 		int s = wic.getCoins().size();
 		assertEquals(s, wic.updateDumbCoinStates());
 	}
 
 	@Test
 	public void testWorldItemTunnelStates() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.tunnels);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.TUNNELS);
 		int s = wic.getTunnels().size();
 		assertEquals(s, wic.updateDumbTunnelStates());
 	}
 	
 	@Test
 	public void testWorldItemGuardStates() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.guards);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.GUARDS);
 		int s = wic.getGuards().size();
 		assertEquals(s, wic.updateDumbGuardStates());
 	}
 
 	@Test
 	public void testWorldItemMud() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.guards);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.GUARDS);
 		int s = wic.getTerrains().size();
 		assertEquals(s, wic.charIsInMudTest());
 	}
 
 	@Test
 	public void testWorldItemAlterLastCoin() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.coins);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.COINS);
 		int s = wic.getCoins().size();
 		assertEquals(s, wic.editLastCoin(3.2, 1.1));
 	}
 	
 	@Test
 	public void testWorldItemAlterLastCoinUninitiated() {
-		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.guards);
+		WorldItemController wic = new WorldItemController(WorldItemController.TEST_TYPE.GUARDS);
 		int s = wic.getCoins().size();
 		assertEquals(s, wic.editLastCoin(3.2, 1.1));
 	}

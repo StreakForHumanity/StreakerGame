@@ -74,7 +74,7 @@ public class GameOverView extends StreakerView {
 		root.setBackground(new Background(bgi));
 		
 		
-		//text nodes for time lasted, coins collected, and total score
+		//text nodes for time lasted, COINS collected, and total score
 		Text time = new Text(225, 290, hms);
 		time.setFont(new Font(20));
 		
