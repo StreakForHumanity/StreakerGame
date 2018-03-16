@@ -1,6 +1,8 @@
 package test;
 
 import logic.models.Coin;
+import logic.models.Tunnel;
+import logic.controllers.WorldItemController;
 import logic.configuration.Constants;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
