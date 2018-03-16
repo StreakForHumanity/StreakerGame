@@ -23,7 +23,7 @@ public class Constants {
     public static final double GUARD_SPAWN_RATE     = .02;
     public static final double TERRAIN_SPAWN_RATE	= .007;
 	public static final int JUMP_TIME         		= 1000;
-    public static final int COOLDOWN_TIME     		= 3000;
+    public static final double COOLDOWN_TIME     	= 3000.0;
     public static final int HEALTHBAR_H				= 28;
     public static final int HEALTHBAR_W				= 124;
     public static final int COOLDOWNBAR_H			= 28;

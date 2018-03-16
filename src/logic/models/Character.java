@@ -26,6 +26,7 @@ public class Character extends AnimatedItem {
         this.setSpeed(0, 0);
         charHealth = Constants.CHAR_MAX_HEALTH;
         cooldownTime = Constants.COOLDOWN_TIME / 1000.0;
+        cooldownTime = Constants.COOLDOWN_TIME;
 	}
 	
 	public Character(int test) {
@@ -106,6 +107,10 @@ public class Character extends AnimatedItem {
     
     public void resetCooldown() {
     		cooldownTime = 0;
+    }
+    
+    public void setCooldown(double time) {
+    	cooldownTime = time;
     }
     
     
